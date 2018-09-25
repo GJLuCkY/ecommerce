@@ -97,6 +97,12 @@ class ProductCrudController extends CrudController
             'minimum_input_length' => 2, // minimum characters to type before querying results
         ]);
 
+        $this->crud->addField([
+            'name' => 'status',
+            'label' => 'Опубликовать',
+            'type' => 'checkbox'
+        ]);
+
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');

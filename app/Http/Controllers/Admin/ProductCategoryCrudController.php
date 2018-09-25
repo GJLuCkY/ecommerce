@@ -49,6 +49,11 @@ class ProductCategoryCrudController extends CrudController
             'hint' => 'URL-страницы (Генерируется автоматически)',
             // 'disabled' => 'disabled'
         ]);
+        $this->crud->addField([
+            'name' => 'status',
+            'label' => 'Опубликовать',
+            'type' => 'checkbox'
+        ]);
 
 
         // ------ CRUD FIELDS
