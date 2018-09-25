@@ -1,0 +1,314 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Cart;
+use App\Models\Review;
+use App\Models\Slider;
+use App\Filters\ProductFilter;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Value;
+use App\Models\Filter;
+use Wishlist;
+use SEO;
+use Backpack\NewsCRUD\app\Models\Article;
+use Backpack\PageManager\app\Models\Page;
+use App\Models\ProductCategory;
+use Illuminate\Http\Request;
+use Session;
+use Illuminate\Support\Facades\Auth;
+use Newsletter;
+use Toastr;
+
+
+class IndexController extends Controller
+{
+    public function index() {
+        SEO::setTitle('Главная страница');
+        SEO::setDescription('Описание главной страницы');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        $sliders = Slider::where('status', 1)->orderBy('lft')->get();
+        $brand = Filter::where('id', 1)->first();
+        $latests = Product::latest()->take(10)->get();
+        $bestsellers = Product::withCount('orders')->orderBy('orders_count', 'desc')->take(10)->get();
+
+        return view('pages.homepage', compact('sliders', 'brand', 'bestsellers', 'latests'));
+    }
+    public function news() {
+        SEO::setTitle('Новости');
+        SEO::setDescription('Описание новости');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        $news = Article::latest()->where('status', 'PUBLISHED')->paginate(12);
+        return view('pages.news',compact('news'));
+    }
+    public function post($postSlug) {
+        $post = Article::where('slug', $postSlug)->firstOrFail();
+        SEO::setTitle($post->title);
+        SEO::setDescription('Описание');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        return view('pages.inner-news',compact('post'));
+    }
+    public function page($pageSlug) {
+        $page = Page::where('slug', $pageSlug)->firstOrFail();
+        SEO::setTitle(json_decode($page->extras)->meta_title);
+        SEO::setDescription(json_decode($page->extras)->meta_description);
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        return view('pages.page',compact('page'));
+    }
+    public function category($catSlug, ProductFilter $filters) 
+    {
+        $category = ProductCategory::where('slug', $catSlug)->with(['filters' => function ($query) {
+            $query->with('values');
+        }])->firstOrFail();
+        $query = Product::query()->where('category_id', $category->id);
+        $min = $query->min('price');
+        $max = $query->max('price');
+        $products = $query->filter($filters)->paginate(16)->appends(request()->all());
+        
+        // dd($products->getViews());
+        SEO::setTitle($category->title);
+        SEO::setDescription($category->meta_description);
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        return view('pages.category',compact('category', 'products', 'routeParam', 'min', 'max'));
+    }
+    public function product($catSlug, $prodSlug) {
+        $category = ProductCategory::where('slug', $catSlug)->firstOrFail();
+        $product = Product::where('slug', $prodSlug)->with(['reviews' => function($query) {
+            $query->where('status', 1);
+        }])->firstOrFail();
+
+        $product->addView();
+        SEO::setTitle($product->title);
+        SEO::setDescription($product->meta_description);
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        $similarProducts = Product::where('category_id', $category->id)->take(10)->get();
+        return view('pages.product',compact('category', 'product', 'similarProducts'));
+    }
+
+    public function review(Request $request) {
+        $review = new Review();
+        $review->content = $request->get('content');
+        $review->product_id = $request->get('product_id');
+        $review->user_id = $request->get('user_id');
+        $review->stars = $request->get('stars');
+        $review->status = 0;
+        $review->save();
+        Toastr::success('Ваш отзыв отправлен на модерацию!', 'Отзыв успешно отправлен!', ["positionClass" => "toast-top-center"]);
+        return redirect()->back();
+    }
+
+    public function cart() {
+        SEO::setTitle('Корзина');
+        SEO::setDescription('Корзина Etalon Holding');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        if(!Session::has('cart')){
+            return view('pages.cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('pages.cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+    public function profile() {
+        SEO::setTitle('Личный кабинет');
+        SEO::setDescription('Личный кабинет Etalon Holding');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        return view('pages.profile.index');
+    }
+
+    public function profileWishlist() {
+
+        $wishlist = Wishlist::getUserWishlist(1)->load('product');
+        SEO::setTitle('Личный кабинет');
+        SEO::setDescription('Личный кабинет Etalon Holding');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+
+        return view('pages.profile.wishlist', compact(['wishlist']));
+    }
+
+    public function profilePurchases() {
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+        SEO::setTitle('Личный кабинет');
+        SEO::setDescription('Личный кабинет Etalon Holding');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        return view('pages.profile.purchases', compact(['orders']));
+    }
+
+    public function getOrderInProfile($id) {
+        $order = Order::where('id', $id)->first();
+        SEO::setTitle('Личный кабинет');
+        SEO::setDescription('Личный кабинет Etalon Holding');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        return view('pages.profile.order', compact('order'));
+    }
+
+    public function profileHelp() {
+        SEO::setTitle('Личный кабинет');
+        SEO::setDescription('Личный кабинет Etalon Holding');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+        return view('pages.profile.help');
+    }
+
+    public function getAddToCart(Request $request, $id) {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+        $request->session()->put('cart', $cart);
+        Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
+        return redirect()->back();
+
+    }
+
+    public function removeToCart(Request $request, $id) {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        dd($cart);
+        $cart->remove($product, $product->id);
+        $request->session()->put('cart', $cart);
+        Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
+        return redirect()->back();
+
+    }
+
+    public function checkout() {
+        SEO::setTitle('Оформление заказа');
+        SEO::setDescription('Оформление заказа Etalon Holding');
+        // SEO::opengraph()->setUrl('http://current.url.com');
+        // SEO::setCanonical('https://codecasts.com.br/lesson');
+        // SEO::opengraph()->addProperty('type', 'articles');
+        // SEO::twitter()->setSite('@LuizVinicius73');
+
+        if(!Session::has('cart')){
+            return redirect()->route('cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('pages.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+    public function postCheckout(Request $request) {
+
+       //dd($request->all());
+       $oldCart = Session::get('cart');
+       $cart = new Cart($oldCart);
+        $totalPrice = $cart->totalPrice;
+        //dd($cart);
+        $object = $cart->items;
+
+        $productsId = (array)$object;
+        $order = new Order;
+        $order->phone = $request->get('phone');
+        $order->city = 'todo';
+        $order->address = $request->get('address');
+        $order->email = $request->get('email');
+        $order->name = $request->get('name');
+        $order->comment = $request->get('comment');
+        $order->method = 'TODO';
+        $order->status = 'create';
+        $order->products = $request->get('products');
+        $order->user_id = $request->get('user_id');
+        $order->save();
+        $order->products()->attach(array_keys($productsId));
+
+       // dd($order);
+        $products = collect([]);
+        foreach($cart->items as $key=>$product) {
+            $key++;
+            
+                $products->push([
+                    'name' => $product['item']->title,
+                    'article' => 'TODO',
+                    'code' => 'TODO',
+                    'quantity' => $product['qty'],
+                    'price' => $product['price'],
+                    'price_type' => 'KZT',
+                    'price_id' => 'TODO',
+                    'discount' => 'TODO'
+                ]);
+        }
+       
+        
+        $data = [
+            'order_id' => $order->id, // идентификатор заказа на сайте
+            'user_id' => $order->user_id,
+            'user_type' => 'TODO', // Юр/физ лицо признак
+            'iin_bin' => 'TODO', // Если Юр лицо то БИН/ИИН и РНН
+            'fullname' => $order->name, // ФИО
+            'address' => $order->address, // адрес
+            'phone' => $order->phone, // телефон
+            'email' => $order->email, // e-mail
+            'products' => $products,
+            'total_price' => $totalPrice, // сумма заказа
+            'comment' => $order->comment, // комментарий покупателя
+            'payment_method' => 'TODO', // способ оплаты, 
+            'payment_method_id' => 'TODO', // идентификатор способа оплаты
+            'date_payment' => 'TODO', // дата оплаты
+            'delivery_method' => 'TODO', // Способ доставки
+            'delivery_method_id' => 'TODO', // идентификатор способа доставки
+            'created_at' => $order->created_at // Дата создания заказа
+        ];
+        return response()->json(collect([$data]));
+
+        Session::forget('cart');
+        Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('homepage');
+
+    }
+    public function addWishlist($id) {
+        Wishlist::add($id, Auth::user()->id);
+        Toastr::success('', 'Товар добавлен в избранное!', ["positionClass" => "toast-top-right"]);
+        return redirect()->back();
+    }
+
+    public function removeWishlist($id) {
+        Wishlist::removeByProduct($id, Auth::user()->id);
+        Toastr::success('', 'Вы удалили товар из избранного!', ["positionClass" => "toast-top-right"]);
+        return redirect()->back();
+    }
+
+    public function subscribe(Request $request) {
+        Newsletter::subscribe($request->get('email'));
+
+        Toastr::success('', 'Вы успешно подписались на рассылку!', ["positionClass" => "toast-top-right"]);
+
+        return redirect()->back();
+
+    }
+}

@@ -1,0 +1,68 @@
+.signup-error{
+    color: #f00;
+}
+.form-spinner {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: #ffffff7a;
+    top: 0;
+    left: 0;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+.lds-spinner {
+    width: 200px !important;
+    height: 200px !important;
+    -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}
+.bs-header__modal-content input {
+    border: 1px solid #D8D8D8;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #D1D1D1;
+    width: 50%;
+    display: block;
+    margin: auto;
+    margin-top: 18px;
+}
+
+.bs-podlozhka__add {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.vue-star-rating-star{
+    width: 25px;
+}
+
+.back-wishlist {
+    background-color: #00AB0C;
+    width: 52px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.back-wishlist img{
+    width: 28px;
+    margin: auto;
+}
