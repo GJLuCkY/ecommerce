@@ -20,7 +20,7 @@ class ProductCategory extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['title', 'meta_description', 'slug'];
+    protected $fillable = ['title', 'meta_description', 'slug', 'article', 'code', 'code_parent', 'parent'];
     // protected $hidden = [];
     // protected $dates = [];
 

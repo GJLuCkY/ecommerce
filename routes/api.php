@@ -13,4 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->post('/v1/creation-and-updating-data', 'Api\DataApiController@postCreationAndUpdatingData');
+Route::post('/v1/creation-and-updating-categories', 'Api\DataApiController@postCreationAndUpdatingCategory');
+
+Route::post('/v1/creation-and-updating-products', 'Api\DataApiController@postCreationAndUpdatingProducts');
