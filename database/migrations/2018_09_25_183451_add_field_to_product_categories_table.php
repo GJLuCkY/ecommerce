@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldToProductsTable1 extends Migration
+class AddFieldToProductCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddFieldToProductsTable1 extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('article')->nullable();
+        Schema::table('product_categories', function (Blueprint $table) {
+            $table->boolean('status')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddFieldToProductsTable1 extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('product_categories', function (Blueprint $table) {
             //
         });
     }

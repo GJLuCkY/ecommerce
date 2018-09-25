@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldToProductsTable1 extends Migration
+class AddFieldToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddFieldToProductsTable1 extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('article')->nullable();
+            $table->boolean('status')->nullable();
         });
     }
 

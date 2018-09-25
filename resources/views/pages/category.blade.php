@@ -123,7 +123,7 @@
                         @foreach($chunk as $item)
                         <div class="col-sm-3 bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
-                                <a href="{{ route('product', ['catSlug' => $item->category->slug, 'prodSlug' => $item->slug]) }}">
+                                <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
                                     <img src="{{ asset('uploads/' . $item->image) }}" alt="Дуб">
                                 </a>
                                 <a class="back-wishlist" href="{{ route('wishlist', ['id' => $item->id]) }}">
@@ -131,7 +131,7 @@
                                 </a>
                                 <div class="bs-catalog__hitText">
                                     <p>3-х слойная паркетная доска</p>
-                                    <a href="{{ route('product', ['catSlug' => $item->category->slug, 'prodSlug' => $item->slug]) }}">
+                                    <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
                                         <h6>{{ $item->title }}</h6>
                                     </a>
                                 </div>

@@ -33,8 +33,8 @@ class IndexController extends Controller
         // SEO::twitter()->setSite('@LuizVinicius73');
         $sliders = Slider::where('status', 1)->orderBy('lft')->get();
         $brand = Filter::where('id', 1)->first();
-        $latests = Product::latest()->take(10)->get();
-        $bestsellers = Product::withCount('orders')->orderBy('orders_count', 'desc')->take(10)->get();
+        $latests = Product::latest()->where('status', 1)->take(10)->get();
+        $bestsellers = Product::withCount('orders')->where('status', 1)->orderBy('orders_count', 'desc')->take(10)->get();
 
         return view('pages.homepage', compact('sliders', 'brand', 'bestsellers', 'latests'));
     }
@@ -70,10 +70,10 @@ class IndexController extends Controller
     }
     public function category($catSlug, ProductFilter $filters) 
     {
-        $category = ProductCategory::where('slug', $catSlug)->with(['filters' => function ($query) {
+        $category = ProductCategory::where('status', 1)->where('slug', $catSlug)->with(['filters' => function ($query) {
             $query->with('values');
         }])->firstOrFail();
-        $query = Product::query()->where('category_id', $category->id);
+        $query = Product::query()->where('category_id', $category->id)->where('status', 1);
         $min = $query->min('price');
         $max = $query->max('price');
         $products = $query->filter($filters)->paginate(16)->appends(request()->all());
@@ -88,8 +88,8 @@ class IndexController extends Controller
         return view('pages.category',compact('category', 'products', 'routeParam', 'min', 'max'));
     }
     public function product($catSlug, $prodSlug) {
-        $category = ProductCategory::where('slug', $catSlug)->firstOrFail();
-        $product = Product::where('slug', $prodSlug)->with(['reviews' => function($query) {
+        $category = ProductCategory::where('status', 1)->where('slug', $catSlug)->firstOrFail();
+        $product = Product::where('status', 1)->where('slug', $prodSlug)->with(['reviews' => function($query) {
             $query->where('status', 1);
         }])->firstOrFail();
 
