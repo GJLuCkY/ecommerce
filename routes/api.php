@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/v1/creation-and-updating-categories', 'Api\DataApiController@postCreationAndUpdatingCategory');
+Route::post('/v1/creation-and-updating-categories', 'API\DataApiController@postCreationAndUpdatingCategory');
 
-Route::post('/v1/creation-and-updating-products', 'Api\DataApiController@postCreationAndUpdatingProducts');
+Route::post('/v1/creation-and-updating-products', 'API\DataApiController@postCreationAndUpdatingProducts');
