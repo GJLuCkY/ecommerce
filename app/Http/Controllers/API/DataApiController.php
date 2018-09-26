@@ -11,7 +11,7 @@ class DataApiController extends Controller
 {
     public function postCreationAndUpdatingCategory(Request $request)
     {
-        return response()->json($request->all());
+        return $request->all();
         $categories = $request->get('GROUPS');
         if(isset($categories)) {
             foreach($categories as $item) {
@@ -41,7 +41,7 @@ class DataApiController extends Controller
 
     public function postCreationAndUpdatingProducts(Request $request)
     {
-        return response()->json($request->all());
+        return $request->all();
         $products = $request->get('NOMENCLATURE');
         if(isset($products)) {
             $created = false;
