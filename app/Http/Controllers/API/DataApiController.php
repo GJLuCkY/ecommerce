@@ -39,7 +39,11 @@ class DataApiController extends Controller
                 'message' => 'No Content'
             ], 204);
         }
-        
+
+
+        return response()->json([
+                'message' => 'Accepted'
+            ], 202);
         
     }
 
@@ -96,5 +100,9 @@ class DataApiController extends Controller
                 'message' => 'No Content'
             ], 204);
         } 
+
+        return response()->json([
+            'message' => 'Accepted'
+        ], 202);
     }
 }
