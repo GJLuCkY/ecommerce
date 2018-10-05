@@ -20,14 +20,14 @@ class DataApiController extends Controller
                     $searchCategory->title = $item['NAME'];
                     $searchCategory->code = $item['ID'];
                     $searchCategory->code_parent = $item['CODE_PARENT'];
-                    $searchCategory->status = 0;
+                    $searchCategory->status = $item['PUBLISHED'];
                     $searchCategory->save();
                 } else {
                     $category = new ProductCategory;
                     $category->title = $item['NAME'];
                     $category->code = $item['ID'];
                     $category->code_parent = $item['CODE_PARENT'];
-                    $category->status = 0;
+                    $category->status = $item['PUBLISHED'];
                     $category->save();
                 }
             }
@@ -39,17 +39,11 @@ class DataApiController extends Controller
                 'message' => 'No Content'
             ], 204);
         }
-
-
-        return response()->json([
-                'message' => 'Accepted'
-            ], 202);
         
     }
 
     public function postCreationAndUpdatingProducts(Request $request)
     {
-        
         $products = $request->get('NOMENCLATURE');
         if(isset($products)) {
             $created = false;
@@ -66,7 +60,7 @@ class DataApiController extends Controller
                         $searchProduct->category_id = $category->id;
                     }
                     $searchProduct->api_id_category = $item['ID_CATEGORY'];
-                    $searchProduct->status = 0;
+                    $searchProduct->status = $item['PUBLISHED'];;
                     $searchProduct->save();
                 } else {
                     $created = true;
@@ -81,7 +75,7 @@ class DataApiController extends Controller
                     if(isset($category)) {
                         $product->category_id = $category->id;
                     }
-                    $product->status = 0;
+                    $product->status = $item['PUBLISHED'];;
                     $product->save();
                 }
             }
@@ -99,10 +93,6 @@ class DataApiController extends Controller
             return response()->json([
                 'message' => 'No Content'
             ], 204);
-        } 
-
-        return response()->json([
-            'message' => 'Accepted'
-        ], 202);
+        }
     }
 }
