@@ -99,8 +99,8 @@ class DataApiController extends Controller
 
     public function getNewOrders(Request $request)
     {
-        $orders = Order::where('status', '!=', 'Отправлен')->get();
-        // $orders = Order::get();
+        // $orders = Order::where('status', '!=', 'Отправлен')->get();
+        $orders = Order::get();
         $data = collect([]);
         $data2 = collect([
             'DOCUMENT_OUT' => $data
@@ -128,7 +128,7 @@ class DataApiController extends Controller
                 
                 $data->push([
                     'order_id' => $order->id, // идентификатор заказа на сайте
-                    'user_id' => $order->user_id,
+                    'user_id' => 'f-'.$order->user_id,
                     'user_type' => 'TODO', // Юр/физ лицо признак
                     'iin_bin' => 'TODO', // Если Юр лицо то БИН/ИИН и РНН
                     'fullname' => $order->name, // ФИО
