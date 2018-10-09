@@ -115,33 +115,33 @@ class DataApiController extends Controller
                         $totalPrice = $totalPrice + $product->price;
                         $products->push([
                             'name' => $product->item->title,
-                            'article' => 'TODO',
+                            'article' => 'Н0000005031',
                             'code' => 'TODO',
                             'quantity' => $product->qty,
                             'price' => $product->price,
-                            'price_type' => 'KZT',
-                            'price_id' => 'TODO',
-                            'discount' => 'TODO'
+                            'price_type' => 'Тенге',
+                            'price_id' => 'KZT',
+                            'discount' => null
                         ]);
                     }
                 }
                 
                 $data->push([
                     'order_id' => $order->id, // идентификатор заказа на сайте
-                    'user_id' => 'f-'.$order->user_id,
-                    'user_type' => 'TODO', // Юр/физ лицо признак
-                    'iin_bin' => 'TODO', // Если Юр лицо то БИН/ИИН и РНН
+                    'user_id' => $order->user_id,
+                    'user_type' => 'u', // Юр/физ лицо признак
+                    'iin_bin' => '900110399521', // Если Юр лицо то БИН/ИИН и РНН
                     'fullname' => $order->name, // ФИО
                     'address' => $order->address, // адрес
                     'phone' => $order->phone, // телефон
                     'email' => $order->email, // e-mail
                     'total_price' => $totalPrice, // сумма заказа
                     'comment' => $order->comment, // комментарий покупателя
-                    'payment_method' => 'TODO', // способ оплаты, 
-                    'payment_method_id' => 'TODO', // идентификатор способа оплаты
-                    'date_payment' => 'TODO', // дата оплаты
-                    'delivery_method' => 'TODO', // Способ доставки
-                    'delivery_method_id' => 'TODO', // идентификатор способа доставки
+                    'payment_method' => 'Карта', // способ оплаты, 
+                    'payment_method_id' => 'cart', // идентификатор способа оплаты
+                    'date_payment' => $order->updated_at, // дата оплаты
+                    'delivery_method' => 'Доставка', // Способ доставки
+                    'delivery_method_id' => 'dostavka', // идентификатор способа доставки
                     'created_at' => $order->created_at, // Дата создания заказа
                     'products' => $products,
                 ]);
