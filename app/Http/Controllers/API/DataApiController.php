@@ -125,23 +125,43 @@ class DataApiController extends Controller
                         ]);
                     }
                 }
+
+                if(isset($order->method)) {
+                    if($order->method == 'cart') {
+                        $cartMethod = 'Карта';
+                    } else {
+                        $cartMethod = 'Наличные';
+                    }
+                } else {
+                    $cartMethod = 'Другое';
+                }
+
+                if(isset($order->delivery_method)) {
+                    if($order->delivery_method == 'dostavka') {
+                        $delivMethod = 'Доставка';
+                    } else {
+                        $delivMethod = 'Самовывоз';
+                    }
+                } else {
+                    $delivMethod = 'Другое';
+                }
                 
                 $data->push([
                     'order_id' => $order->id, // идентификатор заказа на сайте
                     'user_id' => $order->user_id,
-                    'user_type' => 'u', // Юр/физ лицо признак
-                    'iin_bin' => '900110399521', // Если Юр лицо то БИН/ИИН и РНН
+                    'user_type' => $order->user_type, // Юр/физ лицо признак
+                    'iin_bin' => $order->iin_bin, // Если Юр лицо то БИН/ИИН и РНН
                     'fullname' => $order->name, // ФИО
                     'address' => $order->address, // адрес
                     'phone' => $order->phone, // телефон
                     'email' => $order->email, // e-mail
                     'total_price' => $totalPrice, // сумма заказа
                     'comment' => $order->comment, // комментарий покупателя
-                    'payment_method' => 'Карта', // способ оплаты, 
-                    'payment_method_id' => 'cart', // идентификатор способа оплаты
+                    'payment_method' => $cartMethod, // способ оплаты, 
+                    'payment_method_id' => $order->method, // идентификатор способа оплаты
                     'date_payment' => $order->updated_at, // дата оплаты
-                    'delivery_method' => 'Доставка', // Способ доставки
-                    'delivery_method_id' => 'dostavka', // идентификатор способа доставки
+                    'delivery_method' => $delivMethod, // Способ доставки
+                    'delivery_method_id' => $order->delivery_method, // идентификатор способа доставки
                     'created_at' => $order->created_at, // Дата создания заказа
                     'products' => $products,
                 ]);
