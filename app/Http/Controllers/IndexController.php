@@ -10,6 +10,9 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Value;
 use App\Models\Filter;
+use App\Models\VacancyCity;
+use App\Models\Advice;
+use App\Models\Vacancy;
 use Wishlist;
 use SEO;
 use Backpack\NewsCRUD\app\Models\Article;
@@ -62,11 +65,16 @@ class IndexController extends Controller
         $page = Page::where('slug', $pageSlug)->firstOrFail();
         SEO::setTitle(json_decode($page->extras)->meta_title);
         SEO::setDescription(json_decode($page->extras)->meta_description);
+        if($page->template == 'vacancy') {
+            $vacancyCities = VacancyCity::orderBy('lft')->where('status', 1)->get();
+        } else {
+            $vacancyCities = [];
+        }
         // SEO::opengraph()->setUrl('http://current.url.com');
         // SEO::setCanonical('https://codecasts.com.br/lesson');
         // SEO::opengraph()->addProperty('type', 'articles');
         // SEO::twitter()->setSite('@LuizVinicius73');
-        return view('pages.page',compact('page'));
+        return view('pages.page',compact('page', 'vacancyCities'));
     }
     public function category($catSlug, ProductFilter $filters) 
     {
@@ -200,7 +208,6 @@ class IndexController extends Controller
         $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        dd($cart);
         $cart->remove($product, $product->id);
         $request->session()->put('cart', $cart);
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
@@ -310,5 +317,36 @@ class IndexController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function vacancyCity($citySlug) {
+        
+        $city = VacancyCity::where('status', 1)->whereSlug($citySlug)->firstOrFail();
+        if(count($city->vacancies) > 0) {
+            $last = $city->vacancies->first();
+            return redirect()->route('vacancy.id', ['citySlug' => $city->slug,'vacancyId' => $last->id]);
+        }
+        $vacancyCities = VacancyCity::orderBy('lft')->where('status', 1)->get();
+        return view('pages.vacancy-city', compact('city', 'vacancyCities'));
+
+    }
+
+    public function vacancyId($citySlug, $vacancyId) {
+        
+        $vacancyWithoutFakes = Vacancy::where('id', $vacancyId)->firstOrFail();
+        $vacancy = $vacancyWithoutFakes->withFakes();
+        $city = VacancyCity::whereSlug($citySlug)->where('status', 1)->firstOrFail();
+        $vacancyCities = VacancyCity::orderBy('lft')->where('status', 1)->get();
+        return view('pages.vacancy', compact('vacancy', 'city', 'vacancyCities'));
+    }
+
+    public function advices() {
+        $advices = Advice::latest()->where('status', 1)->get();
+        return view('pages.advices', compact('advices'));
+    }
+
+    public function advice($adviceSlug) {
+        $advice = Advice::where('status', 1)->whereSlug($adviceSlug)->firstOrFail();
+        return view('pages.advice', compact('advice'));
     }
 }

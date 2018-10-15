@@ -295,27 +295,27 @@
                         <div class="row bs-catalog__news">
                             <h5 class="bs-catalog__head">Похожие товары</h5>
                             <div class="hits">
-                                @foreach($similarProducts as $product)
+                                @foreach($similarProducts as $similarProduct)
                                 <div class="bs-catalog__hit">
                                     <div class="bs-catalog__hitImg">
-                                        <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                            <img src="{{ asset('uploads/' . $product->image) }}" alt="{{ $product->title }}">
+                                        <a href="{{ route('product', ['catSlug' => $similarProduct->category->slug, 'prodSlug' => $similarProduct->slug]) }}">
+                                            <img src="{{ (isset($similarProduct->image)) ? asset('uploads/' . $similarProduct->image) : '/images/not-found.png' }}" alt="{{ $similarProduct->title }}">
                                         </a>
                                         <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                             <img src="/images/fav.svg" alt="favorite">
                                         </a>
                                         <div class="bs-catalog__hitText">
                                             <p>3-х слойная паркетная доска</p>
-                                            <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                                <h6>Ясень Standart</h6>
+                                            <a href="{{ route('product', ['catSlug' => $similarProduct->category->slug, 'prodSlug' => $similarProduct->slug]) }}">
+                                                <h6>{{ $similarProduct->title }}</h6>
                                             </a>
                                         </div>
                                     </div>
                                     <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <a href="{{ route('addToCart', ['id' => $similarProduct->id]) }}" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
                                     <div class="bs-catalog__compare">
                                         <ul>
-                                            <star-rating :rating={{ $product->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
+                                            <star-rating :rating={{ $similarProduct->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
                                             <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
                                         </ul>
                                     </div>

@@ -132,7 +132,7 @@
                 </li>
 
                 <li class="bs-main-nav__item ">
-                <a href="#" class="bs-main-nav__link">Советы</a>
+                <a href="{{ route('advices') }}" class="bs-main-nav__link">Советы</a>
                 </li>
                 <!-- <li class="bs-main-nav__item ">
                                 <a href="contacts.html" class="bs-main-nav__link">Услуги</a>
@@ -307,7 +307,7 @@
                 <ul class="bs-footer__list">
                     <li class="bs-footer__item"><a href="/o-kompanii" class="bs-footer__link">О Компании</a></li>
                     <li class="bs-footer__item"><a href="{{ route('news') }}" class="bs-footer__link">Новости</a></li>
-                    <li class="bs-footer__item"><a href="/faq" class="bs-footer__link">Советы</a></li>
+                <li class="bs-footer__item"><a href="{{ route('advices') }}" class="bs-footer__link">Советы</a></li>
                     <!-- <li class="bs-footer__item"><a href="" class="bs-footer__link">Услуги</a></li> -->
                 </ul>
             </div>

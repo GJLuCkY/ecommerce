@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\ProductRequest as StoreRequest;
-use App\Http\Requests\ProductRequest as UpdateRequest;
+use App\Http\Requests\VacancyCityRequest as StoreRequest;
+use App\Http\Requests\VacancyCityRequest as UpdateRequest;
 
-class ProductCrudController extends CrudController
+/**
+ * Class VacancyCityCrudController
+ * @package App\Http\Controllers\Admin
+ * @property-read CrudPanel $crud
+ */
+class VacancyCityCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,10 +23,11 @@ class ProductCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Product');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/product');
-        $this->crud->setEntityNameStrings('product', 'products');
-
+        $this->crud->setModel('App\Models\VacancyCity');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/vacancy-city');
+        $this->crud->setEntityNameStrings('cities', 'vacancy_cities');
+        $this->crud->allowAccess('reorder');
+        $this->crud->enableReorder('title', 1);
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
@@ -30,77 +36,12 @@ class ProductCrudController extends CrudController
 
         $this->crud->addColumn([
             'name' => 'title',
-            'label' => 'Продукты'
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'price',
-            'label' => 'Цена',
-            'type' => 'number'
+            'label' => 'Города вакансии'
         ]);
 
         $this->crud->addField([
             'name' => 'title',
-            'label' => 'Название продукта'
-        ]);
-        $this->crud->addField([
-            'name' => 'meta_description',
-            'label' => 'Meta-описание для SEO',
-            'type' => 'textarea',
-        ]);
-        $this->crud->addField([
-            'name' => 'slug',
-            'label' => 'Slug (URL)',
-            'type' => 'text',
-            'hint' => 'URL-страницы (Генерируется автоматически)',
-            // 'disabled' => 'disabled'
-        ]);
-        $this->crud->addField([ // image
-            'label' => "Изображение",
-            'name' => "image",
-            'type' => 'image',
-            'upload' => true,
-            'crop' => true, // set to true to allow cropping, false to disable
-            //'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
-            'prefix' => 'uploads/' // in case you only store the filename in the database, this text will be prepended to the database value
-        ]);
-        $this->crud->addField([
-            'name' => 'content',
-            'label' => 'Описание продукта',
-            'type' => 'summernote',
-        ]);
-        $this->crud->addField([
-            'name' => 'price',
-            'label' => 'Цена',
-            'type' => 'number',
-            // optionals
-            'attributes' => ["step" => "any"], // allow decimals
-            'prefix' => "₸",
-            // 'suffix' => ".00",
-        ]);
-        $this->crud->addField([
-            'label' => "Выберите категорию",
-            'type' => 'select',
-            'name' => 'category_id', // the db column for the foreign key
-            'entity' => 'category', // the method that defines the relationship in your Model
-            'attribute' => 'title', // foreign key attribute that is shown to user
-            'model' => "App\Models\ProductCategory", // foreign key model
-        ]);
-        $this->crud->addField([
-            'label' => "Фильтры",
-            'type' => 'select_filter_value',
-            'name' => 'values', // the method that defines the relationship in your Model
-            'entity' => 'values', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\Value", // foreign key model
-            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-            'placeholder' => "Выберите фильтр", // placeholder for the select
-            'placeholder_child' => "Выберите значение фильтра", // placeholder for the select
-
-
-            'data_source' => url("api/filters"), // url to controller search function (with /{id} should return model)
-
-            'minimum_input_length' => 2, // minimum characters to type before querying results
+            'label' => 'Название города'
         ]);
 
         $this->crud->addField([
@@ -165,7 +106,7 @@ class ProductCrudController extends CrudController
         // ------ ADVANCED QUERIES
         // $this->crud->addClause('active');
         // $this->crud->addClause('type', 'car');
-        // $this->crud->addClause('where', 'name', '==', 'car');
+        // $this->crud->addClause('where', 'name', '=', 'car');
         // $this->crud->addClause('whereName', 'car');
         // $this->crud->addClause('whereHas', 'posts', function($query) {
         //     $query->activePosts();

@@ -17,7 +17,7 @@
                 @foreach($products as $product)
                 <div class="row bs-basket__row">
                     <div class="col-sm-1 bs-basket__img">
-                        <img src="{{ asset('uploads/' . $product['item']->image) }}" class="">
+                        <img src="{{ (isset($product['item']->image)) ? asset('uploads/' . $product['item']->image) : '/images/not-found.png' }}" class="bs-advice__img">
                     </div>
                     <div class="col-sm-6 bs-basket__bigCol">
                         <p class="bs-basket__about">{{ $product['item']->title }}

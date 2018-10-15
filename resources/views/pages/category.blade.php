@@ -14,6 +14,7 @@
                             <img src="/images/laminat.svg">
                             </span>
                         </h6>
+                        
                     <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
                     </div>
                     {{-- @endif --}}
