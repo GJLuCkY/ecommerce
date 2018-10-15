@@ -15,7 +15,7 @@
                     </ul>
                 </div>
                 <h5 class="bs-basket__heading">{{ $product->title }}</h5>
-                <div class="row">
+                <div class="row row_border">
                     <div class="col-sm-8">
                         <div class="row bs-podlozhka__info">
                             <div class="col-sm-5">
@@ -39,40 +39,8 @@
                             <div class="bs-podlozhka__text">
                                 {!! $product->content !!}
                             </div>
-                            <hr>
                         </div>
-                        <div class="bs-podlozhka__review">
-                            <h5 class="bs-basket__heading">ОТЗЫВЫ  <span class="count">({{ count($product->reviews) }})</span></h5>
-                            @foreach($product->reviews as $review)
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <img src="{{ asset('images/review.png') }}">
-                                </div>
-                                <div class="col-sm-10">
-                                    <div>
-                                        <h6>{{ $review->user->name }}</h6>
-                                        <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
-                                    </div>
-                                    <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
-                                </div>
-                            </div>
-                            @endforeach
-                            <button type="submit">Добавить отзыв</button>
-                            <form action="{{ route('review') }}" method="POST">
-                                {{ csrf_field() }}
-                                <textarea name="content"></textarea>
-                                <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
-                                <select name="stars" id="">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                                <button type="submit">Отправить отзыв</button>
-                            </form>
-                        </div>
+                        
                     </div>
                     <div class="col-sm-4 bs-podlozhka__col">
                         <h6 class="bs-podlozhka__name">Дуб Мокко</h6>
@@ -138,6 +106,40 @@
                             <p class="bs-top__p">Спасибо, Ваше сообщение отправлено!</p>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                  <div class="bs-podlozhka__review">
+                            <h5 class="bs-basket__heading">ОТЗЫВЫ  <span class="count">({{ count($product->reviews) }})</span></h5>
+                            @foreach($product->reviews as $review)
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <img src="{{ asset('images/review.png') }}">
+                                </div>
+                                <div class="col-sm-10">
+                                    <div>
+                                        <h6>{{ $review->user->name }}</h6>
+                                        <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
+                                    </div>
+                                    <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                            <button type="submit">Добавить отзыв</button>
+                            <form action="{{ route('review') }}" method="POST">
+                                {{ csrf_field() }}
+                                <textarea name="content"></textarea>
+                                <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
+                                <select name="stars" id="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <button type="submit">Отправить отзыв</button>
+                            </form>
+                        </div>
                 </div>
             </div>
         </div>

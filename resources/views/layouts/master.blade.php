@@ -111,7 +111,7 @@
 <body>
 <header id="bs-header" class="bs-header">
 <!-- Adds the Main Nav partial -->
-<div class="bs-header__div"></div>
+  <div class="bs-header__div"></div>
     <div class="container">
         <div class="row">
         <div class="col-md-8">
