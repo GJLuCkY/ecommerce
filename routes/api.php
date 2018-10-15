@@ -18,3 +18,5 @@ Route::post('/v1/creation-and-updating-categories', 'API\DataApiController@postC
 Route::post('/v1/creation-and-updating-products', 'API\DataApiController@postCreationAndUpdatingProducts');
 
 Route::post('/v1/get-new-orders', 'API\DataApiController@getNewOrders');
+
+Route::post('/v1/change-order', 'API\DataApiController@changeOrder');
