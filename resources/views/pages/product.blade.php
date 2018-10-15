@@ -154,7 +154,7 @@
                                 <div class="bs-catalog__hit">
                                     <div class="bs-catalog__hitImg">
                                         <img src="/images/mochaDub.png" alt="Дуб">
-                                        <a href=""><img src="/images/fav.svg" alt="favorite"></a>
+                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
                                         <div class="bs-catalog__hitText">
                                             <p>3-х слойная паркетная доска</p>
                                             <h6>Дуб Мокко</h6>
@@ -176,84 +176,107 @@
                                 </div>
                                 <div class="bs-catalog__hit">
                                     <div class="bs-catalog__hitImg">
-                                        <img src="images/grayDub.png" alt="Дуб">
-                                        <a href=""><img src="images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Серый</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="images/nutDub.png" alt="Дуб">
-                                        <a href=""><img src="images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Орех</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="images/arcticDub.png" alt="Дуб">
-                                        <a href=""><img src="images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Арктик</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="images/mochaDub.png" alt="Дуб">
-                                        <a href=""><img src="images/fav.svg" alt="favorite"></a>
+                                        <img src="/images/mochaDub.png" alt="Дуб">
+                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
                                         <div class="bs-catalog__hitText">
                                             <p>3-х слойная паркетная доска</p>
                                             <h6>Дуб Мокко</h6>
                                         </div>
                                     </div>
                                     <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <div class="bs-catalog__compare">
+                                        <ul>
+                                            <li class="bs-catalog__like active"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bs-catalog__hit">
+                                    <div class="bs-catalog__hitImg">
+                                        <img src="/images/mochaDub.png" alt="Дуб">
+                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
+                                        <div class="bs-catalog__hitText">
+                                            <p>3-х слойная паркетная доска</p>
+                                            <h6>Дуб Мокко</h6>
+                                        </div>
+                                    </div>
+                                    <p class="bs-catalog__size">10 000 кв.м</p>
+                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <div class="bs-catalog__compare">
+                                        <ul>
+                                            <li class="bs-catalog__like active"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bs-catalog__hit">
+                                    <div class="bs-catalog__hitImg">
+                                        <img src="/images/mochaDub.png" alt="Дуб">
+                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
+                                        <div class="bs-catalog__hitText">
+                                            <p>3-х слойная паркетная доска</p>
+                                            <h6>Дуб Мокко</h6>
+                                        </div>
+                                    </div>
+                                    <p class="bs-catalog__size">10 000 кв.м</p>
+                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <div class="bs-catalog__compare">
+                                        <ul>
+                                            <li class="bs-catalog__like active"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bs-catalog__hit">
+                                    <div class="bs-catalog__hitImg">
+                                        <img src="/images/mochaDub.png" alt="Дуб">
+                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
+                                        <div class="bs-catalog__hitText">
+                                            <p>3-х слойная паркетная доска</p>
+                                            <h6>Дуб Мокко</h6>
+                                        </div>
+                                    </div>
+                                    <p class="bs-catalog__size">10 000 кв.м</p>
+                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <div class="bs-catalog__compare">
+                                        <ul>
+                                            <li class="bs-catalog__like active"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__like"><a href=""></a></li>
+                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bs-catalog__hit">
+                                    <div class="bs-catalog__hitImg">
+                                        <img src="/images/mochaDub.png" alt="Дуб">
+                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
+                                        <div class="bs-catalog__hitText">
+                                            <p>3-х слойная паркетная доска</p>
+                                            <h6>Дуб Мокко</h6>
+                                        </div>
+                                    </div>
+                                    <p class="bs-catalog__size">10 000 кв.м</p>
+                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
                                     <div class="bs-catalog__compare">
                                         <ul>
                                             <li class="bs-catalog__like active"><a href=""></a></li>
