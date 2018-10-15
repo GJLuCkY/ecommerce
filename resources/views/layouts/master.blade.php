@@ -204,7 +204,7 @@
         <!-- Modal content -->
         <div class="bs-header__modal-content row">
         <span class="x">&times;</span>
-        <img src="images/logo.svg" class="bs-header__modalLogo">
+        <img src="/images/logo.svg" class="bs-header__modalLogo">
         <h4 class="bs-header__h4">Вход</h4>
         <hr class="bs-header__modalLine">
         <form method="post" action="form.php">
