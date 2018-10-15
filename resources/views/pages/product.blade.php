@@ -19,7 +19,7 @@
                     <div class="col-sm-8">
                         <div class="row bs-podlozhka__info">
                             <div class="col-sm-5">
-                                <img src="{{ asset('uploads/' . $product->image) }}" alt="image">
+                                <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
                             </div>
                             <div class="col-sm-7">
                                 <p class="bs-podlozhka__desc">Артикул: <span> 18343378</span></p>
