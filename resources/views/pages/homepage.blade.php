@@ -46,7 +46,7 @@
                         <div class="bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
                                 <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                    <img src="{{ asset('uploads/' . $product->image) }}" alt="{{ $product->title }}">
+                                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
                                 </a>
                                 <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                     <img src="/images/fav.svg" alt="favorite">
@@ -97,7 +97,7 @@
                         <div class="bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
                                 <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                    <img src="{{ asset('uploads/' . $product->image) }}" alt="{{ $product->title }}">
+                                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
                                 </a>
                                 <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                     <img src="/images/fav.svg" alt="favorite">

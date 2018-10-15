@@ -124,7 +124,7 @@
                         <div class="col-sm-3 bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
                                 <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
-                                    <img src="{{ asset('uploads/' . $item->image) }}" alt="Дуб">
+                                    <img src="{{ (isset($item->image)) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{ $item->title }}">
                                 </a>
                                 <a class="back-wishlist" href="{{ route('wishlist', ['id' => $item->id]) }}">
                                     <img src="{{ asset('images/fav.svg') }}" alt="favorite">
