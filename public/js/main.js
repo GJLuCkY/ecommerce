@@ -490,7 +490,30 @@ $('.hits').slick({
   slidesToScroll: 1,
   dots: false,
   speed: 700,
-  arrows: true
+  arrows: true,
+   responsive: [{
+       breakpoint: 1025,
+       settings: {
+         slidesToShow: 3,
+         slidesToScroll: 3
+       }
+     },
+     {
+       breakpoint: 600,
+       settings: {
+         slidesToShow: 2,
+         slidesToScroll: 2
+       }
+     },
+     {
+       breakpoint: 480,
+       settings: {
+         slidesToShow: 1,
+         slidesToScroll: 1
+       }
+     }
+
+   ]
 });
 
 $('.slider-for').slick({
@@ -715,5 +738,30 @@ function zoomPyrenees13() {
   map.fitBounds(boundsPyrenees);
   map.setZoom(16);
 }
+$(document).ready(function () {
+  var burger = $('.mob-header__checkbox'),
+    listItem = $('.mob-header__item'),
+    nav = $('.mob-header__nav'),
+    label = $('.mob-header__label'),
+    background = $('.mob-header__background');
 
+  label.click(function () {
+    background.toggleClass('mob-header__background--open');
+    label.toggleClass('mob-header__label--open');
+    nav.toggleClass('mob-header__nav--open');
+    console.log(listItem);
+    if (background.hasClass('mob-header__background--open')) {
+      TweenMax.staggerTo(listItem, 0.4, {
+        y: 10,
+        autoAlpha: 1,
+        delay: 0.2
+      }, 0.2)
+    } else {
+      TweenMax.to(listItem, 0.4, {
+        y: -10,
+        autoAlpha: 0
+      })
+    }
+  })
+});
 //# sourceMappingURL=main.js.map

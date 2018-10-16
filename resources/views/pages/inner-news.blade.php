@@ -26,6 +26,7 @@
 
                     </div>
                 </div>
+               
                 <div class="col-sm-3">
                     <h4 class="bs-deliver__head">Читайте также</h4>
                     <div class="row">

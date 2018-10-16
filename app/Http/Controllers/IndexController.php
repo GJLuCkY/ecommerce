@@ -284,7 +284,7 @@ class IndexController extends Controller
             'delivery_method_id' => 'TODO', // идентификатор способа доставки
             'created_at' => $order->created_at // Дата создания заказа
         ];
-        return response()->json(collect([$data]));
+        //return response()->json(collect([$data]));
 
         Session::forget('cart');
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
