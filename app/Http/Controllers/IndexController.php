@@ -349,4 +349,20 @@ class IndexController extends Controller
         $advice = Advice::where('status', 1)->whereSlug($adviceSlug)->firstOrFail();
         return view('pages.advice', compact('advice'));
     }
+
+    public function brands() {
+        $values = Value::where('filter_id', 1)->get();
+        return view('pages.brands', compact('values'));
+    }
+
+    public function brand($brandSlug) {
+        $brand = Value::whereSlug($brandSlug)->firstOrFail();
+        $products = $brand->products->where('status', 1);
+        $values = Value::where('filter_id', 1)->get();
+        return view('pages.brand', compact('brand', 'products', 'values'));
+
+
+
+        
+    }
 }
