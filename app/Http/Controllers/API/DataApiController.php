@@ -188,55 +188,44 @@ class DataApiController extends Controller
     {
         $orders = $request->get('DOCUMENT_OUT');
         if(isset($orders)) {
-            
             foreach($orders as $orderItemsBitrix) {
                 foreach($orderItemsBitrix as $orderBitrix) {
                     $order = Order::find($orderBitrix['order_id']);
+                    if(isset($orderBitrix['products'])) {
+                        $orderProducts = [];
+                        foreach($orderBitrix['products'] as $productBitrix) {
+                            $product = Product::where('api_id_product', $productBitrix['code'])->first()->getAttributes();
+                            $data = [
+                                'qty' => $productBitrix['quantity'],
+                                'price' => $productBitrix['quantity'],
+                                'item' => $product
+                            ];
+                            
+                            $orderProducts[$product['id']] = $data;
+                           
+                        }
+                       
+                    }
                     $order->update([
                         'name' => $orderBitrix['fullname'],
                         'address' => $orderBitrix['address'],
                         'phone' => $orderBitrix['phone'],
                         'delivery_method' => $orderBitrix['delivery_method_id'],
                         'method' => $orderBitrix['payment_method_id'],
-                        'comment' => $orderBitrix['comment']
+                        'comment' => $orderBitrix['comment'],
+                        'email' => $orderBitrix['email'],
+                        'products' => json_encode((array)$orderProducts)
                     ]);
 
-
-                //     "order_id": 5,
-                // "created_at": "2018-06-21T09:56:51Z",
-                // "fullname": "Нурлан",
-                // "user_id": 2,
-                // "date_payment": "2018-10-09T00:00:00Z",
-                // "address": "Аль Фараби 53б",
-                // "phone": "+7 (123) 123-12-31",
-                // "email": "balymbetov.temirlan@gmail.com",
-                // "delivery_method": "Самовывоз",
-                // "delivery_method_id": "samovyvoz",
-                // "payment_method": "Наличные",
-                // "payment_method_id": "nal",
-                // "comment": "",
-                // "products": [
-                //     {
-                //         "name": "07 Внутренний угол INDO",
-                //         "article": "",
-                //         "code": "Н0000005031",
-                //         "quantity": 2,
-                //         "price": 123123,
-                //         "discount": 0
-                //     },
-                //     {
-                //         "name": "07 Внутренний угол INDO",
-                //         "article": "",
-                //         "code": "Н0000005031",
-                //         "quantity": 1,
-                //         "price": 100,
-                //         "discount": 0
-                //     }
-                // ]
+                    return response()->json([
+                        'message' => 'OK'
+                    ], 200);
                 }
             }
         } else {
-            dd('Нет данных');
+            return response()->json([
+                'message' => 'No Content'
+            ], 204);
         }
     }
 }
