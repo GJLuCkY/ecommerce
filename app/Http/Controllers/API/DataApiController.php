@@ -186,8 +186,9 @@ class DataApiController extends Controller
 
     public function changeOrder(Request $request)
     {
-        $orders = $request->get('DOCUMENT_OUT');
+        $orders = $request->get("DOCUMENT_OUT");
         if(isset($orders)) {
+            foreach($orders as $orderItemsBitrix) {
                 foreach($orders as $orderBitrix) {
                     $order = Order::find($orderBitrix['order_id']);
                     if(isset($orderBitrix['products'])) {
@@ -220,7 +221,7 @@ class DataApiController extends Controller
                         'message' => 'OK'
                     ], 200);
                 }
-            
+            }
         } else {
             return response()->json([
                 'message' => 'No Content'
