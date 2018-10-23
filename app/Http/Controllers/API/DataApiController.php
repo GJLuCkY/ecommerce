@@ -188,8 +188,7 @@ class DataApiController extends Controller
     {
         $orders = $request->get('DOCUMENT_OUT');
         if(isset($orders)) {
-            foreach($orders as $orderItemsBitrix) {
-                foreach($orderItemsBitrix as $orderBitrix) {
+                foreach($orders as $orderBitrix) {
                     $order = Order::find($orderBitrix['order_id']);
                     if(isset($orderBitrix['products'])) {
                         $orderProducts = [];
@@ -221,7 +220,7 @@ class DataApiController extends Controller
                         'message' => 'OK'
                     ], 200);
                 }
-            }
+            
         } else {
             return response()->json([
                 'message' => 'No Content'
