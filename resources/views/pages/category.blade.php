@@ -14,6 +14,7 @@
                             <img src="/images/laminat.svg">
                             </span>
                         </h6>
+                        
                     <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
                     </div>
                     {{-- @endif --}}
@@ -85,6 +86,9 @@
                 <div class="row bs-catalog__hits">
                     <div class="row">
                         <h5 class="bs-laminat__head">{{ $category->title }}</h5>
+                        <div class="mob-filter">
+                          <button class="filter__button" type="button"><img src="/images/filter.png" alt="filterButton"/></button>
+                        </div>
                         <div class="bs-catalog__select">
                             <div class="bs-catalog__selectIn">
                                 @php
@@ -118,6 +122,82 @@
                             </div>
                         </div>
                     </div>
+                    <div id="filter" class="bs-laminat__modal">
+                      <div class="filter__modal-content">
+                        <div class="filter-header">
+                          <h5 class="filter__head"><span class="filter__close"><img src="/images/back.png" alt="back"></span> ФИЛЬТР</h5>
+                        </div>
+                        <form>
+                            {{-- @if(count($products) > 0) --}}
+                            <div class="bs-laminat__brands">
+                                <h6 class="bs-laminat__title">Цена
+                                    <span>
+                                    <img src="/images/laminat.svg">
+                                    </span>
+                                </h6>
+                                
+                            <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
+                            </div>
+                            {{-- @endif --}}
+                            @foreach($category->filters as $filters)
+                            @if(count($filters->values) > 0)
+                            <div class="bs-laminat__brands">
+                                <h6 class="bs-laminat__title">{{ $filters->name }}
+                                    <span>
+                                        <img src="/images/laminat.svg">
+                                    </span>
+                                </h6>
+                                <div class="bs-order__box">
+                                    @foreach($filters->values as $value)
+                                    <label class="bs-order__checkLabel">
+                                        
+                                    @php
+                                        $currentFilterValue = request($filters->slug);
+                                        $customFilterValue = $currentFilterValue;
+                                        $req = request()->all();
+                                        $active = false;
+                                        if(isset($customFilterValue)) {
+                                            $customFilterValue = explode(',', $customFilterValue);
+                                            if(in_array($value->slug, $customFilterValue)) {
+                                                $active = true;
+                                                $filterValue = array_diff($customFilterValue, [$value->slug]);
+                                            }  else {
+                                                $active = false;
+                                                $filterValue = array_merge($customFilterValue, [$value->slug]);
+                                            }
+                                        } else {
+                                            $filterValue = [$value->slug];
+                                        }
+
+                                        if(isset($customFilterValue) && count($customFilterValue) <= 1 && in_array($value->slug, $customFilterValue)) {
+                                            $req[$filters->slug] = implode(',', $filterValue);
+                                            unset($req[$filters->slug]);
+                                            $routeParameters = array_merge(['catSlug' => $category->slug], $req);
+                                            
+                                        } else {
+                                            $req[$filters->slug] = implode(',', $filterValue);
+                                            $routeParameters = array_merge(['catSlug' => $category->slug], $req);
+                                        }
+                                    @endphp
+
+                                        <a href="{{ route('category',  $routeParameters) }}">
+                                            <input type="checkbox" name="check"> {{ $value->name }}
+                                            <span class="checkmark">
+                                            @if($active === true)
+                                            <span class="check"></span>
+                                            @endif
+                                            </span>
+                                        </a>
+                                    </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+                            @endforeach
+
+                        </form>
+                      </div>
+                    </div>
                     @foreach($products->chunk(5) as $chunk)
                     <div class="bs-laminat__hits row">
                         @foreach($chunk as $item)
@@ -129,6 +209,14 @@
                                 <a class="back-wishlist" href="{{ route('wishlist', ['id' => $item->id]) }}">
                                     <img src="{{ asset('images/fav.svg') }}" alt="favorite">
                                 </a>
+                                <div class="bs-catalog__mob-buttons row">
+                                  <a href="{{ route('wishlist', ['id' => $item->id]) }}" class="mob-wishlist">
+                                    <img src="/images/heart.svg" alt="favorite">
+                                  </a>
+                                  <a href="{{ route('wishlist', ['id' => $item->id]) }}" class="mob-wishlist">
+                                    <img src="/images/basket.svg" alt="favorite">
+                                  </a>
+                                </div>
                                 <div class="bs-catalog__hitText">
                                     <p>3-х слойная паркетная доска</p>
                                     <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">

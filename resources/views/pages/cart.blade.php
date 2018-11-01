@@ -16,7 +16,8 @@
 
                     <div class="row bs-basket__row">
                         <div class="col-sm-1 bs-basket__img">
-                            <img src="{{ asset('uploads/' . $product['item']->image ) }}" class="">
+                            {{-- <img src="{{ asset('uploads/' . $product['item']->image ) }}" class=""> --}}
+                            <img src="{{ (isset($product['item']->image)) ? asset('uploads/' . $product['item']->image) : '/images/not-found.png' }}" alt="{{ $product['item']->title }}">
                         </div>
                         <div class="col-sm-4 bs-basket__bigCol">
                             <p class="bs-basket__about">{{ $product['item']->title }}

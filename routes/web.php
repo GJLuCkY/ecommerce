@@ -22,6 +22,10 @@ Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => 
     CRUD::resource('slider', 'SliderCrudController');
     CRUD::resource('review', 'ReviewCrudController');
     CRUD::resource('city', 'CityCrudController');
+
+    CRUD::resource('vacancy', 'VacancyCrudController');
+    CRUD::resource('vacancy-city', 'VacancyCityCrudController');
+    CRUD::resource('advice', 'AdviceCrudController');
 });
 
 Route::get('/test', function() {
@@ -58,7 +62,14 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::auth();
 
+Route::get('/vacancy/{citySlug}', 'IndexController@vacancyCity')->name('vacancy.city');
+Route::get('/vacancy/{citySlug}/{vacancyId}', 'IndexController@vacancyId')->name('vacancy.id');
 
+Route::get('/advices', 'IndexController@advices')->name('advices');
+
+Route::get('/advices/{adviceSlug}', 'IndexController@advice')->name('advice');
+
+Route::view('/brands', 'pages.brands')->name('brands');
 
 Route::post('/search','SearchController@search')->name('search');
 

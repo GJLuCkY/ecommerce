@@ -25,7 +25,7 @@
                                 <p class="bs-podlozhka__desc">Артикул: <span> 18343378</span></p>
                            
                                 @foreach($product->values as $filter)
-                            <p class="bs-podlozhka__desc">{{$filter->filter->name}}: <span> {{ $filter->name }}</span></p>
+                              <p class="bs-podlozhka__desc">{{$filter->filter->name}}: <span> {{ $filter->name }}</span></p>
                                 @endforeach
                                 <div class="bs-podlozhka__links">
                                     <button type="submit">Задать вопрос</button>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="col-sm-10">
                                     <div>
-                                        <h6>{{ $review->user->name }}</h6>
+                                        <h6 class="bs-podlozhka__review-name">{{ $review->user->name }}</h6>
                                         <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
                                     </div>
                                     <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
@@ -141,6 +141,99 @@
                             </form>
                         </div>
                 </div>
+            </div>
+            <div class="bs-podlozhka-mob">
+              <h5 class="bs-basket__heading"><a href="{{ route('category', ['catSlug' => $product->category->slug]) }}"><span><img src="/images/back.png" alt="back"></span></a>{{ $product->title }}</h5>
+              <ul class="bs-podlozhka-mob__list">
+                <li>Описание
+                  <div class="bs-podlozhka-mob__desc">
+                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
+                    <div class="bs-podlozhka__text">
+                        {!! $product->content !!}
+                    </div>
+                    <div class="bs-podlozhka__buttons">
+                      <div>
+                        <button class="bs-podlozhka__calc">Калькулятора расчета</button>
+                        <p class="bs-podlozhka-mob__cost">ЦЕНА: <span>2 600 ТГ</span></p>
+                      </div>
+                      <div>
+                        <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="bs-podlozhka-mob-wishlist">
+                          <img src="/images/heart.svg" alt="favorite">
+                        </a>
+                        <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-podlozhka__add">КУПИТЬ</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>Характеристики
+                  <div class="bs-podlozhka-mob__desc">
+                    <p class="bs-podlozhka__desc">Артикул: <span> 18343378</span></p>
+                      @foreach($product->values as $filter)
+                    <p class="bs-podlozhka__desc">{{$filter->filter->name}}: <span> {{ $filter->name }}</span></p>
+                      @endforeach
+                      <div class="bs-podlozhka__buttons">
+                      <div>
+                        <button class="bs-podlozhka__calc">Калькулятора расчета</button>
+                        <p class="bs-podlozhka-mob__cost">ЦЕНА: <span>2 600 ТГ</span></p>
+                      </div>
+                      <div>
+                        <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="bs-podlozhka-mob-wishlist">
+                          <img src="/images/heart.svg" alt="favorite">
+                        </a>
+                        <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-podlozhka__add">КУПИТЬ</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>Отзывы
+                  <div class="bs-podlozhka-mob__desc">
+                    @foreach($product->reviews as $review)
+                      <div>
+                          <h6 class="bs-podlozhka__review-name">{{ $review->user->name }}</h6>
+                          <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
+                      </div>
+                      <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
+                    @endforeach
+                    <div class="bs-podlozhka__buttons">
+                    <button class="bs-podlozhka__review-add" type="submit">Добавить отзыв</button>
+                      <form action="{{ route('review') }}" method="POST">
+                          {{ csrf_field() }}
+                          <textarea name="content"></textarea>
+                          <input type="hidden" value="{{ $product->id }}" name="product_id">
+                          <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
+                          <select name="stars" id="">
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                          </select>
+                          <button type="submit">Отправить отзыв</button>
+                      </form>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="bs-podlozhka-mob__info">
+                <div class="bs-podlozhka-mob__desc">
+                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
+                    <div class="bs-podlozhka__text">
+                        {!! $product->content !!}
+                    </div>
+                    <div class="bs-podlozhka__buttons">
+                      <div>
+                        <button class="bs-podlozhka__calc">Калькулятора расчета</button>
+                        <p class="bs-podlozhka-mob__cost">ЦЕНА: <span>2 600 ТГ</span></p>
+                      </div>
+                      <div>
+                        <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="bs-podlozhka-mob-wishlist">
+                          <img src="/images/heart.svg" alt="favorite">
+                        </a>
+                        <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-podlozhka__add">КУПИТЬ</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
         </div>
         <div class="bs-podlozhka">
@@ -295,27 +388,27 @@
                         <div class="row bs-catalog__news">
                             <h5 class="bs-catalog__head">Похожие товары</h5>
                             <div class="hits">
-                                @foreach($similarProducts as $product)
+                                @foreach($similarProducts as $similarProduct)
                                 <div class="bs-catalog__hit">
                                     <div class="bs-catalog__hitImg">
-                                        <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                            <img src="{{ asset('uploads/' . $product->image) }}" alt="{{ $product->title }}">
+                                        <a href="{{ route('product', ['catSlug' => $similarProduct->category->slug, 'prodSlug' => $similarProduct->slug]) }}">
+                                            <img src="{{ (isset($similarProduct->image)) ? asset('uploads/' . $similarProduct->image) : '/images/not-found.png' }}" alt="{{ $similarProduct->title }}">
                                         </a>
                                         <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                             <img src="/images/fav.svg" alt="favorite">
                                         </a>
                                         <div class="bs-catalog__hitText">
                                             <p>3-х слойная паркетная доска</p>
-                                            <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                                <h6>Ясень Standart</h6>
+                                            <a href="{{ route('product', ['catSlug' => $similarProduct->category->slug, 'prodSlug' => $similarProduct->slug]) }}">
+                                                <h6>{{ $similarProduct->title }}</h6>
                                             </a>
                                         </div>
                                     </div>
                                     <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <a href="{{ route('addToCart', ['id' => $similarProduct->id]) }}" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
                                     <div class="bs-catalog__compare">
                                         <ul>
-                                            <star-rating :rating={{ $product->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
+                                            <star-rating :rating={{ $similarProduct->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
                                             <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
                                         </ul>
                                     </div>

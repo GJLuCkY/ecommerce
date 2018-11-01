@@ -473,17 +473,19 @@ $('.one-time').slick({
   arrows: false
 });
 
-$('.brands').slick({
-  infinite: true,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  dots: false,
-  autoplay: true,
-  speed: 700,
-  autoplaySpeed: 1500,
-  arrows: true
-});
 
+if ($(window).width()  > 650) {
+  $('.brands').slick({
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    dots: false,
+    autoplay: true,
+    speed: 700,
+    autoplaySpeed: 1500,
+    arrows: true
+  });
+}
 $('.hits').slick({
   infinite: true,
   slidesToShow: 4,
@@ -764,4 +766,62 @@ $(document).ready(function () {
     }
   })
 });
+
+$(document).ready(function () {
+    // Get the modal
+    var modal = document.getElementById('filter');
+
+    // Get the button that opens the modal
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("filter__close")[0];
+
+    // When the user clicks the button, open the modal
+    $('.mob-filter .filter__button').click(function () {
+      modal.style.display = "block";
+      if(modal.style.display = "block"){
+        $(".filter__button").addClass('button-filter');
+      }
+    });
+
+    
+    if (span) {
+      span.onclick = function () {
+        modal.style.display = "none";
+        $(".filter__button").removeClass('button-filter');
+      };
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    if (send) {
+      send.onclick = function () {
+        modal.style.display = "none";
+        setTimeout(TimeOut, 3000);
+      };
+    }
+
+    function TimeOut() {
+      pop.style.display = "none";
+    }
+  });
+if ($(window).width() < 650) {
+  $(document).ready(function(){  
+    $(".bs-footer__head").click(function () {
+      $(this).parent().find(".bs-footer__list").slideToggle(400);
+      $(this).toggleClass('opacity');
+    });
+    $(".bs-catalog .mob-wishlist").click(function () {
+      $(this).toggleClass("green");
+    });
+    $('.bs-podlozhka-mob__list li').click(function () {
+      $('.bs-podlozhka-mob__info').html($(this).find('.bs-podlozhka-mob__desc').html());
+    });
+  });
+}
 //# sourceMappingURL=main.js.map
