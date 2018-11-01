@@ -45,4 +45,15 @@ class Cart
         $this->totalQty++;
         $this->totalPrice += $item->price;
     }
+
+    public function changeQuantity($oldCart, $id, $operator) {
+        if(isset($oldCart->items[$id])) {
+            if($operator == 'plus') {
+                $this->items[$id]['qty']++;
+            } else if($operator == 'minus') {
+                $this->items[$id]['qty']--;
+            }
+        }
+        
+    }
 }

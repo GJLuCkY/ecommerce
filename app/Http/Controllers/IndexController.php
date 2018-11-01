@@ -98,6 +98,7 @@ class IndexController extends Controller
     }
 
     public function cart() {
+        
         SEO::setTitle('Корзина');
         SEO::setDescription('Корзина Etalon Holding');
         if(!Session::has('cart')){
@@ -256,5 +257,16 @@ class IndexController extends Controller
         Session::forget('cart');
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
         return redirect()->route('homepage');
+    }
+
+    public function cartChangeQuantity(Request $request)
+    {
+        
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->changeQuantity($oldCart, $request->product, $request->change);
+        $request->session()->put('cart', $cart);
+
+        return redirect()->back();
     }
 }

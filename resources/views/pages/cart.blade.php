@@ -28,9 +28,23 @@
                         <div class="col-sm-3 bs-basket__qual">
                             {{-- <h6 class="bs-basket__title">Количество</h6> --}}
                             <div class="bs-basket__counter">
-                                <button type="button">+</button>
+                                <form action="{{ route('cart.change.quantity') }}" method="POST" style="display: initial">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="product" value="{{ $product['item']->id }}">
+                                    <input type="hidden" name="change" value="plus">
+                                    <button type="submit">+</button>
+                                </form> 
                                 <p>{{ $product['qty'] }}</p>
+                                @if($product['qty'] == 1)
                                 <button type="button">-</button>
+                                @else
+                                <form action="{{ route('cart.change.quantity') }}" method="POST" style="display: initial">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="product" value="{{ $product['item']->id }}">
+                                    <input type="hidden" name="change" value="minus">
+                                    <button type="submit">-</button>
+                                </form>
+                                @endif 
                             </div>
                         </div>
                         <div class="col-sm-3 bs-basket__cost">

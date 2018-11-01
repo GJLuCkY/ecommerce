@@ -105,5 +105,7 @@ Route::get('/{catSlug}/{prodSlug}', 'IndexController@product')->name('product');
 Route::post('/review', 'IndexController@review')->name('review');
 Route::post('/subscribe', 'IndexController@subscribe')->name('subscribe');
 
+Route::post('/cart-change-quantity', 'IndexController@cartChangeQuantity')->name('cart.change.quantity');
+
 
 

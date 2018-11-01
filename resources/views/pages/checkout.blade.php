@@ -63,9 +63,9 @@
                             </div> --}}
                             <div class="bs-order__select">
                                 <div class="bs-order__selectIn">
-                                    <select>
-                                    <option>Физическое лицо</option>
-                                    <option>Юридическое лицо</option>
+                                    <select name="usertype">
+                                        <option value="f">Физическое лицо</option>
+                                        <option value="u">Юридическое лицо</option>
                                     </select>
                                 </div>
                             </div>
