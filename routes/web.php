@@ -70,7 +70,10 @@ Route::get('/vacancy/{citySlug}', 'IndexController@vacancyCity')->name('vacancy.
 Route::get('/vacancy/{citySlug}/{vacancyId}', 'IndexController@vacancyId')->name('vacancy.id');
 
 Route::get('/advices', 'IndexController@advices')->name('advices');
+
 Route::get('/advices/{adviceSlug}', 'IndexController@advice')->name('advice');
+
+Route::view('/brands', 'pages.brands')->name('brands');
 
 Route::post('/search','SearchController@search')->name('search');
 

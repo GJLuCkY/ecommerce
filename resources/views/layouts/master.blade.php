@@ -112,7 +112,7 @@
 <header id="bs-header" class="bs-header">
 <!-- Adds the Main Nav partial -->
   <div class="bs-header__div"></div>
-    <div class="container">
+    <div class="container first">
         <div class="row">
         <div class="col-md-8">
             <nav class="bs-main-nav">
@@ -227,6 +227,11 @@
     <hr class="bs-line">
     <div class="container">
         <div class="row">
+        <div class="col-md-2 mob_search">  
+          <a href="{{ route('homepage') }}">
+            <img src="{{ asset('images/search.svg') }}" alt="search">
+            </a>
+        </div>
         <div class="col-md-2">
             <a href="{{ route('homepage') }}">
             <img src="{{ asset('images/logo.svg') }}" class="bs-header__logo">
@@ -280,8 +285,39 @@
         </div>
         </div>
     </div>
+    <!-- <div class="bs-header__mob">
+      <ul>
+        <li>
+          <a href="tel:+7722331122" class="bs-main-nav__link"> +7 (722) 33-11-22</a>
+        </li>
+        <li>
+          <a class="bs-main-nav__link">
+                <img src="{{ asset('images/cab.svg') }}" alt="human" class="bs-header__human"> Личный кабинет
+                </a>
+        </li>
+      </ul>
+    </div> -->
 </header>
-
+<article class="mob-header">
+    <input id="mob-header__checkbox" type="checkbox" class="mob-header__checkbox">
+    <label for="mob-header__checkbox" class="mob-header__label">
+        <span class="mob-header__icon">&nbsp;</span>
+    </label>
+    <div class="mob-header__background">&nbsp;</div>
+    <nav class="mob-header__nav">
+      <ul class="mob-header__list">
+        <li class="mob-header__item">
+            <a class="mob-header__link" href="{{ route('news') }}">Новости</a>
+        </li>
+        <li class="mob-header__item">
+            <a class="mob-header__link" href="{{ route('news') }}">Советы</a>
+        </li>
+        <li class="mob-header__item">
+            <a class="mob-header__link" href="/oplata-i-dostavka">Оплата и доставка</a>
+        </li>
+      </ul>
+    </nav>
+</article>
 
 
 <div id="app">
@@ -301,21 +337,23 @@
                 <a href="{{ route('homepage') }}">
                     <img src="{{ asset('images/logo.svg') }}" class="bs-footer__logo">
                 </a>
+                <p class="bs-footer__mob-p">Магазин строительных материалов</p>
             </div>
             <div class="col-sm-3 bs-footer__col">
-                <h6 class="bs-footer__head">Компания</h6>
+                <h6 class="bs-footer__head">Компания <span><img src="{{ asset('images/foot.png') }}" alt="arrow"></span></h6>
                 <ul class="bs-footer__list">
                     <li class="bs-footer__item"><a href="/o-kompanii" class="bs-footer__link">О Компании</a></li>
                     <li class="bs-footer__item"><a href="{{ route('news') }}" class="bs-footer__link">Новости</a></li>
-                <li class="bs-footer__item"><a href="{{ route('advices') }}" class="bs-footer__link">Советы</a></li>
+                    <li class="bs-footer__item"><a href="{{ route('advices') }}" class="bs-footer__link">Советы</a></li>
+                    <li class="bs-footer__item"><a href="" class="bs-footer__link">Вакансии</a></li>
+                    <li class="bs-footer__item"><a href="" class="bs-footer__link">Контакты</a></li>
                     <!-- <li class="bs-footer__item"><a href="" class="bs-footer__link">Услуги</a></li> -->
                 </ul>
             </div>
             <div class="col-sm-3 bs-footer__col">
-                <h6 class="bs-footer__head">Интернет-магазин</h6>
+                <h6 class="bs-footer__head">Интернет-магазин <span><img src="{{ asset('images/foot.png') }}" alt="arrow"></span></h6>
                 <ul class="bs-footer__list">
                     <li class="bs-footer__item"><a href="/kak-zakazat" class="bs-footer__link">Как сделать заказ</a></li>
-                    <li class="bs-footer__item"><a href="/oplata-i-dostavka" class="bs-footer__link">Как оплатить</a></li>
                     <li class="bs-footer__item"><a href="/oplata-i-dostavka" class="bs-footer__link">Оплата и доставка</a></li>
                     <li class="bs-footer__item"><a href="/faq" class="bs-footer__link">Вопросы и Ответы</a></li>
                     <li class="bs-footer__item"><a href="/vozvrat-tovara" class="bs-footer__link">Возврат товара</a></li>
@@ -323,10 +361,22 @@
             </div>
             <div class="col-sm-3 bs-footer__col">
                 <h6 class="bs-footer__head bs-footer__head--last">Подписка на новости</h6>
+                <div class="bs-footer__mob-div row">
+                  <div class="col-xs-6">
+                    <p class="bs-footer__gray">Адрес</p>
+                    <p class="bs-footer__whiteMob">ТРЦ «Галерея» 1 этаж, 2 бутик</p>
+                  </div>
+                  <div class="col-xs-6">
+                    <p class="bs-footer__gray">Телефон</p>
+                    <a href="tel:+7722331122" class="bs-footer__whiteMob">+7 (722) 33-11-22</a>
+                  </div>
+                </div>
                 <form class="bs-footer__form" method="POST" action="{{ route('subscribe') }}">
                     {{ csrf_field() }}
+                    <p class="bs-footer__boldMob">Подпишитесь на наши новости</p>
                     <input type="email" name="email" placeholder="Ваш E-mail" required>
                     <button type="submit" class="bs-footer__send" href=""><img src="{{ asset('images/send.svg') }}" alt="send"></button>
+                    <button type="submit" class="bs-footer__sendMob" href="">Отправить</button>
                 </form>
                 <button class="bs-footer__call">Заказать звонок</button>
                 <div class="bs-footer__net">

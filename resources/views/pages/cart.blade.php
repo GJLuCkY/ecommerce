@@ -92,10 +92,10 @@
                 <div class="col-sm-2 bs-links">
                     @include('partials.menu')
                 </div>
-                <div class="col-sm-9">
-                    <div class="bs-basket">
+                <div class="col-sm-9 bs-basket">
+                    <div class="">
                         <ul class="breadcrumb">
-                            <li><a href{{ route('homepage') }}Главная</a></li>
+                            <li><a href = "{{ route('homepage') }}">Главная</a></li>
                             <li>Корзина</li>
                         </ul>
                         <h5 class="bs-emptyBasket__heading">ВАША КОРЗИНА <span class="count">(0)</span></h5>

@@ -473,24 +473,49 @@ $('.one-time').slick({
   arrows: false
 });
 
-$('.brands').slick({
-  infinite: true,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  dots: false,
-  autoplay: true,
-  speed: 700,
-  autoplaySpeed: 1500,
-  arrows: true
-});
 
+if ($(window).width()  > 650) {
+  $('.brands').slick({
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    dots: false,
+    autoplay: true,
+    speed: 700,
+    autoplaySpeed: 1500,
+    arrows: true
+  });
+}
 $('.hits').slick({
   infinite: true,
   slidesToShow: 4,
   slidesToScroll: 1,
   dots: false,
   speed: 700,
-  arrows: true
+  arrows: true,
+   responsive: [{
+       breakpoint: 1025,
+       settings: {
+         slidesToShow: 3,
+         slidesToScroll: 3
+       }
+     },
+     {
+       breakpoint: 600,
+       settings: {
+         slidesToShow: 2,
+         slidesToScroll: 2
+       }
+     },
+     {
+       breakpoint: 480,
+       settings: {
+         slidesToShow: 1,
+         slidesToScroll: 1
+       }
+     }
+
+   ]
 });
 
 $('.slider-for').slick({
@@ -715,5 +740,88 @@ function zoomPyrenees13() {
   map.fitBounds(boundsPyrenees);
   map.setZoom(16);
 }
+$(document).ready(function () {
+  var burger = $('.mob-header__checkbox'),
+    listItem = $('.mob-header__item'),
+    nav = $('.mob-header__nav'),
+    label = $('.mob-header__label'),
+    background = $('.mob-header__background');
 
+  label.click(function () {
+    background.toggleClass('mob-header__background--open');
+    label.toggleClass('mob-header__label--open');
+    nav.toggleClass('mob-header__nav--open');
+    console.log(listItem);
+    if (background.hasClass('mob-header__background--open')) {
+      TweenMax.staggerTo(listItem, 0.4, {
+        y: 10,
+        autoAlpha: 1,
+        delay: 0.2
+      }, 0.2)
+    } else {
+      TweenMax.to(listItem, 0.4, {
+        y: -10,
+        autoAlpha: 0
+      })
+    }
+  })
+});
+
+$(document).ready(function () {
+    // Get the modal
+    var modal = document.getElementById('filter');
+
+    // Get the button that opens the modal
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("filter__close")[0];
+
+    // When the user clicks the button, open the modal
+    $('.mob-filter .filter__button').click(function () {
+      modal.style.display = "block";
+      if(modal.style.display = "block"){
+        $(".filter__button").addClass('button-filter');
+      }
+    });
+
+    
+    if (span) {
+      span.onclick = function () {
+        modal.style.display = "none";
+        $(".filter__button").removeClass('button-filter');
+      };
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    if (send) {
+      send.onclick = function () {
+        modal.style.display = "none";
+        setTimeout(TimeOut, 3000);
+      };
+    }
+
+    function TimeOut() {
+      pop.style.display = "none";
+    }
+  });
+if ($(window).width() < 650) {
+  $(document).ready(function(){  
+    $(".bs-footer__head").click(function () {
+      $(this).parent().find(".bs-footer__list").slideToggle(400);
+      $(this).toggleClass('opacity');
+    });
+    $(".bs-catalog .mob-wishlist").click(function () {
+      $(this).toggleClass("green");
+    });
+    $('.bs-podlozhka-mob__list li').click(function () {
+      $('.bs-podlozhka-mob__info').html($(this).find('.bs-podlozhka-mob__desc').html());
+    });
+  });
+}
 //# sourceMappingURL=main.js.map

@@ -34,6 +34,7 @@
             <p>{{ $item->name }}</p>
             </div>
             @endforeach
+            <a href="{{ route('brands') }}" class="brands__button">ВСЕ БРЕНДЫ</a>
         </div>
         <div class="row">
             <div class="col-sm-2"></div>
@@ -54,7 +55,14 @@
                                         Добавить в избранное
                                     </div>
                                 </a>
-                
+                                <div class="bs-catalog__mob-buttons row">
+                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
+                                    <img src="/images/heart.svg" alt="favorite">
+                                  </a>
+                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
+                                    <img src="/images/basket.svg" alt="favorite">
+                                  </a>
+                                </div>
                                 <div class="bs-catalog__hitText">
                                     <p>3-х слойная паркетная доска
                                     <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
@@ -102,6 +110,14 @@
                                 <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                     <img src="/images/fav.svg" alt="favorite">
                                 </a>
+                                <div class="bs-catalog__mob-buttons row">
+                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
+                                    <img src="/images/heart.svg" alt="favorite">
+                                  </a>
+                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
+                                    <img src="/images/basket.svg" alt="favorite">
+                                  </a>
+                                </div>
                                 <div class="bs-catalog__hitText">
                                         <p>3-х слойная паркетная доска
                                         <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
