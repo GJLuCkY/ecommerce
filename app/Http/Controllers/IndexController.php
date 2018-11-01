@@ -171,78 +171,7 @@ class IndexController extends Controller
         $cart = new Cart($oldCart);
         return view('pages.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
-<<<<<<< HEAD
-    public function postCheckout(Request $request) {
-
-       //dd($request->all());
-       $oldCart = Session::get('cart');
-       $cart = new Cart($oldCart);
-        $totalPrice = $cart->totalPrice;
-        //dd($cart);
-        $object = $cart->items;
-
-        $productsId = (array)$object;
-        $order = new Order;
-        $order->phone = $request->get('phone');
-        $order->city = 'todo';
-        $order->address = $request->get('address');
-        $order->email = $request->get('email');
-        $order->name = $request->get('name');
-        $order->comment = $request->get('comment');
-        $order->method = 'TODO';
-        $order->status = 'create';
-        $order->products = $request->get('products');
-        $order->user_id = $request->get('user_id');
-        $order->save();
-        $order->products()->attach(array_keys($productsId));
-
-       // dd($order);
-        $products = collect([]);
-        foreach($cart->items as $key=>$product) {
-            $key++;
-            
-                $products->push([
-                    'name' => $product['item']->title,
-                    'article' => 'TODO',
-                    'code' => 'TODO',
-                    'quantity' => $product['qty'],
-                    'price' => $product['price'],
-                    'price_type' => 'KZT',
-                    'price_id' => 'TODO',
-                    'discount' => 'TODO'
-                ]);
-        }
-       
-        
-        $data = [
-            'order_id' => $order->id, // идентификатор заказа на сайте
-            'user_id' => $order->user_id,
-            'user_type' => 'TODO', // Юр/физ лицо признак
-            'iin_bin' => 'TODO', // Если Юр лицо то БИН/ИИН и РНН
-            'fullname' => $order->name, // ФИО
-            'address' => $order->address, // адрес
-            'phone' => $order->phone, // телефон
-            'email' => $order->email, // e-mail
-            'products' => $products,
-            'total_price' => $totalPrice, // сумма заказа
-            'comment' => $order->comment, // комментарий покупателя
-            'payment_method' => 'TODO', // способ оплаты, 
-            'payment_method_id' => 'TODO', // идентификатор способа оплаты
-            'date_payment' => 'TODO', // дата оплаты
-            'delivery_method' => 'TODO', // Способ доставки
-            'delivery_method_id' => 'TODO', // идентификатор способа доставки
-            'created_at' => $order->created_at // Дата создания заказа
-        ];
-        //return response()->json(collect([$data]));
-
-        Session::forget('cart');
-        Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('homepage');
-
-    }
-=======
     
->>>>>>> 9f666855faa7ff19a88f9a823518ac5fa78758b1
     public function addWishlist($id) {
         if (Auth::check()) {
             Wishlist::add($id, Auth::user()->id);
