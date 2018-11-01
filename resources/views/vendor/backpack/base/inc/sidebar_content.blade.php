@@ -29,6 +29,7 @@
 </li>
 
 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/city') }}"><i class="fa fa-list"></i> <span>Города</span></a></li>
+<li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/address') }}"><i class="fa fa-list"></i> <span>Адреса</span></a></li>
 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/advice') }}"><i class="fa fa-list"></i> <span>Советы</span></a></li>
 
 

@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
-use Cviebrock\EloquentSluggable\Sluggable;
 
-class City extends Model
+class Address extends Model
 {
-    use CrudTrait, Sluggable;
+    use CrudTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -16,36 +15,29 @@ class City extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'cities';
+    protected $table = 'addresses';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name', 'slug', 'status'];
+    protected $fillable = ['title', 'city_id', 'status', 'extras'];
     // protected $hidden = [];
     // protected $dates = [];
+    protected $fakeColumns = ['extras'];
 
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'slug_or_name',
-            ],
-        ];
-    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function addresses()
+    public function city()
     {
-        return $this->hasMany('App\Models\Address', 'city_id');
+        return $this->belongsTo('App\Models\City', 'city_id');
     }
 
     /*
@@ -59,15 +51,6 @@ class City extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
-
-    public function getSlugOrNameAttribute()
-    {
-        if ($this->slug != '') {
-            return $this->slug;
-        }
-
-        return $this->name;
-    }
 
     /*
     |--------------------------------------------------------------------------

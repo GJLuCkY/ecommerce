@@ -40,8 +40,8 @@
                 <form class="bs-order__form" action="{{ route('checkout-go') }}" method="POST">
                     {{ csrf_field() }}
                    
-
-                    <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
+                  
+                    <input type="hidden" value="{{ Auth::check() ? Auth::user()->id : 0 }}" name="user_id">
                     <div class="row">
                         <div class="col-sm-6">
                             <label class="bs-order__input">Телефон

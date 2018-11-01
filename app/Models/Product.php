@@ -120,6 +120,11 @@ class Product extends Model
         $filters->apply($query);
     }
 
+    public function scopeActive($query)
+    {
+        $query->where('status', 1);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | ACCESORS
