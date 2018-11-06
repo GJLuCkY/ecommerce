@@ -163,6 +163,7 @@ class IndexController extends Controller
     }
 
     public function checkout() {
+        // Session::forget('cart');
         SEO::setTitle('Оформление заказа');
         SEO::setDescription('Оформление заказа Etalon Holding');
         if(!Session::has('cart')){
@@ -242,22 +243,48 @@ class IndexController extends Controller
     }
 
     public function postCheckout(Request $request) {
+
+        $user = Auth::user();
+        dd($user);
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $totalPrice = $cart->totalPrice;
         $object = $cart->items;
         $productsId = (array)$object;
+
+
         $order = new Order;
+        if($request->get('user_id') != 0) {
+            $order->user_id = $request->get('user_id');
+            $order->iin_bin = $request->get('usertype');
+        }
         $order->phone = $request->get('phone');
-        $order->city = 'todo';
+        $order->name = $request->get('name');
+        $order->city = 'Almaty';
         $order->address = $request->get('address');
         $order->email = $request->get('email');
-        $order->name = $request->get('name');
         $order->comment = $request->get('comment');
-        $order->method = 'TODO';
+        $order->method = $request->get('method');
         $order->status = 'create';
         $order->products = $request->get('products');
-        $order->user_id = $request->get('user_id');
+        $order->delivery_method = $request->get('delivery_method');
+        $order->user_type = $request->get('usertype');
+
+        
+       
+        
+       
+
+        
+        
+        
+        
+        
+        
+
+
+       
+        
         $order->save();
         $order->products()->attach(array_keys($productsId));
         Session::forget('cart');
