@@ -72,12 +72,12 @@
                             <label class="bs-order__input">E-Mail
                                 <input type="email" name="email" required>
                             </label>
-                            <div class="bs-order__check">
+                            <div class="">
                                 <p>Способ оплаты </p>
-                                <label><input type="radio" name="radio"> Наличными
+                                <label><input type="radio" name="method" value="nal"> Наличными
                                     <span class="checkmark"></span>
                                 </label>
-                                <label><input type="radio" name="radio"> Оплата картой
+                                <label><input type="radio" name="method" value="cart"> Оплата картой
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -95,11 +95,23 @@
                             <label class="bs-order__input">Комментарий
                                 <textarea name="comment"></textarea>
                             </label>
+
+                            <div class="">
+                                <p>Способ доставки</p>
+                                <label><input type="radio" name="delivery_method" value="dostavka"> Доставка
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label><input type="radio" name="delivery_method" value="samovyvoz"> Самовывоз
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
                             <div class="bs-order__total">
                                 <h6>ИТОГО <span class="bs-order__quan"> 2 </span> товара на сумму <span class="bs-order__sum"> {{ number_format($totalPrice, null, ' ', ' ') }} </span></h6>
                                 <h4>К оплате: <span class="bs-order__pay"> 13 390</span></h4>
                                 <button type="submit">Оформить заказ</button>
                             </div>
+
+                            
                         </div>
                     </div>
                 </form>

@@ -163,6 +163,7 @@ class IndexController extends Controller
     }
 
     public function checkout() {
+        // Session::forget('cart');
         SEO::setTitle('Оформление заказа');
         SEO::setDescription('Оформление заказа Etalon Holding');
         if(!Session::has('cart')){
@@ -236,6 +237,10 @@ class IndexController extends Controller
     }
 
     public function postCheckout(Request $request) {
+
+        //dd($request->all());
+
+
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $totalPrice = $cart->totalPrice;
@@ -244,6 +249,12 @@ class IndexController extends Controller
         $order = new Order;
         $order->phone = $request->get('phone');
         $order->city = 'todo';
+
+        $order->user_type = $request->get('usertype');
+
+        $order->method = $request->get('method');
+        $order->delivery_method = $request->get('delivery_method');
+
         $order->address = $request->get('address');
         $order->email = $request->get('email');
         $order->name = $request->get('name');
