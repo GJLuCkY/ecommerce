@@ -556,7 +556,7 @@
 </div>
 
 <!--SCRIPTS    -->
-<script src="{{ asset('js/app.js') }}"></script>
+<!-- <script src="{{ asset('js/app.js') }}"></script> -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
@@ -610,6 +610,7 @@
         $('#sign').show();
     });
 </script>
+
 
 {{-- <script type="text/javascript">
 

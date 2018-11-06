@@ -66,6 +66,8 @@ Route::auth();
 Route::get('/brands', 'IndexController@brands')->name('brands');
 Route::get('/brands/{brandSlug}', 'IndexController@brand')->name('brand');
 
+Route::view('/contacts-2', 'pages.contacts');
+
 
 Route::get('/vacancy/{citySlug}', 'IndexController@vacancyCity')->name('vacancy.city');
 Route::get('/vacancy/{citySlug}/{vacancyId}', 'IndexController@vacancyId')->name('vacancy.id');
