@@ -18,8 +18,8 @@
             </div>
             <h4 class="bs-deliver__head">Советы</h4>
             <img src="{{ (isset($advice->image)) ? asset('uploads/' . $advice->image) : '/images/not-found.png' }}" alt="{{ $advice->title }}" class="bs-advice__img">
-            <h1 class="bs-advice__title">{{ $advice->title }}</h1>
-            <div class="back-advice">
+            <h1 class="bs-advice__title bs-advice__title--inner">{{ $advice->title }}</h1>
+            <div class="back-advice back-advice--inner">
                 {!! $advice->content !!}
             </div>
           </div>

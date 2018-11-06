@@ -72,7 +72,47 @@
                         </div>
                         <p class="bs-podlozhka__p">Минимальный закуп 1 упаковка</p>
                     </div>
-                    <div id="myModal" class="bs-basket__modal">
+                    
+                </div>
+                <div class="row">
+                  <div class="bs-podlozhka__review">
+                            <h5 class="bs-basket__heading">ОТЗЫВЫ  <span class="count">({{ count($product->reviews) }})</span></h5>
+                            @foreach($product->reviews as $review)
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <img src="{{ asset('images/review.png') }}">
+                                </div>
+                                <div class="col-sm-10">
+                                    <div>
+                                        <h6 class="bs-podlozhka__review-name">{{ $review->user->name }}</h6>
+                                        <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
+                                    </div>
+                                    <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                            <button type="submit">Добавить отзыв</button>
+                            <form action="{{ route('review') }}" method="POST">
+                                {{ csrf_field() }}
+                                <label>Имя</label>
+                                <input type="text" name="name" placeholder="Введите ваше имя">
+                                <label>Отзыв</label>
+                                <textarea name="content" placeholder="Напишите Ваш отзыв."></textarea>
+                                <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
+                                <select name="stars" id="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <button type="submit">Отправить отзыв</button>
+                            </form>
+                        </div>
+                </div>
+            </div>
+            <div id="myModal" class="bs-basket__modal">
                         <!-- Modal content -->
                         <div class="bs-basket__modal-content">
                             <span class="close">&times;</span>
@@ -106,46 +146,10 @@
                             <p class="bs-top__p">Спасибо, Ваше сообщение отправлено!</p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                  <div class="bs-podlozhka__review">
-                            <h5 class="bs-basket__heading">ОТЗЫВЫ  <span class="count">({{ count($product->reviews) }})</span></h5>
-                            @foreach($product->reviews as $review)
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <img src="{{ asset('images/review.png') }}">
-                                </div>
-                                <div class="col-sm-10">
-                                    <div>
-                                        <h6 class="bs-podlozhka__review-name">{{ $review->user->name }}</h6>
-                                        <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
-                                    </div>
-                                    <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
-                                </div>
-                            </div>
-                            @endforeach
-                            <button type="submit">Добавить отзыв</button>
-                            <form action="{{ route('review') }}" method="POST">
-                                {{ csrf_field() }}
-                                <textarea name="content"></textarea>
-                                <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
-                                <select name="stars" id="">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                                <button type="submit">Отправить отзыв</button>
-                            </form>
-                        </div>
-                </div>
-            </div>
             <div class="bs-podlozhka-mob">
               <h5 class="bs-basket__heading"><a href="{{ route('category', ['catSlug' => $product->category->slug]) }}"><span><img src="/images/back.png" alt="back"></span></a>{{ $product->title }}</h5>
               <ul class="bs-podlozhka-mob__list">
-                <li>Описание
+                <li class="active">Описание
                   <div class="bs-podlozhka-mob__desc">
                     <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
                     <div class="bs-podlozhka__text">
@@ -196,11 +200,15 @@
                     @endforeach
                     <div class="bs-podlozhka__buttons">
                     <button class="bs-podlozhka__review-add" type="submit">Добавить отзыв</button>
-                      <form action="{{ route('review') }}" method="POST">
+                      <form class="bs-podlozhka__review-form" action="{{ route('review') }}" method="POST">
                           {{ csrf_field() }}
-                          <textarea name="content"></textarea>
+                          <label>Имя</label>
+                          <input type="text" name="name" placeholder="Введите ваше имя">
+                          <label>Отзыв</label>
+                          <textarea name="content" placeholder="Напишите Ваш отзыв."></textarea>
                           <input type="hidden" value="{{ $product->id }}" name="product_id">
                           <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
+                          <label class="small-label">Оцените продукт</label>
                           <select name="stars" id="">
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -208,7 +216,10 @@
                               <option value="4">4</option>
                               <option value="5">5</option>
                           </select>
-                          <button type="submit">Отправить отзыв</button>
+                          <div class="bs-podlozhka__buttons">
+                            <button class="back-button" type="submit">НАЗАД</button>
+                            <button class="send-button" type="submit">ОТПРАВИТЬ</button>
+                          </div>
                       </form>
                     </div>
                   </div>

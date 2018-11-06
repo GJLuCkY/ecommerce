@@ -13,10 +13,10 @@
                   <li>
                     <a href="{{ route('homepage') }}">Главная</a>
                   </li>
-                  <li> Вакансии</li>
+                  <li><a href="{{ route('vacancy.city', ['citySlug' => $city->slug]) }}"> Вакансии</a></li>
                 </ul>
               </div>
-              <h4 class="bs-deliver__head">{{ $vacancy->title }}</h4>
+              <h4 class="bs-deliver__head bs-deliver__head--b"><span><a href="{{ route('vacancy.city', ['citySlug' => $city->slug]) }}"><img src="/images/back.png" alt="back"></a></span>{{ $vacancy->title }}</h4>
             
               <div class="bs-vacancy__prof" id="finance">
                 <div class="bs-vacancy__title">
@@ -90,11 +90,11 @@
                   @endif
                 </div>
                 <div class="bs-vacancy__send">
-                @if(isset($vacancy->content))
-                  <div class="bs-vacancy__text">
-                      {!! $vacancy->content !!}
-                  </div>
-                @endif  
+                  @if(isset($vacancy->content))
+                    <div class="bs-vacancy__text">
+                        {!! $vacancy->content !!}
+                    </div>
+                  @endif  
                   <form>
                     <div class="bs-vacancy__file">
                       <input type="file" name="myFile">
@@ -106,9 +106,22 @@
                     <input type="submit" class="bs-vacancy__submit">
                   </form>
                 </div>
+                <div class="bs-vacancy__send bs-vacancy__send--mob">
+                  <p class="bs-vacancy__resume">Резюме</p>
+                  <p class="bs-vacancy__grayText">Если вы активный, позитивный, вам нравится работать с покупателями, помогая людям в выборе товара, то мы вас ждем! Резюме на hr@etalon-holding.kz</p>
+                  <form>
+                    <textarea class="bs-vacancy__area" placeholder="Сопроводительное письмо"></textarea>
+                    <div class="bs-vacancy__file">
+                      <input type="file" name="myFile">
+                      <button type="button">Выбрать файлы</button>
+                      <span>Файл не выбран</span>
+                    </div>
+                    <input type="submit" class="bs-vacancy__submit">
+                  </form>
+                </div>
               </div>
             </div>
-            <div class="col-sm-3 bs-vacancy__col">
+            <div class="col-sm-3 bs-vacancy__col bs-vacancy__col--city">
               <div class="bs-catalog__select">
                 <div class="bs-catalog__selectIn">
                   <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">

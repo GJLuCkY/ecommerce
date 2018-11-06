@@ -195,12 +195,18 @@ class IndexController extends Controller
         return redirect()->back();
     }
 
+    public function vacancies() {
+        $city = VacancyCity::latest()->where('status', 1)->firstOrFail();
+
+        return redirect()->route('vacancy.city', ['citySlug' => $city->slug]);
+    }
+
     public function vacancyCity($citySlug) {
         $city = VacancyCity::where('status', 1)->whereSlug($citySlug)->firstOrFail();
-        if(count($city->vacancies) > 0) {
-            $last = $city->vacancies->first();
-            return redirect()->route('vacancy.id', ['citySlug' => $city->slug,'vacancyId' => $last->id]);
-        }
+        // if(count($city->vacancies) > 0) {
+        //     $last = $city->vacancies->first();
+        //     return redirect()->route('vacancy.id', ['citySlug' => $city->slug,'vacancyId' => $last->id]);
+        // }
         $vacancyCities = VacancyCity::orderBy('lft')->where('status', 1)->get();
         return view('pages.vacancy-city', compact('city', 'vacancyCities'));
     }
