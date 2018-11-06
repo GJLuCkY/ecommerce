@@ -59,6 +59,7 @@
             <h4 class="bs-deliver__head">Советы</h4>
             @foreach($advices as $advice)
             <div class="row">
+            <a href="{{ route('advice', ['adviceSlug' => $advice->slug]) }}">
               <div class="col-sm-4">
                     <img src="{{ (isset($advice->image)) ? asset('uploads/' . $advice->image) : '/images/not-found.png' }}" alt="{{ $advice->title }}">
               </div>
@@ -66,6 +67,7 @@
                 <h6 class="bs-advice__title">{{ $advice->title }}</h6>
                 <p class="bs-advice__text">{{ $advice->desc }}</p>
                 <a href="{{ route('advice', ['adviceSlug' => $advice->slug]) }}" class="bs-advice__link">Подробнее</a>
+              </a>
               </div>
             </div>
             @endforeach

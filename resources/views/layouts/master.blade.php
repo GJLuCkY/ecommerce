@@ -228,7 +228,7 @@
     <div class="container">
         <div class="row">
         <div class="col-md-2 mob_search">  
-          <a href="{{ route('homepage') }}">
+          <a href="{{ route('search') }}">
             <img src="{{ asset('images/search.svg') }}" alt="search">
             </a>
         </div>
@@ -238,7 +238,7 @@
             </a>
         </div>
         <div class="col-md-7">
-        <form class="bs-header__form" action="{{ route('search') }}" method="POST">
+        <form class="bs-header__form" action="{{ route('search') }}" method="GET">
             <div class="bs-header__cat">
                 <select name="category">
                 <option disabled>Выбор категории</option>
@@ -250,7 +250,7 @@
             
             <div class="bs-header__search">
                 <input type="search" name="search" placeholder="Я ищу...">
-                {{ csrf_field() }}
+                
                 <button>
                 <img src="{{ asset('images/search.svg') }}" alt="search">
                 </button>
@@ -305,18 +305,64 @@
     </label>
     <div class="mob-header__background">&nbsp;</div>
     <nav class="mob-header__nav">
+      <h4 class="mob-header__heading">МЕНЮ</h4>
+       <form class="bs-header__select">
+          <label class="bs-header__city">Ваш город:</label>
+          <div class="bs-header__selectIn">
+          <select>
+              @foreach($cities as $city)
+                  <option value="{{ $city->slug }}">{{$city->name}}</option>
+              @endforeach
+          </select>
+          </div>
+      </form>
       <ul class="mob-header__list">
-        <li class="mob-header__item">
-            <a class="mob-header__link" href="{{ route('news') }}">Новости</a>
-        </li>
-        <li class="mob-header__item">
-            <a class="mob-header__link" href="{{ route('news') }}">Советы</a>
-        </li>
-        <li class="mob-header__item">
-            <a class="mob-header__link" href="/oplata-i-dostavka">Оплата и доставка</a>
-        </li>
-      </ul>
+        <li class="mob-header__item mob-header__item--cat">
+              <button>Каталог</button>
+          </li>
+          <li class="mob-header__item">
+              <a class="mob-header__link" href="{{ route('news') }}">Новости</a>
+          </li>
+          <li class="mob-header__item">
+              <a class="mob-header__link" href="{{ route('news') }}">Советы</a>
+          </li>
+          <li class="mob-header__item">
+              <a class="mob-header__link" href="/oplata-i-dostavka">Оплата и доставка</a>
+          </li>
+        </ul>
+      <div class="mob-bottom">
+        <ul class="mob-header__list">
+          <li class="mob-header__phone">
+              <a class="mob-header__link" href="tel:+7722331122"><img src="/images/phone.svg" alt="phone" class="bs-header__phone">+7 (722) 33-11-22</a>
+          </li>
+          <li class="mob-header__sign">
+              <a class="mob-header__link" href="{{ route('signin') }}"><img src="http://127.0.0.1:8000/images/cab.svg" alt="human" class="bs-header__human">Личный кабинет</a>
+          </li>
+        </ul>
+      </div>
     </nav>
+    <div id="mob-catalog" class="bs-header__modal">
+        <!-- Modal content -->
+      <div class="bs-header__modal-content row">
+        <h4 class="cat-head"><img class="cat-head-close" src="/images/back.png">КАТАЛОГ</h4>
+        <div>
+          <p class="cat-link">Напольные покрытия TODO</p>
+          <ul class="cat-list">
+            <li> <a href="todo">Напольные покрытия</a></li>
+            <li> <a href="todo">Напольные покрытия</a></li>
+            <li> <a href="todo">Напольные покрытия</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="cat-link">Напольные покрытия</p>
+          <ul class="cat-list">
+            <li> <a href="todo">Напольные покрытия</a></li>
+            <li> <a href="todo">Напольные покрытия</a></li>
+            <li> <a href="todo">Напольные покрытия</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 </article>
 
 

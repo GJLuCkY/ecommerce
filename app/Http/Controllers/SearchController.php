@@ -13,13 +13,11 @@ class SearchController extends Controller
         $searchCategory = $request->get('category', 1);
         $searchText = $request->get('search');
 
-        if(strlen($searchText) > 0) {
+        
             $products = Product::search($searchText)->where('category_id', $searchCategory)->paginate(16);
-            
-            return view('pages.search', compact('products', 'searchCategory', 'searchText'));
-        } else {
-            return redirect()->back();
-        }
+        
+
+        return view('pages.search', compact('products', 'searchCategory', 'searchText'));
 
 
     }

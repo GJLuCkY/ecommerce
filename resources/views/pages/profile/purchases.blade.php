@@ -30,6 +30,23 @@
                 @endforeach
                 </table>
             </div>
+            <div class="bs-profile__shop--mob">
+              @foreach($orders as $order)
+              <div class="order-mob">
+                <div class="order-mobLink">
+                  <h5 class="orderNumber">№ {{$order->id}}</h5>
+                  <p class="during">В процессе</p>
+                  <p class="delivered">Доставлен</p>
+                </div>
+                <div class="order-mobInfo">
+                  <p class="order-mobInfo-p"><span>Дата покупки:</span> {{ $order->created_at}}</p>
+                  <p class="order-mobInfo-p"><span>Цена:</span> {{ $order->created_at}}</p>
+                  <p class="order-mobInfo-p"><span>Кол-во: </span>{{ $order->created_at}}</span></p>
+                  <p class="order-mobInfo-p"><span>Адрес доставки </span>{{ $order->address }}</p>
+                </div>
+              </div>
+              @endforeach
+            </div>
         </div>
     </div>
 </article>

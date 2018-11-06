@@ -8,13 +8,21 @@
         </div>
         <div class="col-sm-10 col">
             <h4 class="bs-profile__head">Избранное</h4>
+           
             @foreach($wishlist as $product)
-       
-         
+            @if(isset($product->product))
             <div class="bs-profile__fav">
-                <div class="row">
+              <div class="row">
                 <div class="col-sm-2">
-                <img src="{{ asset('uploads/' . $product->product->image) }}" class="">
+                  <img src="{{ (isset($product->product->image) && strlen($product->product->image) > 1 && !empty($product->product->image))  ? asset('uploads/' . $product->product->image) : '/images/not-found.png' }}" class="">
+                </div>
+                <div class="bs-catalog__mob-buttons row">
+                  <a href="{{ route('wishlist.remove', ['id' => $product->product->id]) }}" class="mob-wishlist like wish">
+                    <img src="/images/ic_love.png" alt="favorite">
+                  </a>
+                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist cart rem">
+                    <img src="/images/basket.svg" alt="favorite">
+                  </a>
                 </div>
                 <div class="col-sm-9">
                 <p class="bs-profile__fav-text">{{ $product->product->title }}</p>
@@ -36,6 +44,7 @@
                 </div>
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
     </div>

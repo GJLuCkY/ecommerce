@@ -66,6 +66,7 @@ Route::auth();
 Route::get('/brands', 'IndexController@brands')->name('brands');
 Route::get('/brands/{brandSlug}', 'IndexController@brand')->name('brand');
 
+
 Route::get('/vacancy/{citySlug}', 'IndexController@vacancyCity')->name('vacancy.city');
 Route::get('/vacancy/{citySlug}/{vacancyId}', 'IndexController@vacancyId')->name('vacancy.id');
 
@@ -75,7 +76,7 @@ Route::get('/advices/{adviceSlug}', 'IndexController@advice')->name('advice');
 
 Route::view('/brands', 'pages.brands')->name('brands');
 
-Route::post('/search','SearchController@search')->name('search');
+Route::get('/search','SearchController@search')->name('search');
 
 Route::get('/add-to-cart/{id}', 'IndexController@getAddToCart')->name('addToCart');
 Route::get('/remove-to-cart/{id}', 'IndexController@removeToCart')->name('removeToCart');

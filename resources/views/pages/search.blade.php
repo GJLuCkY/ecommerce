@@ -18,7 +18,16 @@
                 </div>
                 <div class="row bs-catalog__hits">
                     <div class="row">
-                        <h5 class="bs-laminat__head">Поиск по фразе "{{ $searchText }}"</h5>
+                      <div class="bs-catalog--search">
+                        <h5 class="bs-basket__heading"><span><a href="{{ route('homepage') }}"><img src="/images/back.png" alt="back"></a></span>ПОИСК</h5>
+                        <form action="{{ route('search') }}" method="GET">
+                          <input type="search" name="search">
+                          <button>
+                            <img src="{{ asset('images/smallSearch.png') }}" alt="search">
+                          </button>
+                        </form>
+                      </div>
+                        <!-- <h5 class="bs-laminat__head bs-laminat__head-search">Поиск по фразе "{{ $searchText }}"</h5> -->
                         {{-- <div class="bs-catalog__select">
                             <div class="bs-catalog__selectIn">
                                 <select>

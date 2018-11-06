@@ -51,13 +51,13 @@
                 </div>
                 </div>
                 <div class="bs-profile__help-ask">
-                <h6 class="bs-profile__help-head">Интернет-магазин</h6>
-                <hr class="bs-profile__help-line">
-                <p>У Вас есть вопросы? Задайте их нам и мы с радость ответим на них.</p>
-                <form>
-                    <textarea class="bs-profile__help-area"></textarea>
-                    <button type="submit" class="bs-profile__help-send">Отправить</button>
-                </form>
+                  <h6 class="bs-profile__help-head">Задать вопрос</h6>
+                  <hr class="bs-profile__help-line">
+                  <p>У Вас есть вопросы? Задайте их нам и мы с радость ответим на них.</p>
+                  <form>
+                      <textarea class="bs-profile__help-area" placeholder="Напишите свой вопрос"></textarea>
+                      <button type="submit" class="bs-profile__help-send">Отправить</button>
+                  </form>
                 </div>
             </div>
         </div>

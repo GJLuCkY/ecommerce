@@ -16,7 +16,17 @@
                   <li>  <a href="/vacancy">Вакансии</a></li>
                 </ul>
               </div>
-              <h4 class="bs-deliver__head">Вакансии</h4>
+              <h4 class="bs-deliver__head">Вакансии - <span style="display: initial; text-transform: capitalize;">{{$city -> title}}</span></h4>
+              <div class="bs-catalog__select bs-catalog__select--mob">
+                <div class="bs-catalog__selectIn">
+                  <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                    <option disabled selected>Выберите город</option>
+                    @foreach($vacancyCities as $item)  
+                        <option value="{{ route('vacancy.city', ['citySlug' => $item->slug]) }}">{{ $item->title }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
               <div class="bs-brands__slider">
                 <div class="slider slide-for">
                   <div>
@@ -68,23 +78,15 @@
                   </select>
                 </div>
               </div>
-              {{-- <div class="bs-vacancy__links">
+              <div class="bs-vacancy__links">
                 <ul>
+                @foreach($city->vacancies as $vacancy)
                   <li>
-                    <a data-href="" class="active">Финансист-технолог</a>
+                    <a href="{{ route('vacancy.id', ['citySlug' => $city->slug,'vacancyId' => $vacancy->id]) }}" class="active">{{ $vacancy->title }}</a>
                   </li>
-                  <li>
-                    <a data-href="">Менеджер по продажам
-                    </a>
-                  </li>
-                  <li>
-                    <a data-href="">Программист</a>
-                  </li>
-                  <li>
-                    <a data-href="">Повар</a>
-                  </li>
+                  @endforeach
                 </ul>
-              </div> --}}
+              </div>
             </div>
           </div>
         </div>
