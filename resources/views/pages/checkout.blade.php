@@ -72,7 +72,7 @@
                             <label class="bs-order__input">E-Mail
                                 <input type="email" name="email" required>
                             </label>
-                            <div class="">
+                            <div class="bs-order__check">
                                 <p>Способ оплаты </p>
                                 <label><input type="radio" name="method" value="nal"> Наличными
                                     <span class="checkmark"></span>
@@ -96,7 +96,7 @@
                                 <textarea name="comment"></textarea>
                             </label>
 
-                            <div class="">
+                            <div class="bs-order__check">
                                 <p>Способ доставки</p>
                                 <label><input type="radio" name="delivery_method" value="dostavka"> Доставка
                                     <span class="checkmark"></span>
