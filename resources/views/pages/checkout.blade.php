@@ -104,7 +104,7 @@
 
                             <div class="bs-order__total">
                                 <h6>ИТОГО <span class="bs-order__quan"> 2 </span> товара на сумму <span class="bs-order__sum"> {{ number_format($totalPrice, null, ' ', ' ') }} </span></h6>
-                                <h4>К оплате: <span class="bs-order__pay"> 13 390</span></h4>
+                                {{-- <h4>К оплате: <span class="bs-order__pay"> 13 390</span></h4> --}}
                                 <button type="submit">Оформить заказ</button>
                             </div>
 

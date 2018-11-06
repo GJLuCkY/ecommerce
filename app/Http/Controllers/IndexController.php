@@ -245,7 +245,7 @@ class IndexController extends Controller
     public function postCheckout(Request $request) {
 
         $user = Auth::user();
-        dd($user);
+        // dd($user);
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $totalPrice = $cart->totalPrice;
@@ -269,22 +269,6 @@ class IndexController extends Controller
         $order->products = $request->get('products');
         $order->delivery_method = $request->get('delivery_method');
         $order->user_type = $request->get('usertype');
-
-        
-       
-        
-       
-
-        
-        
-        
-        
-        
-        
-
-
-       
-        
         $order->save();
         $order->products()->attach(array_keys($productsId));
         Session::forget('cart');

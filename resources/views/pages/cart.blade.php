@@ -105,9 +105,9 @@
                     </form>
                 </div>
                 <div class="col-sm-3 bs-basket-oform">
-                    <h6 class="bs-basket__costHead">Способ получения заказа</h6>
+                    {{-- <h6 class="bs-basket__costHead">Способ получения заказа</h6> --}}
                     <div>
-                        <form class="bs-basket__check">
+                        {{-- <form class="bs-basket__check">
                             <label>
                                 <input type="radio" name="radio" checked="checked"> Самовывоз
                                 <span class="checkmark"></span>
@@ -116,8 +116,8 @@
                                 <input type="radio" name="radio"> Доставка
                                 <span class="checkmark"></span>
                             </label>
-                        </form>
-                        <p class="bs-basket__text">Для уточнения цены доставки с Вами сяжется наш прекрасный менеджер.</p>
+                        </form> --}}
+                        {{-- <p class="bs-basket__text">Для уточнения цены доставки с Вами сяжется наш прекрасный менеджер.</p> --}}
                         <hr class="bs-basket__line">
                         <p class="bs-basket__text bs-basket__text--total">ИТОГОВАЯ СТОИМОСТЬ</p>
                         <p class="bs-basket__costText"> {{ number_format($totalPrice, null, ' ', ' ') }} тг
