@@ -13,7 +13,6 @@
                         <li>Оформление заказа</li>
                     </ul>
                 </div>
-                <h5 class="bs-basket__heading"><span><a href="{{ route('homepage') }}"><img src="/images/back.png" alt="back"></a></span>Оформление заказа</h5>
                 @foreach($products as $product)
                 <div class="row bs-basket__row">
                     <div class="col-sm-1 bs-basket__img">

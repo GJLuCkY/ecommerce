@@ -118,7 +118,7 @@
                             <span class="close">&times;</span>
                             <h4 class="bs-basket__h4">Калькулятор расчет ламината</h4>
                             <form method="post" action="form.php" >
-                                <label class="bs-basket__area">Площадь помещения (м2) <input type="text" name="area" placeholder="100" class="bs-basket__inputModal"> М2</label>
+                                <label class="bs-basket__area">Площадь помещения (м2) <input type="text" name="area" placeholder="100" class="bs-basket__inputModal"> <span> М2 </span></label>
                                 <div class="bs-basket__modalLine">
                                     <p class="bs-basket__p">Способ укладки</p>
                                     <div class="bs-basket__check">
@@ -199,7 +199,7 @@
                       <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
                     @endforeach
                     <div class="bs-podlozhka__buttons">
-                    <button class="bs-podlozhka__review-add" type="submit">Добавить отзыв</button>
+                    <button id="awdawd" class="bs-podlozhka__review-add">Добавить отзыв</button>
                       <form class="bs-podlozhka__review-form" action="{{ route('review') }}" method="POST">
                           {{ csrf_field() }}
                           <label>Имя</label>
@@ -209,7 +209,7 @@
                           <input type="hidden" value="{{ $product->id }}" name="product_id">
                           <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
                           <label class="small-label">Оцените продукт</label>
-                          <select name="stars" id="">
+                          <select name="stars">
                               <option value="1">1</option>
                               <option value="2">2</option>
                               <option value="3">3</option>

@@ -1,6 +1,5 @@
-{% extends "master.html" %} {% block header %} {% import '../partials/header.html' as nav %}
-<!-- Creating the navigation with activePage = 'home' -->
-{{nav.active('contacts')}} {% endblock %} {% block content %}
+@extends('layouts.master')
+@section('content')
 <article class="container">
   <div class="bs-contacts">
     <div class="row">
@@ -579,4 +578,4 @@
 
   }
 </script>
-{% endblock %}
+@endsection

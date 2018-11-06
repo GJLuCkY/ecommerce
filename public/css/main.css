@@ -6174,8 +6174,10 @@ a.label:focus {
   vertical-align: middle;
   white-space: nowrap;
   text-align: center;
-  background-color: #777777;
+  background-color: #00AB0C;
   border-radius: 10px;
+  position: absolute;
+  top: -10px;
 }
 
 .badge:empty {
@@ -8949,7 +8951,7 @@ a:hover {
 .bs-advice .checkmark:after {
   content: "";
   display: none;
-   left: 4px;
+  left: 4px;
   top: 3px;
   width: 6px;
   height: 7px;
@@ -13203,7 +13205,7 @@ a:hover {
 .bs-laminat .checkmark:after {
   content: "";
   display: none;
-   left: 4px;
+  left: 4px;
   top: 3px;
   width: 6px;
   height: 7px;
@@ -13588,7 +13590,7 @@ a:hover {
   }
 
   .bs-laminat__head {
-    padding: 42px 0 42px 85px;
+    padding: 42px 0 42px 54px;
     background: #fafafa;
     width: 100%;
     color: #2F2F2F;
@@ -13606,7 +13608,7 @@ a:hover {
     border-bottom: 1px solid #00AB0C;
     width: 44px;
     position: relative;
-    left: -65px;
+    left: -51px;
     top: 10px;
   }
 
@@ -13623,12 +13625,12 @@ a:hover {
     top: 39%;
     right: 5%;
     background: transparent;
-    z-index: 5;
+    z-index: 3;
   }
 
   .bs-laminat__modal {
     position: absolute;
-    z-index: 3;
+    z-index: 2;
     left: 0;
     top: 0;
     width: 100%;
@@ -14322,13 +14324,13 @@ a:hover {
   content: "";
   display: none;
   left: 4px;
-    top: 3px;
-    width: 6px;
-    height: 7px;
-    border: solid #00AB0C;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-    position: absolute;
+  top: 3px;
+  width: 6px;
+  height: 7px;
+  border: solid #00AB0C;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
 }
 
 
@@ -14343,7 +14345,7 @@ a:hover {
   border-color: #00AB0C;
 }
 
-.bs-order__check input:checked~.checkmark:after{
+.bs-order__check input:checked~.checkmark:after {
   display: block;
 }
 
@@ -15474,6 +15476,81 @@ a:hover {
     font-size: 18px;
     margin-left: 28px;
   }
+
+  .bs-basket__modal-content {
+    padding: 15px 15px;
+    width: 100%;
+    margin: 0 auto;
+    border: none;
+  }
+  .bs-basket__h4 {
+    font-size: 18px;
+    padding-top: 30px;
+    color: #2F2F2F;
+    padding-bottom: 25px;
+  }
+  .bs-basket__inputModal{
+    display: block;
+    width: 88px;
+    margin: 24px 0 0;
+    border-radius: 0;
+    color: #2F2F2F;
+    border-color: #2F2F2F;
+    text-align: center;
+    padding: 0;
+    height: 36px;
+  }
+  .bs-basket__area{
+    position: relative;
+  }
+  .bs-basket__area span{
+    position: absolute;
+    top: 62px;
+    left: 100px;
+  }
+  .bs-basket__area, .bs-basket__p {
+    font-size: 14px;
+    width: 100%;
+  }
+  .bs-basket__modal-content .bs-basket__check .checkmark{
+    top: 3px;
+  }
+  .bs-basket__modal-content .bs-basket__check label {
+    font-size: 14px;
+    display: block;
+  }
+
+  .bs-basket__modalLine{
+    border: none;
+  }
+  .bs-basket__quality{
+    text-align: left;
+    background: #00ab0c;
+        padding: 31px 15px 0;
+        width: 108%;
+        margin-left: -4%;
+  }
+
+  .bs-basket__quality label {
+    font-size: 14px;
+    padding-bottom: 30px;
+    color: #fff;
+    font-weight: 300;
+    width: 100%;
+    margin: 0;
+  }
+  .bs-basket__count {
+    color: #fff;
+    position: absolute;
+    right: 5%;
+  }
+  .bs-basket__modal-content button {
+    margin-top: 35px;
+    margin-left: 0;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 20px;
+  }
 }
 
 /*768*/
@@ -15498,6 +15575,7 @@ a:hover {
 
   .bs-podlozhka .bs-basket__heading span {
     margin-right: 17px;
+    filter: none;
   }
 
   .bs-podlozhka-mob__list {
@@ -15708,6 +15786,12 @@ a:hover {
 /*375*/
 /*360*/
 /*320*/
+@media screen and (max-width: 340px) {
+  .bs-podlozhka__buttons div:first-of-type{
+    display: block;
+    width: 100%;
+  }
+}
 .bs-preloader__wrp {
   background: #fff;
   width: 100%;
