@@ -3,7 +3,8 @@
 
 
 Route::get('/test', function() {
-    return bcrypt('password');
+    return Cart::content();
+
 });
 
 

@@ -22,9 +22,8 @@ class CartController extends Controller
     public function getAddToCart(Request $request, $id) {
         $product = Product::find($id);
 
-        Cart::add($id, $product->title, 1, $product->price);
-
-
+        Cart::add($product->id, $product->title, 1, $product->price, ['image' => asset('uploads/' . $product->image)]);
+        // Cart::destroy();
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
         return redirect()->back();
     }
