@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bc4794815df7cd529e36e0e3c3bdbb8",
+    "content-hash": "bfb80c72029d46c3936ef2325e168e70",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1869,43 +1869,47 @@
             "time": "2018-02-07T20:20:57+00:00"
         },
         {
-            "name": "freshbitsweb/laravel-cart-manager",
-            "version": "v1.0.16",
+            "name": "gloudemans/shoppingcart",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/freshbitsweb/laravel-cart-manager.git",
-                "reference": "2cb8a682772062db845ac4b01561902944f4b47f"
+                "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
+                "reference": "7ff157b7e1ef10d27cd2759d5151aae2cc6b1b9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freshbitsweb/laravel-cart-manager/zipball/2cb8a682772062db845ac4b01561902944f4b47f",
-                "reference": "2cb8a682772062db845ac4b01561902944f4b47f",
+                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/7ff157b7e1ef10d27cd2759d5151aae2cc6b1b9a",
+                "reference": "7ff157b7e1ef10d27cd2759d5151aae2cc6b1b9a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.5.*|5.6.*|5.7.*",
-                "php": ">=7.0.0"
+                "illuminate/events": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
+                "illuminate/session": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
+                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*"
             },
             "require-dev": {
-                "mockery/mockery": "^1.1",
-                "orchestra/testbench": "3.7.*",
-                "phpunit/phpunit": "^7.0"
+                "mockery/mockery": "~0.9.0",
+                "orchestra/testbench": "~3.1",
+                "phpunit/phpunit": "~5.0|~6.0|~7.0"
+            },
+            "suggest": {
+                "gloudemans/notify": "Simple flash notifications for Laravel"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Freshbitsweb\\LaravelCartManager\\CartManagerServiceProvider"
-                    ]
+                        "Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider"
+                    ],
+                    "aliases": {
+                        "Cart": "Gloudemans\\Shoppingcart\\Facades\\Cart"
+                    }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Freshbitsweb\\LaravelCartManager\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
+                    "Gloudemans\\Shoppingcart\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1913,12 +1917,16 @@
             ],
             "authors": [
                 {
-                    "name": "Gaurav Makhecha",
-                    "email": "info@freshbits.in"
+                    "name": "Rob Gloudemans",
+                    "email": "info@robgloudemans.nl"
                 }
             ],
-            "description": "Managing the cart of your Laravel application is a breeze",
-            "time": "2018-09-08T13:39:33+00:00"
+            "description": "Laravel Shoppingcart",
+            "keywords": [
+                "laravel",
+                "shoppingcart"
+            ],
+            "time": "2018-02-17T09:34:00+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

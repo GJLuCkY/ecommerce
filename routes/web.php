@@ -82,7 +82,7 @@ Route::get('/news/{newSlug}', 'PageController@post')->name('post');
 //Бренды
 Route::get('/brands', 'PageController@brands')->name('brands');
 Route::get('/brands/{brandSlug}', 'PageController@brand')->name('brand');
-Route::view('/brands', 'pages.brands')->name('brands');
+// Route::view('/brands', 'pages.brands')->name('brands');
 
 // Контакты
 Route::view('/contacts-2', 'pages.contacts');

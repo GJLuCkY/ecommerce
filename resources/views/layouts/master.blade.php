@@ -278,7 +278,7 @@
                 <a href="{{ route('cart') }}">
                 <img src="/images/basket.svg" alt="basket" class="bs-header__img">
                 <p class="bs-header__text">Корзина</p>
-                <span class="badge">{{ isset(cart()->toArray()['items']) ? count(cart()->toArray()['items']) : '' }}</span>
+                <span class="badge">{{ Cart::count() > 0 ? Cart::count() : '' }}</span>
                 </a>
             </div>
             </div>

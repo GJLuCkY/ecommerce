@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Cart;
+use Cart;
 use Session;
 use SEO;
 use App\Models\Product;
@@ -20,7 +20,9 @@ class CartController extends Controller
     }
 
     public function getAddToCart(Request $request, $id) {
-        $cart = Product::addToCart($id);
+        $product = Product::find($id);
+
+        Cart::add($id, $product->title, 1, $product->price);
 
 
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
@@ -28,7 +30,8 @@ class CartController extends Controller
     }
 
     public function removeToCart(Request $request, $id) {
-        $cart = cart()->removeAt($id);
+
+        Cart::remove($id);
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
         return redirect()->back();
     }

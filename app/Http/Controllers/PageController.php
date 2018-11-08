@@ -73,6 +73,7 @@ class PageController extends Controller
 
     public function brands() {
         $values = Value::where('filter_id', 1)->get();
+      
         return view('pages.brands', compact('values'));
     }
 

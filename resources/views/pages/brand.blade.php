@@ -89,18 +89,13 @@
                                     @endif
                             </div>
                         </div>
-                        @php
-                        $cartItems = session()->has('cart') ? session('cart')->items : [];
-                        $inCart = array_key_exists($product->id, $cartItems);
-                        @endphp
+                      
                         <p class="bs-catalog__size">10 000 кв.м</p>
-                        <a href="{{ $inCart ? route('cart') : route('addToCart', ['id' => $product->id]) }}" class="bs-catalog__add">
+                        <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-catalog__add">
                             <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">
-                            @if($inCart)
-                            В корзине
-                            @else
+                           
                             Добавить в корзину
-                            @endif
+                           
                         </a>
                         <div class="bs-catalog__compare">
                             <ul>
