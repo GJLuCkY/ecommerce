@@ -55,7 +55,7 @@
         processStyle: {
           "backgroundImage": "white"
         },
-        value: null
+        value: []
       }
     },
     computed: {

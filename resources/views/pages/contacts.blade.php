@@ -465,6 +465,9 @@
     </div>
   </div>
 </article>
+@endsection
+
+@section('before_jquery')
 <style>
   /*style the box*/
 

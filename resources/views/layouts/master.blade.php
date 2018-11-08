@@ -278,7 +278,7 @@
                 <a href="{{ route('cart') }}">
                 <img src="/images/basket.svg" alt="basket" class="bs-header__img">
                 <p class="bs-header__text">Корзина</p>
-                <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
+                <span class="badge">{{ isset(cart()->toArray()['items']) ? count(cart()->toArray()['items']) : '' }}</span>
                 </a>
             </div>
             </div>
@@ -554,10 +554,11 @@
         </div>
     </div>
 </div>
-
+@yield('before_jquery')
 <!--SCRIPTS    -->
-<!-- <script src="{{ asset('js/app.js') }}"></script> -->
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script src="{{ asset('js/main.js') }}"></script>
+@yield('after_jquery')
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
 

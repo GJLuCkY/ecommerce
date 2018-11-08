@@ -19,6 +19,7 @@
         "brian2694/laravel-toastr": "^5.5",
         "cyrildewit/eloquent-viewable": "^2.3",
         "fideloper/proxy": "^4.0",
+        "freshbitsweb/laravel-cart-manager": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "jaybizzle/crawler-detect": "^1.2",
         "laravel/framework": "5.6.*",
