@@ -10299,6 +10299,10 @@ a:hover {
   padding-left: 35px;
 }
 
+.brands__button{
+  display: none;
+}
+
 .bs-catalog__brand {
   height: 190px;
   display: -ms-flexbox !important;
@@ -10542,7 +10546,7 @@ a:hover {
 }
 
 .brands__button {
-  display: none;
+  display: none!important;
 }
 
 .mob-wishlist {
@@ -10937,6 +10941,10 @@ a:hover {
   margin: 0;
 }
 
+.bs-contacts .select-link{
+  display: none;
+}
+
 @media screen and (min-width: 1501px) and (max-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
   .bs-contacts .bs-advice {
     width: 61%;
@@ -10967,7 +10975,7 @@ a:hover {
   }
 }
 
-@media screen and (min-width: 1200px) and (max-width: 1300px) and (-webkit-min-device-pixel-ratio: 1) {
+@media screen and (max-width: 1300px) {
   .bs-contacts .bs-advice {
     width: 59%;
   }
@@ -11063,6 +11071,85 @@ a:hover {
   font-weight: 300;
   color: #505050;
   padding-top: 22px;
+}
+
+
+@media screen and (max-width: 1190px) {
+  .bs-contacts .row{
+    position: relative;
+  }
+  .bs-contacts .bs-advice {
+    width: 75%;
+  }
+  .bs-contacts .bs-deliver__head {
+    margin-bottom: 95px;
+  }
+  .bs-contacts__links{
+    width: 25%;
+    position: absolute;
+    top: 100px;
+    left: 26.5%;
+  }
+  .bs-contacts .select-link{
+    display: block;
+    color: #FFFFFF;
+    font-size: 16px;
+    background: #00AB0C;
+    padding: 14px 22px;
+    position: relative;
+    margin: 0;
+  }
+
+  .bs-contacts .select-link img{
+    max-width: 12px;
+    transition: .5s;
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 47%;
+    right: 7%;
+  }
+
+  .bs-contacts__list{
+    display: none;
+    background: #FAFAFA;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bs-contacts__list li {
+    padding: 15px 22px 17px;
+    border-bottom: 1px solid #FFFFFF;
+  }
+  .bs-contacts__item{
+    font-size: 16px;
+  }
+  .bs-contacts__head {
+    font-size: 16px;
+    padding: 17px 19px 16px;
+  }
+  .select-link-active img{
+    transform: rotate(0deg)!important;
+     transition: .5s;
+  }
+  .bs-contacts #map{
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 640px){
+  .bs-contacts .bs-advice {
+      width: 100%;
+  }
+  .bs-contacts__links {
+    width: 234px;
+    top: 130px;
+    left: 0;
+  }
+  .bs-contacts__shop ul{
+    margin: 0;
+  }
 }
 
 /*1600*/
