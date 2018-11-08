@@ -9,10 +9,12 @@ use Backpack\CRUD\CrudTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use CyrildeWit\EloquentViewable\Viewable;
 
+use Freshbitsweb\LaravelCartManager\Traits\Cartable;
+
 class Product extends Model
 {
     use CrudTrait, Sluggable, SearchableTrait, Viewable;
-
+    use Cartable;
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
@@ -135,6 +137,12 @@ class Product extends Model
         if ($this->slug != '') {
             return $this->slug;
         }
+
+        return $this->title;
+    }
+
+    public function getName()
+    {
 
         return $this->title;
     }

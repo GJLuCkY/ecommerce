@@ -47,13 +47,6 @@ class UserController extends Controller
         if(Auth::attempt($credentials)) {
             echo 'ok';
         }
-            // Authentication passed...
-           
-       
-
-
-
-
     }
 
     public function getSignin() {

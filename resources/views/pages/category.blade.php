@@ -15,7 +15,7 @@
                             </span>
                         </h6>
                         
-                    <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
+                    {{-- <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>         --}}
                     </div>
                     {{-- @endif --}}
                     @foreach($category->filters as $filters)

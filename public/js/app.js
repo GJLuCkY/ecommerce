@@ -47922,7 +47922,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       processStyle: {
         "backgroundImage": "white"
       },
-      value: null
+      value: []
     };
   },
 
