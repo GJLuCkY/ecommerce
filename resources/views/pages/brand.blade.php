@@ -81,6 +81,14 @@
                             <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                 <img src="/images/fav.svg" alt="favorite">
                             </a>
+                            <div class="bs-catalog__mob-buttons row">
+                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
+                                    <img src="/images/heart.svg" alt="favorite">
+                                  </a>
+                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
+                                    <img src="/images/basket.svg" alt="favorite">
+                                  </a>
+                                </div>
                             <div class="bs-catalog__hitText">
                                     <p>3-х слойная паркетная доска
                                     <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
@@ -103,6 +111,7 @@
                                 <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
                             </ul>
                         </div>
+                        
                     </div>
                   @endforeach
                  

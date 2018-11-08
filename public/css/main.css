@@ -10217,10 +10217,28 @@ a:hover {
 .bs-brands__link--active {
   border-bottom: 1px solid #00ab0c;
 }
+@media screen and (max-width: 1601px) and (-webkit-min-device-pixel-ratio: 1) {
+  .bs-brands{
+    width: 65%;
+  }
+  .bs-brands__nav{
+    width: 100%;
+    margin-top: -90px;
+  }
+  .bs-brands__info{
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 1500px) and (-webkit-min-device-pixel-ratio: 1) {
   .bs-brands {
     padding-left: 35px;
+  }
+  .bs-brands{
+    width: 62%;
+  }
+  .bs-brands__nav{
+    margin-top: -100px;
   }
 }
 
@@ -10232,6 +10250,9 @@ a:hover {
   .bs-brands .col-sm-3 {
     padding-left: 15px;
   }
+  .bs-brands__nav{
+    margin-top: -97px;
+  }
 }
 
 @media screen and (max-width: 1300px) and (-webkit-min-device-pixel-ratio: 1) {
@@ -10242,11 +10263,32 @@ a:hover {
   .bs-brands .col-sm-3 {
     padding-left: 10px;
   }
+  
+}
+
+@media screen and (max-width: 1190px) and (-webkit-min-device-pixel-ratio: 1) {
+  .bs-brands{
+    width: 60%;
+  }
+  .bs-brands__nav{
+    margin-top: -86px;
+    margin-bottom: 0;
+  }
+  .bs-brands__info{
+    padding-top: 40px;
+  }
+  .bs-brands .row {
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width: 899px) and (-webkit-min-device-pixel-ratio: 1) {
   .bs-brands {
     width: 100%;
+    margin-bottom: 0;
+  }
+  .bs-brands__links{
+    display: none;
   }
 }
 
@@ -10258,6 +10300,7 @@ a:hover {
   .bs-brands__head {
     padding: 42px 0 42px 85px;
     background: #fafafa;
+    margin: 0;
   }
 
   .bs-brands__head:before {
@@ -10267,7 +10310,7 @@ a:hover {
     width: 44px;
     position: relative;
     left: -65px;
-    top: 10px;
+    top: 16px;
   }
 
   .bs-brands .col-sm-3 {
@@ -10284,6 +10327,29 @@ a:hover {
   .bs-brands__text {
     font-size: 14px;
     color: #2F2F2F;
+  }
+  .bs-brands__slider{
+    display: none;
+  }
+  .bs-brands__logo {
+    width: 210px;
+    margin: 41px auto 0;
+    display: block;
+  }
+  .bs-brands__info {
+    padding: 40px 20px 0;
+    color: #121212;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .bs-brands .bs-catalog__hits{
+    padding-top: 0;
+  }
+  .bs-brands .bs-catalog__head{
+    margin-top: 60px;
+  }
+  .bs-brands .bs-catalog__hit{
+    padding: 0 100px;
   }
 }
 
@@ -10812,7 +10878,7 @@ a:hover {
   }
 
   .brands__button {
-    display: initial;
+    display: initial!important;
     background: #00AB0C;
     color: #fff;
     padding: 19px 52px 15px;
