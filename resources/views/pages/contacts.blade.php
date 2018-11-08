@@ -66,6 +66,7 @@
       </div>
       <div class="col-sm-2 bs-contacts__links">
         <div id="MainMenu">
+        <p class="select-link">Выберите город <span><img src="/images/selectW.svg" alt="arrow"></span></p>
           <ul class="bs-contacts__list">
             <li class="">
               <a href="#SubMenu1" class="bs-contacts__item" onclick="zoomPyrenees(); return false;">Алматы</a>
