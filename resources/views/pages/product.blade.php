@@ -93,34 +93,36 @@
                                 <div class="col-sm-10">
                                     <div>
                                         <h6 class="bs-podlozhka__review-name">{{ $review->user->name }}</h6>
+                                        <star-rating :rating={{ $review->stars }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
                                         <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
                                     </div>
                                     <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
                                 </div>
                             </div>
                             @endforeach
-                            <button type="submit">Добавить отзыв</button>
+                            <p class="bs-podlozhka__rebiew-add">Добавить отзыв</p>
                             <form action="{{ route('review') }}" method="POST">
                                 {{ csrf_field() }}
-                                <label>Имя</label>
-                                <input type="text" name="name" placeholder="Введите ваше имя">
-                                <label>Отзыв</label>
-                                <textarea name="content" placeholder="Напишите Ваш отзыв."></textarea>
+                                <input class="bs-podlozhka__review-input" type="text" name="name" placeholder="Имя">
+                                <textarea class="bs-podlozhka__review-area" name="content" placeholder="Напишите Ваш отзыв."></textarea>
                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
                                 <input type="hidden" value="{{ (Auth::check()) ? Auth::user()->id : '' }}" name="user_id">
-                                <select name="stars" id="">
+                                <!-- <select name="stars" id="">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                </select>
-                                <button type="submit">Отправить отзыв</button>
+                                </select> -->
+                                <label class="bs-podlozhka__review-label">Поставьте оценку:</label>
+                                <star-rating inactive-color="#fff" :border-width="3"></star-rating>
+                                <input type="hidden" value="" name="stars">
+                                <button type="submit">Отправить</button>
                             </form>
                         </div>
                 </div>
             </div>
-            <div id="myModal" class="bs-basket__modal">
+            <div id="myModal" class="bs-basket__modal calculator">
                         <!-- Modal content -->
                         <div class="bs-basket__modal-content">
                             <span class="close">&times;</span>
@@ -157,8 +159,12 @@
             <div class="bs-podlozhka-mob">
               <h5 class="bs-basket__heading"><a href="{{ route('category', ['catSlug' => $product->category->slug]) }}"><span><img src="/images/back.png" alt="back"></span></a>{{ $product->title }}</h5>
               <ul class="bs-podlozhka-mob__list">
-                <li class="active">Описание
-                  <div class="bs-podlozhka-mob__desc">
+                <li data-value="1" class="active">Описание </li>
+                <li data-value="2" >Характеристики </li>
+                <li data-value="3" >Отзывы </li>
+              </ul>
+              <div data-value="1" class="bs-podlozhka-mob__info">
+                <div class="bs-podlozhka-mob__desc">
                     <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
                     <div class="bs-podlozhka__text">
                         {!! $product->content !!}
@@ -176,9 +182,9 @@
                       </div>
                     </div>
                   </div>
-                </li>
-                <li>Характеристики
-                  <div class="bs-podlozhka-mob__desc">
+              </div>
+              <div data-value="2" class="bs-podlozhka-mob__info">
+                <div class="bs-podlozhka-mob__desc">
                     <p class="bs-podlozhka__desc">Артикул: <span> 18343378</span></p>
                       @foreach($product->values as $filter)
                     <p class="bs-podlozhka__desc">{{$filter->filter->name}}: <span> {{ $filter->name }}</span></p>
@@ -196,18 +202,28 @@
                       </div>
                     </div>
                   </div>
-                </li>
-                <li>Отзывы
-                  <div class="bs-podlozhka-mob__desc">
+              </div>
+              <div data-value="3" class="bs-podlozhka-mob__info">
+                <div class="bs-podlozhka-mob__desc">
                     @foreach($product->reviews as $review)
                       <div>
                           <h6 class="bs-podlozhka__review-name">{{ $review->user->name }}</h6>
+                          <div class="bs-catalog__compare">
+                              <ul>
+                                  <li class="bs-catalog__like active"><a href=""></a></li>
+                                  <li class="bs-catalog__like"><a href=""></a></li>
+                                  <li class="bs-catalog__like"><a href=""></a></li>
+                                  <li class="bs-catalog__like"><a href=""></a></li>
+                                  <li class="bs-catalog__like"><a href=""></a></li>
+                                  <li class="bs-catalog__like"><a href=""></a></li>
+                              </ul>
+                          </div>
                           <p class="bs-podlozhka__review-date">Вчера в 22:00</p>
                       </div>
                       <p class="bs-podlozhka__review-text">{{ $review->content }}</p>
                     @endforeach
                     <div class="bs-podlozhka__buttons">
-                    <button id="awdawd" class="bs-podlozhka__review-add">Добавить отзыв</button>
+                      <button id="awdawd" class="bs-podlozhka__review-add dobavitOtziv">Добавить отзыв</button>
                       <form class="bs-podlozhka__review-form" action="{{ route('review') }}" method="POST">
                           {{ csrf_field() }}
                           <label>Имя</label>
@@ -229,27 +245,6 @@
                             <button class="send-button" type="submit">ОТПРАВИТЬ</button>
                           </div>
                       </form>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              <div class="bs-podlozhka-mob__info">
-                <div class="bs-podlozhka-mob__desc">
-                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
-                    <div class="bs-podlozhka__text">
-                        {!! $product->content !!}
-                    </div>
-                    <div class="bs-podlozhka__buttons">
-                      <div>
-                        <button class="bs-podlozhka__calc">Калькулятора расчета</button>
-                        <p class="bs-podlozhka-mob__cost">ЦЕНА: <span>2 600 ТГ</span></p>
-                      </div>
-                      <div>
-                        <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="bs-podlozhka-mob-wishlist">
-                          <img src="/images/heart.svg" alt="favorite">
-                        </a>
-                        <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-podlozhka__add">КУПИТЬ</a>
-                      </div>
                     </div>
                   </div>
               </div>
@@ -445,3 +440,4 @@
         </div>
     </article>
 @endsection
+
