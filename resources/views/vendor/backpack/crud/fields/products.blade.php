@@ -39,7 +39,7 @@
             </table>
             <div>
                 <p> <b>Доставка: </b> 800 ₸</p>
-                <p> <b>Итого: </b>80 800 ₸</p>
+                <p> <b>Итого: </b>{{ $product->total_price }} ₸</p>
             </div>
         @else
 
