@@ -12,6 +12,7 @@
     @if(old($field['name']))
         {{ old($field['name']) }}
     @else
+     
         @if(isset($field['value']))
             <table class="table table-bordered">
 
@@ -20,11 +21,11 @@
                     <th>Количество</th>
                     <th>Цена</th>
                 </tr>
-                @foreach(json_decode($field['value']) as $product)
+                @foreach($field['value'] as $product)
 
                 <tr>
                     <td>
-                        {{ $product->item->title }}
+                        {{ $product->name }}
                     </td>
 
                     <td>
@@ -36,6 +37,10 @@
                 </tr>
                 @endforeach
             </table>
+            <div>
+                <p> <b>Доставка: </b> 800 ₸</p>
+                <p> <b>Итого: </b>80 800 ₸</p>
+            </div>
         @else
 
             @if(isset($field['default']))
