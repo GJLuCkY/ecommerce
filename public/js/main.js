@@ -324,7 +324,8 @@ $(document).ready(function () {
   var back = document.getElementsByClassName("cat-head-close")[0];
 
 	var mod = document.getElementsByClassName('bs-services__modal')[0];
-	var close = document.getElementsByClassName('bs-header__signup')[0];
+  var close = document.getElementsByClassName('bs-header__signup')[0];
+  var log = document.getElementsByClassName('bs-header__login')[0];
 
 	// When the user clicks the button, open the modal
     $('.bs-podlozhka__calc').click(function(){
@@ -342,6 +343,9 @@ $(document).ready(function () {
      $(close).click(function(){
     	sign.style.display = "block";
     });
+    $(log).click(function(){
+    	login.style.display = "block";
+    });
 
     // $('.bs-services__col').click(function(){
     // 	mod.style.display = "block";
@@ -358,12 +362,14 @@ $(document).ready(function () {
         };
 	}
 
-	if(x) {
-        x.onclick = function() {
-            sign.style.display = "none";
-            login.style.display = "none";
-        };
-  }
+    x.onclick = function (event) {
+      if (event.target === sign) {
+        sign.style.display = "none";
+      }
+      if (event.target === login) {
+        login.style.display = "none";
+      }
+    };
   
   if(back) {
         back.onclick = function() {
@@ -379,9 +385,9 @@ $(document).ready(function () {
 	    if (event.target === sign) {
 	        sign.style.display = "none";
       }
-    if (event.target === login) {
-      login.style.display = "none";
-    }
+      if (event.target === login) {
+        login.style.display = "none";
+      }
 	};
 
 	if(send) {
@@ -785,7 +791,16 @@ $(document).ready(function () {
       $(this).parent().find(".cat-list").slideToggle(400);
       $(this).toggleClass('cat-link-active');
     });
+
+    $('.check_samovyvoz').click(function() {
+      $(".adress-dostavki").css("display", "none");
+      $(".check_samovyvoz-info").css("display", "block");
+    });
+  $('.check_dostavka').click(function () {
+    $(".check_samovyvoz-info").css("display", "none");
+    $(".adress-dostavki").css("display", "block");
   });
+});
   if ($(window).width() < 1190) {
      $(document).ready(function(){   
        $(".bs-contacts .select-link").click(function () {

@@ -47,17 +47,18 @@
                             
                             <div class="bs-order__check" style="margin-bottom: 40px">
                                 <p style="margin-bottom: 15px">Способ доставки</p>
-                                <label><input type="radio" name="delivery_method" value="dostavka" checked> Доставка
+                                <label class="check_dostavka"><input type="radio" name="delivery_method" value="dostavka" checked> Доставка
                                     <span class="checkmark"></span>
                                 </label>
-                                <label><input type="radio" name="delivery_method" value="samovyvoz"> Самовывоз
+                                <label class="check_samovyvoz"><input type="radio" name="delivery_method" value="samovyvoz"> Самовывоз
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
 
-                            <label class="bs-order__input">Адрес доставки
+                            <label class="bs-order__input adress-dostavki">Адрес доставки
                                 <input type="text" name="address">
                             </label>
+                            <p class="check_samovyvoz-info">info</p>
                             
                             <div class="bs-order__select" style="margin: 15px 0 50px 0">
                                 <div class="bs-order__selectIn">

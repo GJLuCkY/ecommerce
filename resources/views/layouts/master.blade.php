@@ -151,17 +151,19 @@
             </li>
 
             <li class="bs-main-nav__item ">
-            <button class="bs-header__signup">
-                @if(Auth::check())
-                    <a href="{{ route('getLogout') }}">Выйти</a>
-                    <a href="{{ route('profile.index') }}">Профиль</a>
-                @else
-                <a class="bs-main-nav__link">
-                <img src="{{ asset('images/cab.svg') }}" alt="human" class="bs-header__human"> Личный кабинет
-                </a>
-                <a href="{{ route('signin') }}">Войти</a>
-                @endif
-            </button>
+              @if(Auth::check())
+                      <a href="{{ route('getLogout') }}">Выйти</a>
+                      <a href="{{ route('profile.index') }}">Профиль</a>
+                  @else
+              <button class="bs-header__signup">
+                  <a class="bs-main-nav__link">
+                    <img src="{{ asset('images/cab.svg') }}" alt="human" class="bs-header__human"> Личный кабинет
+                  </a>
+              </button>
+              <button class="bs-header__login">
+                <a class="bs-main-nav__link">Войти</a>
+              </button>
+              @endif
             </li>
         </div>
         </div>
