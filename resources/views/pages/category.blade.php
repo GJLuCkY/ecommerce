@@ -197,7 +197,7 @@
                         </form>
                       </div>
                     </div>
-                    @foreach($products->chunk(5) as $chunk)
+                    @foreach($products->chunk(4) as $chunk)
                     <div class="bs-laminat__hits row">
                         @foreach($chunk as $item)
                         <div class="col-sm-3 bs-catalog__hit">
