@@ -10440,6 +10440,11 @@ a:hover {
 .bs-catalog__hitImg {
   position: relative;
 }
+.bs-catalog__hitImg img{
+    height: 257px;
+    width: 100%;
+    object-fit: cover;
+}
 
 .bs-catalog__hitImg .back-wishlist {
   width: 100%;
@@ -10462,6 +10467,7 @@ a:hover {
 
 .bs-catalog__hitImg .back-wishlist img {
   width: 28px;
+  height: auto;
   margin: auto;
 }
 
