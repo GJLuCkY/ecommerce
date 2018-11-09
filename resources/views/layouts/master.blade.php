@@ -556,7 +556,7 @@
 </div>
 @yield('before_jquery')
 <!--SCRIPTS    -->
-<script src="{{ asset('js/app.js') }}"></script>
+<!-- <script src="{{ asset('js/app.js') }}"></script> -->
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('after_jquery')
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
