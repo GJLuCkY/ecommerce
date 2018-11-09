@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use SEO;
 use Session;
 use Cart;
+use Auth;
+use App\Models\Order;
+use Toastr;
 
 class CheckoutController extends Controller
 {
@@ -23,20 +26,13 @@ class CheckoutController extends Controller
     }
 
     public function postCheckout(Request $request) {
-
+       
         $user = Auth::user();
-        // dd($user);
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        $totalPrice = $cart->totalPrice;
-        $object = $cart->items;
-        $productsId = (array)$object;
-
-
+        
         $order = new Order;
         if($request->get('user_id') != 0) {
             $order->user_id = $request->get('user_id');
-            $order->iin_bin = $request->get('usertype');
+            // $order->iin_bin = $request->get('usertype');
         }
         $order->phone = $request->get('phone');
         $order->name = $request->get('name');
@@ -46,12 +42,13 @@ class CheckoutController extends Controller
         $order->comment = $request->get('comment');
         $order->method = $request->get('method');
         $order->status = 'create';
-        $order->products = $request->get('products');
+        $order->products = Cart::content()->toArray();
         $order->delivery_method = $request->get('delivery_method');
         $order->user_type = $request->get('usertype');
+        $order->total_price = Cart::total();
         $order->save();
-        $order->products()->attach(array_keys($productsId));
-        Session::forget('cart');
+        // $order->products()->attach(array_keys($productsId));
+        
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
         return redirect()->route('homepage');
     }

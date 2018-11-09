@@ -23,7 +23,7 @@ class ProductCategoryCrudController extends CrudController
         $this->crud->setEntityNameStrings('product_category', 'product_categories');
 
         $this->crud->allowAccess('reorder');
-        $this->crud->enableReorder('title', 2);
+        $this->crud->enableReorder('title', 3);
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
