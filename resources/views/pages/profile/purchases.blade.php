@@ -22,8 +22,8 @@
                 <tr onclick="document.location = '{{ route('profile.order', ['id' => $order->id]) }}';">
                     <td>{{$order->id}}</td>
                     <td>{{ $order->created_at}}</td>
-                    <td>todo</td>
-                    <td>todo</td>
+                    <td>{{ $order->total_price}}</td>
+                <td>{{ count((array)$order->products) }}</td>
                     <td>{{ $order->address }}</td>
                     <td>{{ $order->status }}</td>
                 </tr>
@@ -38,6 +38,7 @@
                   <p class="during">В процессе</p>
                   <p class="delivered">Доставлен</p>
                 </div>
+                
                 <div class="order-mobInfo">
                   <p class="order-mobInfo-p"><span>Дата покупки:</span> {{ $order->created_at}}</p>
                   <p class="order-mobInfo-p"><span>Цена:</span> {{ $order->created_at}}</p>

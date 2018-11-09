@@ -12,7 +12,6 @@
                 <h6 class="bs-profile__innerShop-head">Заказ №{{$order->id}}</h6>
                 <div class="bs-profile__innerShop-info">
                 <p>
-                    {{ dd($order) }}
                     <label>Получатель:</label>{{ $order->name }}
                 </p>
                 <p>
@@ -25,7 +24,7 @@
                     <label>Способ оплаты:</label> {{ ($order->method == 'nal') ? 'Наличными' : 'Оплата картой' }}
                 </p>
                 <p>
-                    <label>К оплате:</label> TODO tg
+                    <label>К оплате:</label> {{ $order->total_price }}
                 </p>
                 </div>
                 <table style="width:100%">
