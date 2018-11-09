@@ -18,7 +18,7 @@
                     <div class="row bs-basket__row">
                         <div class="col-sm-1 bs-basket__img">
                             {{-- <img src="{{ asset('uploads/' . $product['item']->image ) }}" class=""> --}}
-                            <img src="{{ (isset($product['options']['image'])) ? $product['options']['image'] : '/images/not-found.png' }}" alt="{{ $product['name'] }}">
+                            <img src="{{ (isset($product['options']['image']) && strlen($product['options']['image']) > 1) ? $product['options']['image'] : '/images/not-found.png' }}" alt="{{ $product['name'] }}">
                         </div>
                         <div class="col-sm-4 bs-basket__bigCol">
                             <p class="bs-basket__about">{{ $product['name'] }}
@@ -31,9 +31,7 @@
                             <div class="bs-basket__counter">
                                 <form action="{{ route('cart.change.quantity') }}" method="POST" style="display: initial">
                                     {{ csrf_field() }}
-                                    
-                                    <input type="hidden" name="product" value="{{ $product['id'] }}">
-                                    
+                                    <input type="hidden" name="product" value="{{ $product['rowId'] }}">
                                     <input type="hidden" name="change" value="plus">
                                     <button type="submit">+</button>
                                 </form> 
@@ -43,7 +41,7 @@
                                 @else
                                 <form action="{{ route('cart.change.quantity') }}" method="POST" style="display: initial">
                                     {{ csrf_field() }}
-                                    <input type="hidden" name="product" value="{{ $product['id'] }}">
+                                    <input type="hidden" name="product" value="{{ $product['rowId'] }}">
                                     <input type="hidden" name="change" value="minus">
                                     <button type="submit">-</button>
                                 </form>
@@ -55,7 +53,7 @@
                             <h4 class="bs-basket__costTotal">{{ number_format($product['subtotal'], null, ' ', ' ') }} тг / {{ $product['qty'] }} шт.</h4>
                         </div>
                         <div class="col-sm-1 bs-basket__delete">
-                            <a href="{{ route('removeToCart', ['id' => $product['id']]) }}"><img src="/images/delete.svg" alt="X" class=""></a>
+                            <a href="{{ route('removeToCart', ['id' => $product['rowId']]) }}"><img src="/images/delete.svg" alt="X" class=""></a>
                         </div>
                     </div>
                     <div class="row bs-basket__row-mob">
@@ -72,7 +70,7 @@
                           <div class="bs-basket__counter">
                               <form action="{{ route('cart.change.quantity') }}" method="POST" style="display: initial">
                                   {{ csrf_field() }}
-                                  <input type="hidden" name="product" value="{{ $product['id'] }}">
+                                  <input type="hidden" name="product" value="{{ $product['rowId'] }}">
                                   <input type="hidden" name="change" value="plus">
                                   <button type="submit">+</button>
                               </form> 
@@ -82,7 +80,7 @@
                               @else
                               <form action="{{ route('cart.change.quantity') }}" method="POST" style="display: initial">
                                   {{ csrf_field() }}
-                                  <input type="hidden" name="product" value="{{ $product['id'] }}">
+                                  <input type="hidden" name="product" value="{{ $product['rowId'] }}">
                                   <input type="hidden" name="change" value="minus">
                                   <button type="submit">-</button>
                               </form>
@@ -90,7 +88,7 @@
                           </div>
                         </div>
                         <div class="col-xs-1 bs-basket__delete">
-                            <a href="{{ route('removeToCart', ['id' => $product['id']]) }}"><img src="/images/delete.svg" alt="X" class=""></a>
+                            <a href="{{ route('removeToCart', ['id' => $product['rowId']]) }}"><img src="/images/delete.svg" alt="X" class=""></a>
                         </div>
                     </div>
                     @endforeach

@@ -58,18 +58,13 @@
                                     </a>
                                 </div>
                             </div>
-                            @php
-                            $cartItems = session()->has('cart') ? session('cart')->items : [];
-                            $inCart = array_key_exists($item->id, $cartItems);
-                            @endphp
+                            
                             <p class="bs-catalog__size">10 000 кв.м</p>
-                            <a href="{{ $inCart ? route('cart') : route('addToCart', ['id' => $item->id]) }}" class="bs-catalog__add">
+                            <a href="{{ route('addToCart', ['id' => $item->id]) }}" class="bs-catalog__add">
                                 <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">
-                                @if($inCart)
-                                В корзине
-                                @else
+                               
                                 Добавить в корзину
-                                @endif</a>
+                               </a>
                             <div class="bs-catalog__compare">
                                 <ul>
                                     <star-rating :rating={{ $item->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>

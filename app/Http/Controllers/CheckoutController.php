@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use SEO;
 use Session;
-use App\Cart;
+use Cart;
 
 class CheckoutController extends Controller
 {
@@ -14,12 +14,12 @@ class CheckoutController extends Controller
         // Session::forget('cart');
         SEO::setTitle('Оформление заказа');
         SEO::setDescription('Оформление заказа Etalon Holding');
-        if(!Session::has('cart')){
+        // dd(Cart::count());
+        if(Cart::count() < 1){
             return redirect()->route('cart');
         }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        return view('pages.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+       
+        return view('pages.checkout');
     }
 
     public function postCheckout(Request $request) {

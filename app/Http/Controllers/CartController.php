@@ -21,15 +21,15 @@ class CartController extends Controller
 
     public function getAddToCart(Request $request, $id) {
         $product = Product::find($id);
-
-        Cart::add($product->id, $product->title, 1, $product->price, ['image' => asset('uploads/' . $product->image)]);
+        $image = isset($product->image) ? asset('uploads/' . $product->image) : '';
+        Cart::add($product->id, $product->title, 1, $product->price, ['image' => $image])->associate('App\\Models\\Product');
         // Cart::destroy();
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
         return redirect()->back();
     }
 
     public function removeToCart(Request $request, $id) {
-
+       
         Cart::remove($id);
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
         return redirect()->back();
@@ -37,12 +37,16 @@ class CartController extends Controller
 
     public function cartChangeQuantity(Request $request)
     {
+        // Cart::destroy();
+        $rowId = $request->get('product');
+        $product = Cart::get($rowId);
         
         if($request->get('change') == 'plus') {
-            $cart = cart()->incrementQuantityAt($request->get('product'));
+            Cart::update($rowId, 1 + $product->qty);
+            // $cart = cart()->incrementQuantityAt($request->get('product'));
         }
         else if($request->get('change') == 'minus') {
-            $cart = cart()->decrementQuantityAt($request->get('product'));
+            Cart::update($rowId, $product->qty - 1);
         }
 
         return redirect()->back();

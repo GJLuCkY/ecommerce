@@ -22,6 +22,8 @@ class ProductCategoryCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/product-category');
         $this->crud->setEntityNameStrings('product_category', 'product_categories');
 
+        $this->crud->allowAccess('reorder');
+        $this->crud->enableReorder('title', 2);
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
@@ -31,6 +33,12 @@ class ProductCategoryCrudController extends CrudController
         $this->crud->addColumn([
             'name' => 'title',
             'label' => 'Категории'
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'status',
+            'label' => 'Опубликованные',
+            'type' => 'check'
         ]);
 
         $this->crud->addField([

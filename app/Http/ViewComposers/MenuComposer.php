@@ -2,7 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\MenuItem;
+use App\Models\ProductCategory;
 use Illuminate\View\View;
 
 
@@ -11,7 +11,7 @@ class MenuComposer
 {
     private $menu;
 
-    public function __construct(MenuItem $items)
+    public function __construct(ProductCategory $items)
     {
         $this->menu = $items;
 
@@ -20,6 +20,6 @@ class MenuComposer
     }
     public function compose(View $view)
     {
-        $view->with('menus', $this->menu->orderBy('lft')->get());
+        $view->with('menus', $this->menu->getTree($this->menu->where('parent_id', null)->orderBy('lft')->get()));
     }
 }

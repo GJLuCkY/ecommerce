@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+{{-- {{ dd() }} --}}
     <article class="container">
         <div class="row bs-podlozhka">
             <div class="col-sm-2 bs-links">
@@ -29,8 +30,15 @@
                                 @endforeach
                                 <div class="bs-podlozhka__links">
                                     <button type="submit">Задать вопрос</button>
-                                    <a href="{{ route('wishlist', ['id' => $product->id]) }}">Добавить в избранное</a>
-                                    <p>Добавлено <span><img src="/images/added.svg"></span></p>
+                                    @if(Auth::check())
+                                        @if(empty(Wishlist::getWishlistItem($product->id, Auth::user()->id)))
+                                        <a href="{{ route('wishlist', ['id' => $product->id]) }}">Добавить в избранное</a>
+                                        @else
+                                        <p>Добавлено <span><img src="/images/added.svg"></span></p>
+                                        @endif
+                                    @else
+                                        <a href="#" class="bs-wishlist-register">Добавить в избранное</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

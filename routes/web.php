@@ -7,6 +7,9 @@ Route::get('/test', function() {
 
 });
 
+Route::view('excell', 'excell');
+Route::post('excel', 'ExcellController@importExcell')->name('importExcel');
+
 
 Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin'], 'namespace' => 'Admin'], function()
 {
@@ -112,3 +115,7 @@ Route::post('/subscribe', 'SubscribeController@subscribe')->name('subscribe');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

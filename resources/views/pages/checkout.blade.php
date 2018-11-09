@@ -13,13 +13,13 @@
                         <li>Оформление заказа</li>
                     </ul>
                 </div>
-                @foreach($products as $product)
+                @foreach(Cart::content()->toArray() as $product)
                 <div class="row bs-basket__row">
                     <div class="col-sm-1 bs-basket__img">
-                        <img src="{{ (isset($product['item']->image)) ? asset('uploads/' . $product['item']->image) : '/images/not-found.png' }}" class="bs-advice__img">
+                        <img src="{{ (isset($product['options']['image']) && strlen($product['options']['image']) > 1) ? $product['options']['image'] : '/images/not-found.png' }}" class="bs-advice__img">
                     </div>
                     <div class="col-sm-6 bs-basket__bigCol">
-                        <p class="bs-basket__about">{{ $product['item']->title }}
+                        <p class="bs-basket__about">{{ $product['name'] }}
                             <br>3-х слойная паркетная доска
                             <br>KRONOTEX
                         </p>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-sm-2 bs-basket__qual">
                         <h6 class="bs-basket__title">Стоимость</h6>
-                        <p>{{ $product['item']->price }}</p>
+                        <p>{{ $product['price'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -102,7 +102,7 @@
 
 
                             <div class="bs-order__total">
-                                <h6>ИТОГО <span class="bs-order__quan"> 2 </span> товара на сумму <span class="bs-order__sum"> {{ number_format($totalPrice, null, ' ', ' ') }} </span></h6>
+                                <h6>ИТОГО <span class="bs-order__quan"> {{Cart::content()->count()}} </span> товара на сумму <span class="bs-order__sum"> {{ Cart::total() }} </span></h6>
                                 {{-- <h4>К оплате: <span class="bs-order__pay"> 13 390</span></h4> --}}
                                 <button type="submit">Оформить заказ</button>
                             </div>
@@ -165,8 +165,8 @@
                     </div>
                     <div class="bs-order__total">
                       <div class="row bs-basket__buttons-cost">
-                        <p class="bs-basket__text bs-basket__text--total">ВЫБРАНО: <span class="count">{{count($products)}} товаров</span></p>
-                        <p class="bs-basket__text bs-basket__text--total">ИТОГО: <span class="count">{{ number_format($totalPrice, null, ' ', ' ') }} тг</span></p>
+                        <p class="bs-basket__text bs-basket__text--total">ВЫБРАНО: <span class="count">{{Cart::content()->count()}} товаров</span></p>
+                        <p class="bs-basket__text bs-basket__text--total">ИТОГО: <span class="count">{{ Cart::total() }} тг</span></p>
                     </div>
                       <button type="submit">Оформить заказ</button>
                     </div>

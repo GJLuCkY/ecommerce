@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Validator;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -42,9 +42,12 @@ class UserController extends Controller
             'email' => 'email|required',
             'password' => 'required|min:4'
         ])->validate();
-        $credentials = $request->only('email', 'password');
+        $userdata = array(
+            'email'     => $request->get('email'),
+            'password'  => $request->get('password')
+        );
         // echo $credentials;
-        if(Auth::attempt($credentials)) {
+        if(Auth::attempt($userdata)) {
             echo 'ok';
         }
     }
