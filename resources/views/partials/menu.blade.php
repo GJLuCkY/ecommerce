@@ -3,7 +3,8 @@
     @foreach($menus as $item)
         <li class="bs-links__item">
             <a href="{{ route('category', ['catSlug' => $item->slug]) }}">{{ $item->title }}</a>
-            @if(count((array)$item->children) > 0)
+            
+            @if($item->children->count() > 0)
             <div class="dropdown-content">
                 @foreach($item->children as $menu)
                 <a href="{{ route('category', ['catSlug' => $menu->slug]) }}">{{ $menu->title }}</a>
