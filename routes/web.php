@@ -92,8 +92,8 @@ Route::get('/brands/{brandSlug}', 'PageController@brand')->name('brand');
 Route::view('/contacts-2', 'pages.contacts');
 
 // Вакансии
-Route::get('/vacancy/{citySlug}', 'PageController@vacancyCity')->name('vacancy.city');
-Route::get('/vacancy/{citySlug}/{vacancyId}', 'PageController@vacancyId')->name('vacancy.id');
+Route::get('/vacancy/{citySlug}', 'VacancyController@vacancyCity')->name('vacancy.city');
+Route::get('/vacancy/{citySlug}/{vacancyId}', 'VacancyController@vacancyId')->name('vacancy.id');
 
 // Советы
 Route::get('/advices', 'PageController@advices')->name('advices');

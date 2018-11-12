@@ -39,22 +39,15 @@
                
                 <div class="col-sm-3">
                     <h4 class="bs-deliver__head">Читайте также</h4>
+                    @foreach($news as $item)
                     <div class="row">
-                        <img src="images/news1.png" alt="news">
-                        <p class="bs-news__date">20.06.2018</p>
-                        <a href="" class="bs-news__link">Акция! Пол + плинтус</a>
+                        <img src="{{ asset($item->image) }}" alt="news">
+                        <p class="bs-news__date">{{ $item->created_at }}</p>
+                    <a href="{{ route('post', ['newSlug' => $item->slug]) }}" class="bs-news__link">{{ $item->title }}</a>
                     </div>
-                    <div class="row">
-                        <img src="images/news1.png" alt="news">
-                        <p class="bs-news__date">20.06.2018</p>
-                        <a href="" class="bs-news__link">Акция! Пол + плинтус</a>
-                    </div>
-                    <div class="row">
-                        <img src="images/news1.png" alt="news">
-                        <p class="bs-news__date">20.06.2018</p>
-                        <a href="" class="bs-news__link">Акция! Пол + плинтус</a>
-                    </div>
-                    <a href="news.html" class="bs-inner-news__link">Все новости </a>
+                    @endforeach
+                    
+                    <a href="{{route('news')}}" class="bs-inner-news__link">Все новости </a>
                     <span class="bs-inner-news__arrow"></span>
                 </div>
             </div>

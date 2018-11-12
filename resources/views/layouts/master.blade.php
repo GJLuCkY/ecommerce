@@ -243,7 +243,7 @@
                 <select name="category">
                 <option disabled>Выбор категории</option>
                 @foreach($menus as $category)
-                <option value={{ $category->id }}>{{ $category->name }}</option>
+                <option value={{ $category->id }}>{{ $category->title }}</option>
                 @endforeach
                 </select>
             </div>
@@ -391,8 +391,8 @@
                     <li class="bs-footer__item"><a href="/o-kompanii" class="bs-footer__link">О Компании</a></li>
                     <li class="bs-footer__item"><a href="{{ route('news') }}" class="bs-footer__link">Новости</a></li>
                     <li class="bs-footer__item"><a href="{{ route('advices') }}" class="bs-footer__link">Советы</a></li>
-                    <li class="bs-footer__item"><a href="" class="bs-footer__link">Вакансии</a></li>
-                    <li class="bs-footer__item"><a href="" class="bs-footer__link">Контакты</a></li>
+                    <li class="bs-footer__item"><a href="/vacancy" class="bs-footer__link">Вакансии</a></li>
+                    <li class="bs-footer__item"><a href="/contacts-2" class="bs-footer__link">Контакты</a></li>
                     <!-- <li class="bs-footer__item"><a href="" class="bs-footer__link">Услуги</a></li> -->
                 </ul>
             </div>

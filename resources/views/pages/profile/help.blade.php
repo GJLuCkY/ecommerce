@@ -15,16 +15,16 @@
                     <hr class="bs-profile__help-line">
                     <ul class="bs-profile__help-list">
                     <li>
-                        <a href="howOrder.html" class="bs-profile__help-link">Как сделать заказ</a>
+                        <a href="/kak-zakazat" class="bs-profile__help-link">Как сделать заказ</a>
                     </li>
                     <li>
-                        <a href="delivery.html" class="bs-profile__help-link">Оплата и доставка</a>
+                        <a href="/oplata-i-dostavka" class="bs-profile__help-link">Оплата и доставка</a>
                     </li>
                     <li>
-                        <a href="faq.html" class="bs-profile__help-link">Вопросы и ответы</a>
+                        <a href="/faq" class="bs-profile__help-link">Вопросы и ответы</a>
                     </li>
                     <li>
-                        <a href="return.html" class="bs-profile__help-link">Возврат товара</a>
+                        <a href="/vozvrat-tovara" class="bs-profile__help-link">Возврат товара</a>
                     </li>
                     </ul>
                 </div>
@@ -33,19 +33,19 @@
                     <hr class="bs-profile__help-line">
                     <ul class="bs-profile__help-list">
                     <li>
-                        <a href="about.html" class="bs-profile__help-link">О компании</a>
+                        <a href="/o-kompanii" class="bs-profile__help-link">О компании</a>
                     </li>
                     <li>
-                        <a href="news.html" class="bs-profile__help-link">Новости</a>
+                        <a href="{{ route('news') }}" class="bs-profile__help-link">Новости</a>
                     </li>
                     <li>
-                        <a href="advice.html" class="bs-profile__help-link">Советы</a>
+                        <a href="{{ route('advices') }}" class="bs-profile__help-link">Советы</a>
                     </li>
                     <li>
-                        <a href="vacancy.html" class="bs-profile__help-link">Вакансии</a>
+                        <a href="/vacancy" class="bs-profile__help-link">Вакансии</a>
                     </li>
                     <li>
-                        <a href="contacts.html" class="bs-profile__help-link">Контакты</a>
+                        <a href="/contacts-2" class="bs-profile__help-link">Контакты</a>
                     </li>
                     </ul>
                 </div>

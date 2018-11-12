@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Value;
 use App\Models\Filter;
+use App\Models\VacancyCity;
 
 
 class PageController extends Controller
@@ -44,10 +45,12 @@ class PageController extends Controller
         return view('pages.news',compact('news'));
     }
     public function post($postSlug) {
-        $post = Article::where('slug', $postSlug)->firstOrFail();
+        $post = Article::where('slug', $postSlug)->where('status', 'PUBLISHED')->firstOrFail();
         SEO::setTitle($post->title);
         SEO::setDescription('Описание');
-        return view('pages.inner-news',compact('post'));
+        $news = Article::where('id', '!=', $post->id)->where('status', 'PUBLISHED')->inRandomOrder()->take(3)->get();
+
+        return view('pages.inner-news',compact('post', 'news'));
     }
     public function page($pageSlug) {
         $page = Page::where('slug', $pageSlug)->firstOrFail();
