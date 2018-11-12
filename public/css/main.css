@@ -12167,6 +12167,10 @@ a:hover {
   padding-left: 10px;
 }
 
+.bs-header__select option{
+  color: #000!important;
+}
+
 .bs-header__selectIn {
   width: 51%;
   float: right;
@@ -12481,19 +12485,19 @@ a:hover {
   color: #b9b9b9;
 }
 
-.bs-header__signup {
+.bs-header__signup, .bs-header__login {
   background: transparent;
   width: 94%;
 }
 
-.bs-header__signup a {
+.bs-header__signup a, .bs-header__login a {
   color: #707070;
   font-size: 20px;
   font-weight: 300;
 }
 
 .bs-header__signup a:hover,
-.bs-header__signup a:focus {
+.bs-header__signup a:focus, .bs-header__login a:hover, .bs-header__login a:focus {
   color: #707070;
   text-decoration: none;
   outline: none;
@@ -12589,7 +12593,7 @@ a:hover {
   }
 
   .bs-header .bs-main-nav__link,
-  .bs-header__signup a {
+  .bs-header__signup a, .bs-header__login a {
     font-size: 18px;
   }
 }
@@ -12636,7 +12640,7 @@ a:hover {
   }
 
   .bs-header .bs-main-nav__link,
-  .bs-header__signup a {
+  .bs-header__signup a, .bs-header__login a {
     font-size: 18px;
   }
 }
@@ -12711,7 +12715,7 @@ a:hover {
   }
 
   .bs-header .bs-main-nav__link,
-  .bs-header__signup a {
+  .bs-header__signup a, .bs-header__login a {
     font-size: 17px;
   }
 }
@@ -14437,6 +14441,13 @@ a:hover {
   margin-bottom: 50px;
 }
 
+.check_samovyvoz-info{
+  display: none;
+  color: #525252;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 .bs-order__input:hover,
 .bs-order__input:focus {
   color: #00AB0C;
@@ -14485,6 +14496,10 @@ a:hover {
   border-radius: 0;
   width: 110%;
   padding-left: 46px;
+}
+
+.bs-order__select option{
+  color: #000 !important;
 }
 
 .bs-order__selectIn {

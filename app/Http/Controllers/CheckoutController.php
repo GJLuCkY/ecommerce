@@ -26,7 +26,6 @@ class CheckoutController extends Controller
     }
 
     public function postCheckout(Request $request) {
-       
         $user = Auth::user();
         
         $order = new Order;
