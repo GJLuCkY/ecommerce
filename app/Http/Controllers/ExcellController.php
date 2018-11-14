@@ -28,14 +28,35 @@ class ExcellController extends Controller
                     'quantity' => 10, 
                     'status' => 1, 
                     'article' => $value->article,
-
+                    'minimum' => $value->minimum,
                     'filters' => [
-                        1 => $value->brand,
-                        6 => $value->collection,
-                        7 => $value->decor,
-                        8 => $value->class,
-                        9 => $value->strana,
-                        10 => $value->ves,
+                        29 => $value->upakovka, // Упаковка
+                        1 => $value->brand, // Brand
+                        6 => $value->collection, // Коллекция
+                        7 => $value->decor, // Декор
+                        8 => $value->class, // Класс истираеомости
+                        9 => $value->strana, // Производитель
+                        10 => $value->ves, // Вес
+                        11 => $value->shirina, // Ширина
+                        12 => $value->dlina, // Длина
+                        13 => $value->vysota, // Высота
+                        14 => $value->tolwina, // Толщина
+                        15 => $value->plotnost, // Плотность
+                        16 => $value->vyravnivanie, // Выравнивание
+                        17 => $value->zvuk,
+                        18 => $value->termo, 
+                        19 => $value->nagruzka,
+                        20 => $value->razmer,
+                        21 => $value->faska,
+                        2 => $value->color,
+                        22 => $value->harak,
+                        23 => $value->structure,
+                        24 => $value->material,
+                        25 => $value->forma_vypuska,
+                        26 => $value->steklo,
+                        27 => $value->pokrytie,
+                        28 => $value->type,
+                        // 1 => minimum,
                     ]
                     
                 ];
@@ -45,10 +66,12 @@ class ExcellController extends Controller
                 foreach($arr as $item) {
                     $product = new Product();
                     $product->title = $item['title'];
-                    $product->category_id = 1;
+                    $product->category_id = 1326;
                     $product->status = 1;
                     $product->quantity = $item['quantity'];
                     $product->article = $item['article'];
+                    $product->minimum = $item['minimum'];
+                    $product->price = random_int(300, 700) * 50;
                     $product->save();
 
                     foreach($item['filters'] as $key=>$filter) {
@@ -57,7 +80,7 @@ class ExcellController extends Controller
                             if(isset($value)) {
                                 $value->products()->attach($product->id);
                             } else {
-                                $value = new Value;
+                                $value = new Value();
                                 $value->name = $filter;
                                 $value->filter_id = $key;
                                 $value->save();
@@ -65,10 +88,6 @@ class ExcellController extends Controller
                             }
                         }
                     }
-                        
-
-                    
-                    
 
                 }
                 Product::insert($arr);

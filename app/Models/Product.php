@@ -25,10 +25,10 @@ class Product extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['title', 'meta_description', 'slug', 'image', 'content', 'price', 'article', 'code', 'quantity', 'api_id_product', 'api_id_category', 'status'];
+    protected $fillable = ['title', 'meta_description', 'slug', 'image', 'content', 'price', 'article', 'code', 'quantity', 'api_id_product', 'api_id_category', 'status', 'custom_name', 'packaging', 'minimum'];
     // protected $hidden = [];
     // protected $dates = [];
-    protected $appends = ['brand', 'page_views'];
+    protected $appends = ['brand'];
 
     /*
     |--------------------------------------------------------------------------
@@ -84,12 +84,23 @@ class Product extends Model
     */
     public function category()
     {
-        return $this->belongsTo('App\Models\ProductCategory', 'category_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
     public function values()
     {
         return $this->belongsToMany('App\Models\Value');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product', 'produce_product', 'product_id', 'produce_id');
+    }
+    public function produces()
+    {
+        return $this->belongsToMany('App\Models\Product', 'produce_product', 'produce_id', 'product_id');
+    }
+ 
+    
 
     public function reviews() {
         return $this->hasMany('App\Models\Review', 'product_id');

@@ -2,7 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\View\View;
 
 
@@ -11,7 +11,7 @@ class MenuComposer
 {
     private $menu;
 
-    public function __construct(ProductCategory $items)
+    public function __construct(Category $items)
     {
         $this->menu = $items;
 

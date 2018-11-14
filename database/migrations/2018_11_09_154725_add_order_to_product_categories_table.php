@@ -13,8 +13,8 @@ class AddOrderToProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
-            $table->integer('parent_id')->unsigned()->nullable();
+        Schema::table('categories', function (Blueprint $table) {
+            
             $table->integer('lft')->unsigned()->nullable();
             $table->integer('rgt')->unsigned()->nullable();
             $table->integer('depth')->unsigned()->nullable();
@@ -28,7 +28,7 @@ class AddOrderToProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             //
         });
     }

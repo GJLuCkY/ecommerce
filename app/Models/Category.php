@@ -6,7 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class ProductCategory extends Model
+class Category extends Model
 {
     use CrudTrait, Sluggable;
 
@@ -16,7 +16,7 @@ class ProductCategory extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'product_categories';
+    protected $table = 'categories';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
@@ -24,7 +24,7 @@ class ProductCategory extends Model
                             'lft',
                             'depth',
                             'parent_id',
-                            'rgt'];
+                            'rgt', 'custom_name'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -69,11 +69,20 @@ class ProductCategory extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function categories() {
+        return $this->hasMany('App\Models\Category', 'parent_id');
+    }
+
     public function products() {
         return $this->hasMany('App\Models\Product', 'category_id');
     }
-    public function filters() {
-        return $this->hasMany('App\Models\Filter', 'category_id');
+    // public function filters() {
+    //     return $this->hasMany('App\Models\Filter', 'category_id');
+    // }
+
+    public function filters()
+    {
+        return $this->belongsToMany('App\Models\Filter');
     }
 
 

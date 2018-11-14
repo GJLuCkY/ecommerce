@@ -217,19 +217,23 @@
                                   </a>
                                 </div>
                                 <div class="bs-catalog__hitText">
-                                    <p>3-х слойная паркетная доска</p>
+                                    <p>{{ $category->custom_name .' '. $item->brand->name }}</p>
                                     <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
                                         <h6>{{ $item->title }}</h6>
                                     </a>
                                 </div>
                             </div>
                            
-                            <p class="bs-catalog__size">10 000 кв.м</p>
-                            <a href="{{ route('addToCart', ['id' => $item->id]) }}" class="bs-catalog__add">
-                                <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">
-                               
-                                Добавить в корзину
-                               </a>
+                            <p class="bs-catalog__size">{{ number_format($item->price, null, ',', ' ') }} ₸</p>
+                            <form action="{{ route('addToCart') }}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                <button type="submit" class="bs-catalog__add">
+                                    <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                    Добавить в корзину
+                                </button>
+                            </form>
+                            
                             <div class="bs-catalog__compare">
                                 <ul>
                                     <star-rating :rating={{ $item->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>

@@ -14,14 +14,20 @@
                     </ul>
                 </div>
                 @foreach(Cart::content()->toArray() as $product)
+                {{-- {{ dd($product) }} --}}
                 <div class="row bs-basket__row">
                     <div class="col-sm-1 bs-basket__img">
                         <img src="{{ (isset($product['options']['image']) && strlen($product['options']['image']) > 1) ? $product['options']['image'] : '/images/not-found.png' }}" class="bs-advice__img">
                     </div>
                     <div class="col-sm-6 bs-basket__bigCol">
                         <p class="bs-basket__about">{{ $product['name'] }}
-                            <br>3-х слойная паркетная доска
-                            <br>KRONOTEX
+                            <br>{{ $product['options']['brand']['name'] }}
+                            <br>{{ $product['options']['category'] }}
+                            @if(count($product['options']['equipments']) > 0)
+                            @foreach($product['options']['equipments'] as $key=>$item)
+                                <li>{{ $item['name'] }} </li>
+                            @endforeach
+                        @endif
                         </p>
                     </div>
                     <div class="col-sm-3 bs-basket__qual">

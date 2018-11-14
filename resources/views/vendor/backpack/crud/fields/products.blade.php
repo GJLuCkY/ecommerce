@@ -23,7 +23,7 @@
                 </tr>
                 @foreach($field['value'] as $product)
 
-                <tr>
+                <tr style="background: #46d493">
                     <td>
                         {{ $product->name }}
                     </td>
@@ -35,6 +35,24 @@
                         {{ number_format($product->price, 2, ',', ' ') }} ₸
                     </td>
                 </tr>
+                
+                @if(count((array)$product->options->equipments) > 0)
+                @foreach($product->options->equipments as $key=>$item)
+              
+                <tr>
+                    <td>
+                        {{ $item->name }}
+                    </td>
+
+                    <td>
+                        Комплектация ↑
+                    </td>
+                    <td>
+                        -
+                    </td>
+                </tr>
+                @endforeach
+                @endif
                 @endforeach
             </table>
             

@@ -889,12 +889,12 @@ $(document).ready(function () {
       }
     };
 
-    if (send) {
-      send.onclick = function () {
-        modal.style.display = "none";
-        setTimeout(TimeOut, 3000);
-      };
-    }
+    // if (send) {
+    //   send.onclick = function () {
+    //     modal.style.display = "none";
+    //     setTimeout(TimeOut, 3000);
+    //   };
+    // }
 
     function TimeOut() {
       pop.style.display = "none";

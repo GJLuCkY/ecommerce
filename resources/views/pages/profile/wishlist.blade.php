@@ -29,7 +29,7 @@
                     <p class="have">Товар в наличии</p>
                     <p class="haveNot">Товара нет в наличии</p>
                     <p class="bs-profile__fav-cost">
-                    <label>Цена:</label> {{ $product->product->price }}.
+                    <label>Цена:</label> {{ number_format($product->product->price, null, ',', ' ') }} ₸
                     </p>
                     <p class="bs-profile__fav-date">
                     <label>Добавлен:</label> {{ $product->created_at }}

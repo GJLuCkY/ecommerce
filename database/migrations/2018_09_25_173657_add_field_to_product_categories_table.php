@@ -13,7 +13,7 @@ class AddFieldToProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             $table->string('article')->nullable();
             $table->string('code')->nullable();
             $table->string('code_parent')->nullable();
@@ -28,7 +28,7 @@ class AddFieldToProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             //
         });
     }

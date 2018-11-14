@@ -47,7 +47,7 @@ class CheckoutController extends Controller
         $order->total_price = Cart::total();
         $order->save();
         // $order->products()->attach(array_keys($productsId));
-        
+        Cart::destroy();
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
         return redirect()->route('homepage');
     }

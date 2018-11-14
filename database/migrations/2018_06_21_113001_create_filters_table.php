@@ -17,7 +17,7 @@ class CreateFiltersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('product_categories');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('slug')->nullable();
             $table->timestamps();
         });

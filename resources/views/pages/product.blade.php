@@ -51,34 +51,30 @@
                         
                     </div>
                     <div class="col-sm-4 bs-podlozhka__col">
-                        <h6 class="bs-podlozhka__name">Дуб Мокко</h6>
-                        <p class="bs-podlozhka__p">3-х слойная паркетная доска</p>
-                        <h3 class="bs-podlozhka__cost">5000 тг / полотно</h3>
-                        <h3 class="bs-podlozhka__cost">7000 тг / с коробкой</h3>
-                        <h6 class="bs-podlozhka__quan">Комплектация</h6>
-                        <div class="bs-order__box">
-                            <label class="bs-order__checkLabel">
-                                <input type="checkbox" name="check" checked=""> с коробкой
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="bs-order__checkLabel">
-                                <input type="checkbox" name="check"> Наличник 1 сторона
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="bs-order__checkLabel">
-                                <input type="checkbox" name="check"> Наличник 2 стороны
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="bs-order__checkLabel">
-                                <input type="checkbox" name="check"> Добор 10 см
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bs-podlozhka__buttons">
-                            <button class="bs-podlozhka__calc">Калькулятора расчета</button>
-                            <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-podlozhka__add">Добавить в корзину</a>
-                        </div>
-                        <p class="bs-podlozhka__p">Минимальный закуп 1 упаковка</p>
+                        <form action="{{ route('addToCart') }}" method="post">
+                            {!! csrf_field() !!}
+                            <h6 class="bs-podlozhka__name">{{ $product->title }}</h6>
+                            <p class="bs-podlozhka__p">3-х слойная паркетная доска</p>
+                            <h3 class="bs-podlozhka__cost">5000 тг / полотно</h3>
+                            <h3 class="bs-podlozhka__cost">7000 тг / с коробкой</h3>
+                            @if(count($equipment) > 0)
+                            <h6 class="bs-podlozhka__quan">Комплектация</h6>
+                            <div class="bs-order__box">
+                                @foreach($equipment as $item)
+                                <label class="bs-order__checkLabel">
+                                <input type="checkbox" name="equipment[]" value="{{ $item->id }}">{{ $item->title }}
+                                    <span class="checkmark"></span>
+                                </label>
+                                @endforeach
+                            </div>
+                            @endif
+                            <div class="bs-podlozhka__buttons">
+                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                <button class="bs-podlozhka__calc">Калькулятора расчета</button>
+                                <button type="submit" class="bs-podlozhka__add">Добавить в корзину</button>
+                            </div>
+                            <p class="bs-podlozhka__p">Минимальный закуп 1 упаковка</p>
+                        </form>
                     </div>
                     
                 </div>

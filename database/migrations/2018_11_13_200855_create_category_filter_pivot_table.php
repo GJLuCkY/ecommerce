@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRelationToProductsTable extends Migration
+class CreateCategoryFilterPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddRelationToProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->unsignedInteger('category_id')->nullable();
+        Schema::create('category_filter', function (Blueprint $table) {
+            $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('filter_id')->unsigned()->index();
+            $table->foreign('filter_id')->references('id')->on('filters')->onDelete('cascade');
+            $table->primary(['category_id', 'filter_id']);
         });
     }
 
@@ -26,8 +29,6 @@ class AddRelationToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('category_filter');
     }
 }

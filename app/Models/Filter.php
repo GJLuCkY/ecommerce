@@ -43,12 +43,17 @@ class Filter extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function category()
-    {
-        return $this->belongsTo('App\Models\ProductCategory', 'category_id');
-    }
+    // public function category()
+    // {
+    //     return $this->belongsTo('App\Models\Category', 'category_id');
+    // }
     public function values() {
         return $this->hasMany('App\Models\Value', 'filter_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category');
     }
 
     /*

@@ -7,7 +7,7 @@
 <li class="treeview">
     <a href="#"><i class="fa fa-newspaper-o"></i> <span>Новости</span> <i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-        <li><a href="{{ backpack_url('category') }}"><i class="fa fa-list"></i> <span>Категории</span></a></li>
+        {{-- <li><a href="{{ backpack_url('category') }}"><i class="fa fa-list"></i> <span>Категории</span></a></li> --}}
         <li><a href="{{ backpack_url('article') }}"><i class="fa fa-newspaper-o"></i> <span>Новости</span></a></li>
         <li><a href="{{ backpack_url('tag') }}"><i class="fa fa-tag"></i> <span>Тэги</span></a></li>
 
@@ -19,7 +19,7 @@
 <li class="treeview">
     <a href="#"><i class="fa fa-newspaper-o"></i> <span>Номенклатура</span> <i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-        <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product-category') }}"><i class="fa fa-list"></i> <span>Категории</span></a></li>
+        <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/category') }}"><i class="fa fa-list"></i> <span>Категории</span></a></li>
         <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/product') }}"><i class="fa fa-list"></i> <span>Продукты</span></a></li>
         <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/review') }}"><i class="fa fa-list"></i> <span>Отзывы</span></a></li>
         <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/order') }}"><i class="fa fa-list"></i> <span>Заказы</span></a></li>

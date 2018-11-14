@@ -12,7 +12,7 @@
             <div class="row bs-basket--rel"  style="margin-bottom: 60px">
                 <div class="col-sm-9 bs-basket-9">
                     <h5 class="bs-basket__heading"> <span><a href="{{ route('homepage') }}"><img src="/images/back.png" alt="back"></a></span> ВАША КОРЗИНА <span class="count">({{ Cart::count() > 0 ? Cart::count() : '' }})</span></h5>
-                    
+                    {{-- {{ dd(Cart::content()->toArray()) }} --}}
                     @foreach(Cart::content()->toArray() as $product)
                         {{-- {{ dd($product) }} --}}
                     <div class="row bs-basket__row">
@@ -22,10 +22,18 @@
                         </div>
                         <div class="col-sm-4 bs-basket__bigCol">
                             <p class="bs-basket__about">{{ $product['name'] }}
-                                <br>3-х слойная паркетная доска
-                                <br>{{ $product['name'] }}
+                                <br>{{ $product['options']['category'] . ' ' . $product['options']['brand']['name'] }}
+                               
                             </p>
+                            <ul>
+                                @if(count($product['options']['equipments']) > 0)
+                                    @foreach($product['options']['equipments'] as $key=>$item)
+                                        <li>{{ $item['name'] }} </li>
+                                    @endforeach
+                                @endif
+                            </ul>
                         </div>
+                       
                         <div class="col-sm-3 bs-basket__qual">
                             {{-- <h6 class="bs-basket__title">Количество</h6> --}}
                             <div class="bs-basket__counter">

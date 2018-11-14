@@ -33,28 +33,28 @@ class FilterCrudController extends CrudController
             'label' => 'Фильтры'
         ]);
 
-        $this->crud->addColumn([
-            'name' => 'category_id',
-            'label' => 'Категория',
-            'type' => 'select',
-            'entity' => 'category', // the method that defines the relationship in your Model
-            'attribute' => "title", // foreign key attribute that is shown to user
-            'model' => "App\Models\ProductCategory", // foreign key model
-        ]);
+        // $this->crud->addColumn([
+        //     'name' => 'category_id',
+        //     'label' => 'Категория',
+        //     'type' => 'select',
+        //     'entity' => 'category', // the method that defines the relationship in your Model
+        //     'attribute' => "title", // foreign key attribute that is shown to user
+        //     'model' => "App\Models\Category", // foreign key model
+        // ]);
 
         $this->crud->addField([
             'name' => 'name',
             'label' => 'Название фильтра'
         ]);
 
-        $this->crud->addField([
-            'label' => "Категория фильтра",
-            'type' => 'select',
-            'name' => 'category_id', // the db column for the foreign key
-            'entity' => 'category', // the method that defines the relationship in your Model
-            'attribute' => 'title', // foreign key attribute that is shown to user
-            'model' => "App\Models\ProductCategory" // foreign key model
-        ]);
+        // $this->crud->addField([
+        //     'label' => "Категория фильтра",
+        //     'type' => 'select',
+        //     'name' => 'category_id', // the db column for the foreign key
+        //     'entity' => 'category', // the method that defines the relationship in your Model
+        //     'attribute' => 'title', // foreign key attribute that is shown to user
+        //     'model' => "App\Models\Category" // foreign key model
+        // ]);
 
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');

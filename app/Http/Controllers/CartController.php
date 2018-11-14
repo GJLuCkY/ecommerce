@@ -19,10 +19,32 @@ class CartController extends Controller
         return view('pages.cart');
     }
 
-    public function getAddToCart(Request $request, $id) {
+    public function getAddToCart(Request $request) {
+        
+        $id = $request->get('id');
+        $data = [];
+        $amount = 0;
+        if(!empty($request->get('equipment'))) {
+            $equipments = $request->get('equipment');
+            $products = Product::whereIn('id', $equipments)->select('id', 'title', 'quantity', 'price', 'image')->get()->toArray();
+            foreach($products as $key=>$product) {
+                $amount += $product['price'];
+                $data[$product['id']] = [
+                    'name' => $product['title'],
+                    'price' => $product['price'],
+                    'image' => isset($product['image']) ? asset('uploads/' . $product['image']) : ''
+                ];
+            }
+            
+        }
+        if(empty($id)) {
+            Toastr::warning('', 'Что-то пошло не так!', ["positionClass" => "toast-top-right"]);
+            return redirect()->back();
+        }
+        
         $product = Product::find($id);
         $image = isset($product->image) ? asset('uploads/' . $product->image) : '';
-        Cart::add($product->id, $product->title, 1, $product->price, ['image' => $image])->associate('App\\Models\\Product');
+        Cart::add($product->id, $product->title, 1, $product->price + $amount, ['image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name])->associate('App\\Models\\Product');
         // Cart::destroy();
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
         return redirect()->back();

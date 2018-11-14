@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\ProductCategoryRequest as StoreRequest;
-use App\Http\Requests\ProductCategoryRequest as UpdateRequest;
+use App\Http\Requests\CategoryRequest as StoreRequest;
+use App\Http\Requests\CategoryRequest as UpdateRequest;
 
-class ProductCategoryCrudController extends CrudController
+class CategoryCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,9 +18,9 @@ class ProductCategoryCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\ProductCategory');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/product-category');
-        $this->crud->setEntityNameStrings('product_category', 'product_categories');
+        $this->crud->setModel('App\Models\Category');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/category');
+        $this->crud->setEntityNameStrings('category', 'categories');
 
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('title', 3);
@@ -45,6 +45,11 @@ class ProductCategoryCrudController extends CrudController
             'name' => 'title',
             'label' => 'Название категории'
         ]);
+
+        $this->crud->addField([
+            'name' => 'custom_name',
+            'label' => 'Пользовательское имя'
+        ]);
         $this->crud->addField([
             'name' => 'meta_description',
             'label' => 'Meta-описание для SEO',
@@ -56,6 +61,16 @@ class ProductCategoryCrudController extends CrudController
             'type' => 'text',
             'hint' => 'URL-страницы (Генерируется автоматически)',
             // 'disabled' => 'disabled'
+        ]);
+
+        $this->crud->addField([
+            'label' => "Фильтры",
+            'type' => 'select2_multiple',
+            'name' => 'filters', // the method that defines the relationship in your Model
+            'entity' => 'filters', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Filter", // foreign key model
+            'pivot' => true,
         ]);
         $this->crud->addField([
             'name' => 'status',

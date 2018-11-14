@@ -13,7 +13,7 @@ class AddFieldToProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             $table->boolean('status')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddFieldToProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             //
         });
     }

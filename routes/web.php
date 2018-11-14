@@ -14,7 +14,7 @@ Route::post('excel', 'ExcellController@importExcell')->name('importExcel');
 Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin'], 'namespace' => 'Admin'], function()
 {
     CRUD::resource('product', 'ProductCrudController');
-    CRUD::resource('product-category', 'ProductCategoryCrudController');
+    CRUD::resource('category', 'CategoryCrudController');
     CRUD::resource('menu-item', 'MenuItemCrudController');
 
     CRUD::resource('order', 'OrderCrudController');
@@ -59,7 +59,7 @@ Route::auth();
 
 // Корзина
 Route::get('/cart', 'CartController@cart')->name('cart');
-Route::get('/add-to-cart/{id}', 'CartController@getAddToCart')->name('addToCart');
+Route::post('/add-to-cart', 'CartController@getAddToCart')->name('addToCart');
 Route::get('/remove-to-cart/{id}', 'CartController@removeToCart')->name('removeToCart');
 Route::post('/cart-change-quantity', 'CartController@cartChangeQuantity')->name('cart.change.quantity');
 
@@ -110,11 +110,6 @@ Route::post('/review', 'CategoryController@review')->name('review');
 
 // Подписаться
 Route::post('/subscribe', 'SubscribeController@subscribe')->name('subscribe');
-
-
-
-
-
 
 Auth::routes();
 
