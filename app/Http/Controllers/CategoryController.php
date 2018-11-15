@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Filters\ProductFilter;
 use App\Models\Product;
+use App\Models\Filter;
 use SEO;
 use App\Models\Review;
 use Toastr;
@@ -16,9 +17,18 @@ class CategoryController extends Controller
 {
     public function category($catSlug, ProductFilter $filters) 
     {
-        $category = Category::where('status', 1)->where('slug', $catSlug)->with(['filters' => function ($query) {
-            $query->with('values');
+        $cat = Category::where('status', 1)->where('slug', $catSlug)->firstOrFail();
+        $id = $cat->id;
+
+        $category = Category::where('status', 1)->where('slug', $catSlug)->with(['filters' => function ($query) use ($id) {
+            $query->with(['values'=> function($q) use ($id) {
+                $q->whereHas('products', function($qu) use ($id) {
+                    $qu->where('category_id', $id);
+                });
+            }]);
         }])->firstOrFail();
+
+
         $ids = $category->categories->pluck('id')->toArray();
         array_push($ids, $category->id);
         $query = Product::query()->whereIn('category_id', $ids)->where('status', 1);

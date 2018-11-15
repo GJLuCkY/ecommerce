@@ -55,14 +55,14 @@
                             {!! csrf_field() !!}
                             <h6 class="bs-podlozhka__name">{{ $product->title }}</h6>
                             <p class="bs-podlozhka__p">3-х слойная паркетная доска</p>
-                            <h3 class="bs-podlozhka__cost">5000 тг / полотно</h3>
-                            <h3 class="bs-podlozhka__cost">7000 тг / с коробкой</h3>
+                            <h3 class="bs-podlozhka__cost"><span>{{ $product->price }}</span> тг / полотно</h3>
+                        <h3 class="bs-podlozhka__cost"><span id="price2">{{ $product->price }}</span> тг / с коробкой</h3>
                             @if(count($equipment) > 0)
                             <h6 class="bs-podlozhka__quan">Комплектация</h6>
                             <div class="bs-order__box">
                                 @foreach($equipment as $item)
                                 <label class="bs-order__checkLabel">
-                                <input type="checkbox" name="equipment[]" value="{{ $item->id }}">{{ $item->title }}
+                                <input type="checkbox" name="equipment[]" class="subproducts" value="{{ $item->id }}" data-price="{{ $item->price }}">{{ $item->title }}
                                     <span class="checkmark"></span>
                                 </label>
                                 @endforeach
@@ -435,5 +435,16 @@
             </div>
         </div>
     </article>
+    <script>
+            var summ = {{ $product->price }};
+            $(document).ready(function() {
+                $(document).on("change", ".subproducts", function() {
+                    summ+=((this.checked?1:-1)*$(this).data('price'));
+                    
+                    $("#price2").html(summ);
+                });
+            });
+    
+        </script>
 @endsection
 
