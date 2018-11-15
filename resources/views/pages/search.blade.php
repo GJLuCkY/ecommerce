@@ -40,38 +40,50 @@
                         </div> --}}
                     </div>
                     @if(count($products) > 0)
-                    @foreach($products->chunk(5) as $chunk)
+                    @foreach($products->chunk(4) as $chunk)
                     <div class="bs-laminat__hits row">
                         @foreach($chunk as $item)
                         <div class="col-sm-3 bs-catalog__hit">
-                            <div class="bs-catalog__hitImg">
-                                <a href="{{ route('product', ['catSlug' => $item->category->slug, 'prodSlug' => $item->slug]) }}">
-                                    <img src="{{ asset('uploads/' . $item->image) }}" alt="Дуб">
-                                </a>
-                                <a class="back-wishlist" href="{{ route('wishlist', ['id' => $item->id]) }}">
-                                    <img src="{{ asset('images/fav.svg') }}" alt="favorite">
-                                </a>
-                                <div class="bs-catalog__hitText">
-                                    <p>3-х слойная паркетная доска</p>
+                                <div class="bs-catalog__hitImg">
                                     <a href="{{ route('product', ['catSlug' => $item->category->slug, 'prodSlug' => $item->slug]) }}">
-                                        <h6>{{ $item->title }}</h6>
+                                        <img src="{{ (isset($item->image)) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{ $item->title }}">
                                     </a>
+                                    <a class="back-wishlist" href="{{ route('wishlist', ['id' => $item->id]) }}">
+                                        <img src="{{ asset('images/fav.svg') }}" alt="favorite">
+                                    </a>
+                                    <div class="bs-catalog__mob-buttons row">
+                                      <a href="{{ route('wishlist', ['id' => $item->id]) }}" class="mob-wishlist">
+                                        <img src="/images/heart.svg" alt="favorite">
+                                      </a>
+                                      <a href="{{ route('wishlist', ['id' => $item->id]) }}" class="mob-wishlist">
+                                        <img src="/images/basket.svg" alt="favorite">
+                                      </a>
+                                    </div>
+                                    <div class="bs-catalog__hitText">
+                                        <p>{{ isset($item->category->custom_name) ? $item->category->custom_name : $item->category->title }} {{ $item->brand->name }}</p>
+                                        <a href="{{ route('product', ['catSlug' => $item->category->slug, 'prodSlug' => $item->slug]) }}">
+                                            <h6>{{ $item->title }}</h6>
+                                        </a>
+                                    </div>
+                                </div>
+                               
+                                <p class="bs-catalog__size">{{ number_format($item->price, null, ',', ' ') }} ₸</p>
+                                <form action="{{ route('addToCart') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <button type="submit" class="bs-catalog__add">
+                                        <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                        Добавить в корзину
+                                    </button>
+                                </form>
+                                
+                                <div class="bs-catalog__compare">
+                                    <ul>
+                                        <star-rating :rating={{ $item->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
+                                        <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            
-                            <p class="bs-catalog__size">10 000 кв.м</p>
-                            <a href="{{ route('addToCart', ['id' => $item->id]) }}" class="bs-catalog__add">
-                                <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">
-                               
-                                Добавить в корзину
-                               </a>
-                            <div class="bs-catalog__compare">
-                                <ul>
-                                    <star-rating :rating={{ $item->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
-                                    <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                </ul>
-                            </div>
-                        </div>
                         @endforeach
                     </div>
                     @endforeach

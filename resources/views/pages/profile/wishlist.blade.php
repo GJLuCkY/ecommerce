@@ -10,6 +10,7 @@
             <h4 class="bs-profile__head">Избранное</h4>
            
             @foreach($wishlist as $product)
+            {{-- {{ dd($wishlist) }} --}}
             @if(isset($product->product))
             <div class="bs-profile__fav">
               <div class="row">
@@ -26,16 +27,25 @@
                 </div>
                 <div class="col-sm-9">
                 <p class="bs-profile__fav-text">{{ $product->product->title }}</p>
+                    @if($product->product->quantity > 0)
                     <p class="have">Товар в наличии</p>
+                    @else
                     <p class="haveNot">Товара нет в наличии</p>
+                    @endif
                     <p class="bs-profile__fav-cost">
                     <label>Цена:</label> {{ number_format($product->product->price, null, ',', ' ') }} ₸
                     </p>
                     <p class="bs-profile__fav-date">
                     <label>Добавлен:</label> {{ $product->created_at }}
                     </p>
-                    <a href="{{ route('addToCart', ['id' => $product->product->id]) }}" class="bs-catalog__add">
-                    <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                    <form action="{{ route('addToCart') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ $product->product->id }}">
+                            <button type="submit" class="bs-catalog__add">
+                                <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                Добавить в корзину
+                            </button>
+                        </form>
                 </div>
                 <div class="col-sm-1">
                     <a href="{{ route('wishlist.remove', ['id' => $product->product->id]) }}" class="bs-profile__fav-delete">

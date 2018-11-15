@@ -23,7 +23,7 @@
                                 <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
                             </div>
                             <div class="col-sm-7">
-                                <p class="bs-podlozhka__desc">Артикул: <span> 18343378</span></p>
+                            <p class="bs-podlozhka__desc">Артикул: <span> {{ $product->article }}</span></p>
                            
                                 @foreach($product->values as $filter)
                               <p class="bs-podlozhka__desc">{{$filter->filter->name}}: <span> {{ $filter->name }}</span></p>
@@ -53,27 +53,46 @@
                     <div class="col-sm-4 bs-podlozhka__col">
                         <form action="{{ route('addToCart') }}" method="post">
                             {!! csrf_field() !!}
-                            <h6 class="bs-podlozhka__name">{{ $product->title }}</h6>
-                            <p class="bs-podlozhka__p">3-х слойная паркетная доска</p>
-                            <h3 class="bs-podlozhka__cost"><span>{{ $product->price }}</span> тг / полотно</h3>
-                        <h3 class="bs-podlozhka__cost"><span id="price2">{{ $product->price }}</span> тг / с коробкой</h3>
-                            @if(count($equipment) > 0)
+                            <h3 class="bs-podlozhka__cost"><span>{{ $product->price }}</span> ₸ / 
+                            
+                            @if($product->type == 'polotno')
+                            полотно
+                            @elseif($product->type == 'thing')
+                            шт.
+                            @else
+                            за уп.
+                            @endif
+
+                            </h3>
+                            @if($product->type == 'polotno')
                             <h6 class="bs-podlozhka__quan">Комплектация</h6>
-                            <div class="bs-order__box">
-                                @foreach($equipment as $item)
-                                <label class="bs-order__checkLabel">
-                                <input type="checkbox" name="equipment[]" class="subproducts" value="{{ $item->id }}" data-price="{{ $item->price }}">{{ $item->title }}
-                                    <span class="checkmark"></span>
-                                </label>
-                                @endforeach
+                            @elseif($product->type == 'thing')
+                            <h6 class="bs-podlozhka__quan">Количество в штуках</h6>
+                            @else
+                            <h6 class="bs-podlozhka__quan">Количество упаковок</h6>
+                            @endif
+                            @if($product->type !== 'polotno')
+                            <div class="quantity">
+                            <input type="number" min="1" max="{{ $product->quantity }}" step="1" value="1" name="quantity" id="quantity-change"><div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>
+                                <span class="bs-podlozhka__equal">=</span>
+                                <div class="bs-podlozhka__plintus">
+                                    <h6 class="bs-podlozhka__plintus-area" ><span id="packaging-summa-izm">{{ $product->packaging }}</span> м</h6>
+                                <p class="bs-podlozhka__plintus-pay">(<span id="packaging-summa">{{ number_format($product->price, 0, ',', ' ') }}</span> ₸)</p>
+                                </div>
                             </div>
                             @endif
+                                  
+                            @include('partials.equipment')
                             <div class="bs-podlozhka__buttons">
                             <input type="hidden" name="id" value="{{ $product->id }}">
+                                @if($product->type !== 'polotno')
                                 <button class="bs-podlozhka__calc">Калькулятора расчета</button>
+                                @endif
                                 <button type="submit" class="bs-podlozhka__add">Добавить в корзину</button>
                             </div>
+                            @if($product->type == 'package')
                             <p class="bs-podlozhka__p">Минимальный закуп 1 упаковка</p>
+                            @endif
                         </form>
                     </div>
                     
@@ -112,7 +131,7 @@
                                 </select> -->
                                 <label class="bs-podlozhka__review-label">Поставьте оценку:</label>
                                 <star-rating inactive-color="#fff" :border-width="3"></star-rating>
-                                <input type="hidden" value="" name="stars">
+                                <input type="hidden" value="1" name="stars" id="review-stars">
                                 <button type="submit">Отправить</button>
                             </form>
                         </div>
@@ -251,149 +270,47 @@
                 <div class="row">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-7">
+                        @if(count($otherProducts) > 0)
                         <div class="row bs-catalog__hits">
                             <h5 class="bs-catalog__head">С этим товаром покупают</h5>
                             <div class="hits">
+                                @foreach($otherProducts as $otherProduct)
                                 <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="/images/mochaDub.png" alt="Дуб">
-                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Мокко</h6>
+                                        <div class="bs-catalog__hitImg">
+                                            <a href="{{ route('product', ['catSlug' => $otherProduct->category->slug, 'prodSlug' => $otherProduct->slug]) }}">
+                                                <img src="{{ (isset($otherProduct->image)) ? asset('uploads/' . $otherProduct->image) : '/images/not-found.png' }}" alt="{{ $otherProduct->title }}">
+                                            </a>
+                                            <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
+                                                <img src="/images/fav.svg" alt="favorite">
+                                            </a>
+                                            <div class="bs-catalog__hitText">
+                                                <p>{{ isset($otherProduct->category->custom_name) ? $otherProduct->category->custom_name : $otherProduct->category->title }} {{ $otherProduct->brand->name }}</p>
+                                                <a href="{{ route('product', ['catSlug' => $otherProduct->category->slug, 'prodSlug' => $otherProduct->slug]) }}">
+                                                    <h6>{{ $otherProduct->title }}</h6>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p class="bs-catalog__size">{{ number_format($otherProduct->price, null, ',', ' ') }} ₸</p>
+                                        <form action="{{ route('addToCart') }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="id" value="{{ $otherProduct->id }}">
+                                                <button type="submit" class="bs-catalog__add">
+                                                    <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                                    Добавить в корзину
+                                                </button>
+                                            </form>
+                                        {{-- <a href="{{ route('addToCart', ['id' => $otherProduct->id]) }}" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a> --}}
+                                        <div class="bs-catalog__compare">
+                                            <ul>
+                                                <star-rating :rating={{ $otherProduct->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
+                                                <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="/images/mochaDub.png" alt="Дуб">
-                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Мокко</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="/images/mochaDub.png" alt="Дуб">
-                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Мокко</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="/images/mochaDub.png" alt="Дуб">
-                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Мокко</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="/images/mochaDub.png" alt="Дуб">
-                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Мокко</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="bs-catalog__hit">
-                                    <div class="bs-catalog__hitImg">
-                                        <img src="/images/mochaDub.png" alt="Дуб">
-                                        <a href="" class="back-wishlist"><img src="/images/fav.svg" alt="favorite"></a>
-                                        <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
-                                            <h6>Дуб Мокко</h6>
-                                        </div>
-                                    </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
-                                    <div class="bs-catalog__compare">
-                                        <ul>
-                                            <li class="bs-catalog__like active"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__like"><a href=""></a></li>
-                                            <li class="bs-catalog__cm"><a href="">Сравнить товар</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
+                        @endif
                         @if(count($similarProducts) > 0)
                         <div class="row bs-catalog__news">
                             <h5 class="bs-catalog__head">Похожие товары</h5>
@@ -408,14 +325,22 @@
                                             <img src="/images/fav.svg" alt="favorite">
                                         </a>
                                         <div class="bs-catalog__hitText">
-                                            <p>3-х слойная паркетная доска</p>
+                                            <p>{{ isset($similarProduct->category->custom_name) ? $similarProduct->category->custom_name : $similarProduct->category->title }} {{ $similarProduct->brand->name }}</p>
                                             <a href="{{ route('product', ['catSlug' => $similarProduct->category->slug, 'prodSlug' => $similarProduct->slug]) }}">
                                                 <h6>{{ $similarProduct->title }}</h6>
                                             </a>
                                         </div>
                                     </div>
-                                    <p class="bs-catalog__size">10 000 кв.м</p>
-                                    <a href="{{ route('addToCart', ['id' => $similarProduct->id]) }}" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a>
+                                    <p class="bs-catalog__size">{{ number_format($similarProduct->price, null, ',', ' ') }} ₸</p>
+                                    <form action="{{ route('addToCart') }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="id" value="{{ $similarProduct->id }}">
+                                            <button type="submit" class="bs-catalog__add">
+                                                <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                                Добавить в корзину
+                                            </button>
+                                        </form>
+                                    {{-- <a href="{{ route('addToCart', ['id' => $similarProduct->id]) }}" class="bs-catalog__add"><img src="/images/basket.svg" alt="basket" class="bs-catalog__basket"> Добавить в корзину</a> --}}
                                     <div class="bs-catalog__compare">
                                         <ul>
                                             <star-rating :rating={{ $similarProduct->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
@@ -435,16 +360,63 @@
             </div>
         </div>
     </article>
-    <script>
-            var summ = {{ $product->price }};
-            $(document).ready(function() {
-                $(document).on("change", ".subproducts", function() {
-                    summ+=((this.checked?1:-1)*$(this).data('price'));
-                    
-                    $("#price2").html(summ);
-                });
-            });
-    
-        </script>
+
 @endsection
 
+
+@section('after_jquery')
+<script>
+        var summ = {{ $product->price }};
+       
+            $(document).on("change", ".subproducts", function() {
+                summ+=((this.checked?1:-1)*$(this).data('price'));
+                
+                $("#price2").html(summ);
+            });
+            
+
+            var summa = 0;
+            var izm = {{ isset($product->packaging) ? $product->packaging : 1 }}
+            $(document).on("change", "#quantity-change", function() {
+                $("#packaging-summa-izm").html(Math.round(this.value * izm * 1000) / 1000);
+                summa = this.value * {{ $product->price }}
+                $("#packaging-summa").html(number_format(summa, 0, ',', ' '));
+            });
+
+            $(document).on("click", ".vue-star-rating-pointer", function() {
+                var rating = $('.vue-star-rating-rating-text').html();
+                $('#review-stars').val(rating);
+                console.log($('#review-stars').val());
+            });
+   
+
+    </script>
+
+
+<script>
+function number_format (number, decimals, dec_point, thousands_sep) {
+    // Strip all characters but numerical ones.
+    number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+    var n = !isFinite(+number) ? 0 : +number,
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function (n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+        };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
+}
+
+</script>
+    @endsection

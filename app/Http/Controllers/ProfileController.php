@@ -19,6 +19,15 @@ class ProfileController extends Controller
     public function profileWishlist() {
 
         $wishlist = Wishlist::getUserWishlist(1)->load('product');
+        foreach($wishlist as $product) {
+            $id = $product->product_id;
+            // dd($product)
+            if(isset($product->product)) {
+                
+            } else {
+                Wishlist::removeByProduct($id, Auth::user()->id);
+            }
+        }
         SEO::setTitle('Личный кабинет');
         SEO::setDescription('Личный кабинет Etalon Holding');
         return view('pages.profile.wishlist', compact(['wishlist']));

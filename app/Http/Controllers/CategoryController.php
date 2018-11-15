@@ -43,19 +43,25 @@ class CategoryController extends Controller
     public function product($catSlug, $prodSlug) {
         
         $category = Category::where('status', 1)->where('slug', $catSlug)->firstOrFail();
+        // dd($category->pivotCats);
+        $pivotCats = $category->pivotCats->pluck('id');
+        $otherProducts = Product::whereIn('category_id', $pivotCats)->where('status', 1)->inRandomOrder()->take(10)->get();
+        
+
         $product = Product::active()->where('slug', $prodSlug)->with(['reviews' => function($query) {
             $query->where('status', 1);
         }])->firstOrFail();
         $equipment = $product->produces->where('status', 1);
-       
+        
         $product->addView();
         SEO::setTitle($product->title);
         SEO::setDescription($product->meta_description);
         $similarProducts = Product::where('category_id', $category->id)->take(10)->get();
-        return view('pages.product',compact('category', 'product', 'similarProducts', 'equipment'));
+        return view('pages.product',compact('category', 'product', 'similarProducts', 'equipment', 'otherProducts'));
     }
 
     public function review(Request $request) {
+        // dd($request->all());
         $review = new Review();
         $review->content = $request->get('content');
         $review->product_id = $request->get('product_id');

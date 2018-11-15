@@ -1,9 +1,7 @@
 <!-- select2 multiple -->
 
 <?php
-$filters = $field['model']::with(['filter' => function ($query) {
-    $query->with('category');
-}])->get();
+$filters = $field['model']::with(['filter'])->get();
 ?>
 
 <div @include('crud::inc.field_wrapper_attributes') >
@@ -30,9 +28,9 @@ $filters = $field['model']::with(['filter' => function ($query) {
 
 
                     @if( (old($field["name"]) && in_array($connected_entity_entry->getKey(), old($field["name"]))) || (is_null(old($field["name"])) && isset($field['value']) && in_array($connected_entity_entry->getKey(), $field['value']->pluck($connected_entity_entry->getKeyName(), $connected_entity_entry->getKeyName())->toArray())))
-                        <option value="{{ $connected_entity_entry->getKey() }}" selected>{{ $connected_entity_entry->filter->category->title }} -> {{ $connected_entity_entry->filter->name }} -> {{ $connected_entity_entry->{$field['attribute']} }}</option>
+                        <option value="{{ $connected_entity_entry->getKey() }}" selected>{{ $connected_entity_entry->filter->name }} -> {{ $connected_entity_entry->{$field['attribute']} }}</option>
                     @else
-                        <option value="{{ $connected_entity_entry->getKey() }}">{{ $connected_entity_entry->filter->category->title }} -> {{ $connected_entity_entry->filter->name }} -> {{ $connected_entity_entry->{$field['attribute']} }}</option>
+                        <option value="{{ $connected_entity_entry->getKey() }}">{{ $connected_entity_entry->filter->name }} -> {{ $connected_entity_entry->{$field['attribute']} }}</option>
                     @endif
                 @endforeach
             @endif
@@ -138,7 +136,6 @@ $filters = $field['model']::with(['filter' => function ($query) {
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
-                var value = '<span class="filter-value-span">' + obj[2] + '</span>';
 
                 var result = removeHTML + category + filter + value;
                 $(this).html(result);
@@ -156,7 +153,6 @@ $filters = $field['model']::with(['filter' => function ($query) {
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
-                var value = '<span class="filter-value-span">' + obj[2] + '</span>';
 
                 var result = category + filter + value;
                 $(this).html(result);
@@ -172,7 +168,6 @@ $filters = $field['model']::with(['filter' => function ($query) {
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
-                var value = '<span class="filter-value-span">' + obj[2] + '</span>';
 
                 var result = removeHTML + category + filter + value;
                 $(this).html(result);
@@ -186,7 +181,6 @@ $filters = $field['model']::with(['filter' => function ($query) {
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
-                var value = '<span class="filter-value-span">' + obj[2] + '</span>';
 
                 var result = category + filter + value;
                 $(this).html(result);
@@ -202,7 +196,6 @@ $filters = $field['model']::with(['filter' => function ($query) {
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
-                var value = '<span class="filter-value-span">' + obj[2] + '</span>';
 
                 var result = removeHTML + category + filter + value;
                 $(this).html(result);
@@ -216,7 +209,6 @@ $filters = $field['model']::with(['filter' => function ($query) {
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
-                var value = '<span class="filter-value-span">' + obj[2] + '</span>';
 
                 var result = category + filter + value;
                 $(this).html(result);

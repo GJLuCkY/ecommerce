@@ -111,22 +111,31 @@ class ProductCrudController extends CrudController
             'name' => 'minimum',
             'label' => 'Минимальный закуп, упаковка'
         ]);
-        // $this->crud->addField([
-        //     'label' => "Фильтры",
-        //     'type' => 'select_filter_value',
-        //     'name' => 'values', // the method that defines the relationship in your Model
-        //     'entity' => 'values', // the method that defines the relationship in your Model
-        //     'attribute' => 'name', // foreign key attribute that is shown to user
-        //     'model' => "App\Models\Value", // foreign key model
-        //     'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-        //     'placeholder' => "Выберите фильтр", // placeholder for the select
-        //     'placeholder_child' => "Выберите значение фильтра", // placeholder for the select
+        $this->crud->addField([
+            'label' => "Фильтры",
+            'type' => 'select_filter_value',
+            'name' => 'values', // the method that defines the relationship in your Model
+            'entity' => 'values', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Value", // foreign key model
+            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            'placeholder' => "Выберите фильтр", // placeholder for the select
+            'placeholder_child' => "Выберите значение фильтра", // placeholder for the select
 
 
-        //     'data_source' => url("api/filters"), // url to controller search function (with /{id} should return model)
+            'data_source' => url("api/filters"), // url to controller search function (with /{id} should return model)
 
-        //     'minimum_input_length' => 2, // minimum characters to type before querying results
-        // ]);
+            'minimum_input_length' => 2, // minimum characters to type before querying results
+        ]);
+
+
+        $this->crud->addField([
+            'name' => 'type',
+            'label' => "Единица измерения",
+            'type' => 'select_from_array',
+            'options' => ['polotno' => 'Полотно', 'thing' => 'Штука', 'package' => 'Упаковка'],
+            'allows_null' => false,
+        ]);
 
         $this->crud->addField([
             'label' => "Комплектующие",

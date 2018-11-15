@@ -86,6 +86,15 @@ class Category extends Model
     }
 
 
+    public function pivotCategories()
+    {
+        return $this->belongsToMany('App\Models\Category', 'category_cat', 'cat_id', 'category_id');
+    }
+    public function pivotCats()
+    {
+        return $this->belongsToMany('App\Models\Category', 'category_cat', 'category_id', 'cat_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

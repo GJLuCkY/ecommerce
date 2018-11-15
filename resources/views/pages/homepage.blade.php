@@ -64,7 +64,7 @@
                                   </a>
                                 </div>
                                 <div class="bs-catalog__hitText">
-                                    <p>3-х слойная паркетная доска
+                                    <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ $product->brand->name }}
                                     <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
                                     @if(isset($product->brand))
                                     <br> {{ $product->brand->name }} </p>
@@ -72,12 +72,15 @@
                                 </div>
                             </div>
                             
-                            <p class="bs-catalog__size">10 000 кв.м</p>
-                            <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-catalog__add">
-                                <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">
-                               
-                                Добавить в корзину
-                               </a>
+                            <p class="bs-catalog__size">{{ number_format($product->price, null, ',', ' ') }} ₸</p>
+                            <form action="{{ route('addToCart') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <button type="submit" class="bs-catalog__add">
+                                        <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                        Добавить в корзину
+                                    </button>
+                                </form>
                                 
                             <div class="bs-catalog__compare">
                                 <ul>
@@ -114,21 +117,22 @@
                                   </a>
                                 </div>
                                 <div class="bs-catalog__hitText">
-                                        <p>3-х слойная паркетная доска
+                                        <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ $product->brand->name }}
                                         <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
                                         @if(isset($product->brand))
                                         <br> {{ $product->brand->name }} </p>
                                         @endif
                                 </div>
                             </div>
-                            <p class="bs-catalog__size">10 000 кв.м</p>
-                            <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-catalog__add">
-                                <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">
-                               
-                               
-                                Добавить в корзину
-                               
-                            </a>
+                            <p class="bs-catalog__size">{{ number_format($product->price, null, ',', ' ') }} ₸</p>
+                            <form action="{{ route('addToCart') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <button type="submit" class="bs-catalog__add">
+                                        <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                        Добавить в корзину
+                                    </button>
+                                </form>
                             <div class="bs-catalog__compare">
                                 <ul>
                                 <star-rating :rating={{ $product->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>

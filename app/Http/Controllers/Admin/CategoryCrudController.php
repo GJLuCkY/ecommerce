@@ -78,6 +78,16 @@ class CategoryCrudController extends CrudController
             'type' => 'checkbox'
         ]);
 
+        $this->crud->addField([
+            'label' => "С этим товаром покупают",
+            'type' => 'select2_multiple',
+            'name' => 'pivotCats', // the method that defines the relationship in your Model
+            'entity' => 'pivotCats', // the method that defines the relationship in your Model
+            'attribute' => 'title', // foreign key attribute that is shown to user
+            'model' => "App\Models\Category", // foreign key model
+            'pivot' => true,
+        ]);
+
 
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
