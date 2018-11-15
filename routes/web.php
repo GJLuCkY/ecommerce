@@ -2,12 +2,12 @@
 
 
 
-Route::get('/test', function() {
-    return Cart::content();
-
-});
+Route::get('/test', 'PageController@test');
 
 Route::view('excell', 'excell');
+
+Route::view('city', 'test.city');
+
 Route::post('excel', 'ExcellController@importExcell')->name('importExcel');
 
 

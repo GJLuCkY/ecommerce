@@ -86,4 +86,13 @@ class PageController extends Controller
         $values = Value::where('filter_id', 1)->get();
         return view('pages.brand', compact('brand', 'products', 'values'));
     }
+
+    public function test()
+    {
+        $server = $_SERVER['REMOTE_ADDR'];
+        $rrs = file_get_contents("http://api.sypexgeo.net/json/".$server);
+        $obj = json_decode($rrs);
+        dd($obj);
+        $country = $obj->country->name_ru;
+    }
 }
