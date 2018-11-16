@@ -51,7 +51,7 @@ class CategoryController extends Controller
         $product = Product::active()->where('slug', $prodSlug)->with(['reviews' => function($query) {
             $query->where('status', 1);
         }])->firstOrFail();
-        $equipment = $product->produces->where('status', 1);
+        $equipment = $product->produces->where('status', 1)->where('quantity', '>', 0);
         
         $product->addView();
         SEO::setTitle($product->title);

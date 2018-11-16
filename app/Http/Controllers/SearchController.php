@@ -12,13 +12,8 @@ class SearchController extends Controller
     {
         $searchCategory = $request->get('category', 1);
         $searchText = $request->get('search');
-
+        $products = Product::search($searchText)->where('category_id', $searchCategory)->paginate(16);
         
-            $products = Product::search($searchText)->where('category_id', $searchCategory)->paginate(16);
-        
-
         return view('pages.search', compact('products', 'searchCategory', 'searchText'));
-
-
     }
 }

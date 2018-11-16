@@ -20,9 +20,24 @@ class CartController extends Controller
     }
 
     public function getAddToCart(Request $request) {
-       
-        $quantity = $request->get('quantity', 1);
+        
         $id = $request->get('id');
+        $quantity = $request->get('quantity', 1);
+        $cart = Cart::content()->toArray();
+        foreach($cart as $key=>$item) {
+            if($item['id'] == $id) {
+                $cartProductQty = $item['qty'];
+                $sumQty = $cartProductQty + $quantity;
+                $product = Product::find($id);
+                if($sumQty >= $product->quantity) {
+                    Toastr::warning('', 'Сейчас в наличии ' . $product->quantity . ' единиц выбранного Вами товара', ["positionClass" => "toast-top-right"]);
+                    return redirect()->back();
+                }
+            }
+        }
+
+        
+        
         // dd($id);
         $data = [];
         $amount = 0;
@@ -49,7 +64,12 @@ class CartController extends Controller
             Toastr::warning('', 'Этот товар временно недоступен!', ["positionClass" => "toast-top-right"]);
             return redirect()->back();
         }
+        if($product->quantity < $quantity) {
+            Toastr::warning('', 'Сейчас в наличии ' . $product->quantity . ' единиц выбранного Вами товара', ["positionClass" => "toast-top-right"]);
+            return redirect()->back();
+        }
         $image = isset($product->image) ? asset('uploads/' . $product->image) : '';
+        // dd($quantity);
         Cart::add($product->id, $product->title, $quantity, $product->price + $amount, ['image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name])->associate('App\\Models\\Product');
         // Cart::destroy();
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
@@ -67,15 +87,17 @@ class CartController extends Controller
     {
         $rowId = $request->get('product');
         $product = Cart::get($rowId);
-        
+        $p = Product::find($product->id);
         if($request->get('change') == 'plus') {
-            // TODO
+            if($p->quantity <= $product->qty) {
+                Toastr::warning('', 'Сейчас в наличии ' . $p->quantity . ' единиц выбранного Вами товара', ["positionClass" => "toast-top-right"]);
+                return redirect()->back();
+            }
             Cart::update($rowId, 1 + $product->qty);
         }
         else if($request->get('change') == 'minus') {
             Cart::update($rowId, $product->qty - 1);
         }
-
         return redirect()->back();
     }
 }

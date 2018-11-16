@@ -7,6 +7,8 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\OrderRequest as StoreRequest;
 use App\Http\Requests\OrderRequest as UpdateRequest;
+use App\Models\Order;
+use App\Models\Product;
 
 class OrderCrudController extends CrudController
 {
@@ -161,6 +163,29 @@ class OrderCrudController extends CrudController
 
     public function update(UpdateRequest $request)
     {
+        $order = Order::find($request->id);
+        
+        foreach($order->products as $orderProduct) {
+            $orderProductQty = $orderProduct->qty;
+            $product = Product::find($orderProduct->id);
+            if(isset($product)) {
+                $product->update([
+                    'quantity' => $product->quantity - $orderProductQty
+                ]);
+            }
+            if(isset($orderProduct->options->equipments)) {
+                foreach($orderProduct->options->equipments as $key=>$orderEquipmentsProduct) {
+                    $product = Product::find($key);
+                    if(isset($product)) {
+                        $product->update([
+                            'quantity' => $product->quantity - $orderProductQty
+                        ]);
+                    }
+                }
+            }
+        }
+        // dd($request->all());
+
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here

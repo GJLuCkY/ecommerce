@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\ProductCategory;
+use App\Models\Category;
+use App\Models\Value;
 use App\Models\Product;
 use App\Models\Order;
 
@@ -45,10 +46,12 @@ class DataApiController extends Controller
 
     public function postCreationAndUpdatingProducts(Request $request)
     {
+        
         $products = $request->get('NOMENCLATURE');
         if(isset($products)) {
             $created = false;
             foreach($products as $item) {
+                // dd($item);
                 $searchProduct = Product::where('api_id_product', $item['ID'])->first();
                 if(isset($searchProduct)) {
                     $searchProduct->title = $item['NAME'];
@@ -56,13 +59,29 @@ class DataApiController extends Controller
                     $searchProduct->price = $item['PRICE'];
                     $searchProduct->quantity = $item['BALANCE'];
                     $searchProduct->api_id_product = $item['ID'];
-                    $category = ProductCategory::where('code', $item['ID_CATEGORY'])->first();
+                    $category = Category::where('code', $item['ID_CATEGORY'])->first();
                     if(isset($category)) {
                         $searchProduct->category_id = $category->id;
                     }
                     $searchProduct->api_id_category = $item['ID_CATEGORY'];
                     $searchProduct->status = $item['PUBLISHED'];;
                     $searchProduct->save();
+
+
+                    foreach($item['FILTERS'] as $key=>$filter) {
+                        if(strlen($filter) > 0) {
+                            $value = Value::where('name', $filter)->where('filter_id', $key)->first();
+                            if(isset($value)) {
+                                $value->products()->attach($searchProduct->id);
+                            } else {
+                                $value = new Value();
+                                $value->name = $filter;
+                                $value->filter_id = $key;
+                                $value->save();
+                                $value->products()->attach($searchProduct->id);
+                            }
+                        }
+                    }
                 } else {
                     $created = true;
                     $product = new Product;
@@ -72,12 +91,27 @@ class DataApiController extends Controller
                     $product->quantity = $item['BALANCE'];
                     $product->api_id_product = $item['ID'];
                     $product->api_id_category = $item['ID_CATEGORY'];
-                    $category = ProductCategory::where('code', $item['ID_CATEGORY'])->first();
+                    $category = Category::where('code', $item['ID_CATEGORY'])->first();
                     if(isset($category)) {
                         $product->category_id = $category->id;
                     }
                     $product->status = $item['PUBLISHED'];;
                     $product->save();
+                    
+                    foreach($item['FILTERS'] as $key=>$filter) {
+                        if(strlen($filter) > 0) {
+                            $value = Value::where('name', $filter)->where('filter_id', $key)->first();
+                            if(isset($value)) {
+                                $value->products()->attach($product->id);
+                            } else {
+                                $value = new Value();
+                                $value->name = $filter;
+                                $value->filter_id = $key;
+                                $value->save();
+                                $value->products()->attach($product->id);
+                            }
+                        }
+                    }
                 }
             }
             if($created) {
@@ -100,7 +134,8 @@ class DataApiController extends Controller
     public function getNewOrders(Request $request)
     {
         // $orders = Order::where('status', '!=', 'Отправлен')->get();
-        $orders = Order::get();
+        // $orders = Order::get();
+        dd('В стадии разработки!');
         $data = collect([]);
         $data2 = collect([
             'DOCUMENT_OUT' => $data

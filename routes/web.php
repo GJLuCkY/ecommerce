@@ -23,7 +23,7 @@ Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => 
     CRUD::resource('slider', 'SliderCrudController');
     CRUD::resource('review', 'ReviewCrudController');
     CRUD::resource('city', 'CityCrudController');
-
+    CRUD::resource('article', 'ArticleCrudController');
     CRUD::resource('vacancy', 'VacancyCrudController');
     CRUD::resource('vacancy-city', 'VacancyCityCrudController');
     CRUD::resource('advice', 'AdviceCrudController');

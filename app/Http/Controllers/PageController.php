@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use SEO;
 
 use App\Models\Slider;
-use Backpack\NewsCRUD\app\Models\Article;
+use App\Models\Article;
 use Backpack\PageManager\app\Models\Page;
 use App\Models\Advice;
 use App\Models\Order;

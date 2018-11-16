@@ -22,9 +22,9 @@ class ExcellController extends Controller
         if($data->count()){
             foreach ($data as $key => $value) {
                 $arr[] = [
-                    'title' => $value->title, 
-                    'category_id' => 1, 
-                    'price' => 1000, 
+                    'title' => $value->title, //1
+                    'category_id' => 1, //1
+                    'price' => 1000, //1
                     'quantity' => 10, 
                     'status' => 1, 
                     'article' => $value->article,

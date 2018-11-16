@@ -245,7 +245,9 @@
                 <select name="category">
                 <option disabled>Выбор категории</option>
                 @foreach($menus as $category)
-                <option value={{ $category->id }}>{{ $category->title }}</option>
+                    @foreach($category->children as $item)
+                        <option value={{ $item->id }}>{{ $item->title }}</option>
+                    @endforeach
                 @endforeach
                 </select>
             </div>
