@@ -30,7 +30,7 @@
         <div class="brands">
             @foreach($brand->values as $item)
             <div class="bs-catalog__brand">
-                <img src="{{ asset('uploads/' . $item->image) }}" alt="{{$item->name}}">
+                <img src="{{ isset($item->image) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{$item->name}}">
             <p>{{ $item->name }}</p>
             </div>
             @endforeach
@@ -59,9 +59,13 @@
                                   <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
                                     <img src="/images/heart.svg" alt="favorite">
                                   </a>
-                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
-                                    <img src="/images/basket.svg" alt="favorite">
-                                  </a>
+                                    <form action="{{ route('addToCart') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <button type="submit" class="mob-wishlist">
+                                            <img src="/images/basket.svg" alt="favorite">
+                                        </button>
+                                    </form>
                                 </div>
                                 <div class="bs-catalog__hitText">
                                     <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ $product->brand->name }}
@@ -112,9 +116,13 @@
                                   <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
                                     <img src="/images/heart.svg" alt="favorite">
                                   </a>
-                                  <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="mob-wishlist">
-                                    <img src="/images/basket.svg" alt="favorite">
-                                  </a>
+                                  <form action="{{ route('addToCart') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <button type="submit" class="mob-wishlist">
+                                            <img src="/images/basket.svg" alt="favorite">
+                                        </button>
+                                    </form>
                                 </div>
                                 <div class="bs-catalog__hitText">
                                         <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ $product->brand->name }}

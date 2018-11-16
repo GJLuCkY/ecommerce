@@ -164,26 +164,58 @@ class OrderCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         $order = Order::find($request->id);
-        
-        foreach($order->products as $orderProduct) {
-            $orderProductQty = $orderProduct->qty;
-            $product = Product::find($orderProduct->id);
-            if(isset($product)) {
-                $product->update([
-                    'quantity' => $product->quantity - $orderProductQty
-                ]);
-            }
-            if(isset($orderProduct->options->equipments)) {
-                foreach($orderProduct->options->equipments as $key=>$orderEquipmentsProduct) {
-                    $product = Product::find($key);
-                    if(isset($product)) {
-                        $product->update([
-                            'quantity' => $product->quantity - $orderProductQty
-                        ]);
+        $newStatus = $request->get('status');
+        // dd($newStatus);
+        $oldStatus = $order->status;
+
+        if($oldStatus != 'done' && $newStatus == 'done') {
+            // dd(1);
+            foreach($order->products as $orderProduct) {
+                $orderProductQty = $orderProduct->qty;
+                $product = Product::find($orderProduct->id);
+                if(isset($product)) {
+                    $product->update([
+                        'quantity' => $product->quantity - $orderProductQty
+                    ]);
+                }
+                if(isset($orderProduct->options->equipments)) {
+                 
+                    foreach($orderProduct->options->equipments as $key=>$orderEquipmentsProduct) {
+                        // dd($orderEquipmentsProduct);
+                        $product = Product::find($key);
+                        if(isset($product)) {
+                            // dd(1);
+                            $product->update([
+                                'quantity' => $product->quantity - $orderProductQty
+                            ]);
+                        }
                     }
                 }
             }
         }
+
+        if($oldStatus == 'done' && $newStatus != 'done') {
+            foreach($order->products as $orderProduct) {
+                $orderProductQty = $orderProduct->qty;
+                $product = Product::find($orderProduct->id);
+                if(isset($product)) {
+                    $product->update([
+                        'quantity' => $product->quantity + $orderProductQty
+                    ]);
+                }
+                if(isset($orderProduct->options->equipments)) {
+                    foreach($orderProduct->options->equipments as $key=>$orderEquipmentsProduct) {
+                        $product = Product::find($key);
+                        if(isset($product)) {
+                            $product->update([
+                                'quantity' => $product->quantity + $orderProductQty
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+        
         // dd($request->all());
 
         // your additional operations before save here

@@ -9,5 +9,5 @@
     </label>
     @endforeach
 </div>
-<h3 class="bs-podlozhka__cost">Сумма: <span id="price2">{{ $product->price }}</span> тг</h3>
+
 @endif

@@ -212,14 +212,18 @@
                                   <a href="{{ route('wishlist', ['id' => $item->id]) }}" class="mob-wishlist">
                                     <img src="/images/heart.svg" alt="favorite">
                                   </a>
-                                  <a href="{{ route('wishlist', ['id' => $item->id]) }}" class="mob-wishlist">
-                                    <img src="/images/basket.svg" alt="favorite">
-                                  </a>
+                                  <form action="{{ route('addToCart') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <button class="mob-wishlist">
+                                        <img src="/images/basket.svg" alt="favorite">
+                                    </button>
+                                  </form>
                                 </div>
                                 <div class="bs-catalog__hitText">
                                     <p>{{ isset($item->category->custom_name) ? $item->category->custom_name : $item->category->title }} {{ $item->brand->name }}</p>
                                     <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
-                                        <h6>{{ $item->title }}</h6>
+                                        <h6 style="font-size: 16px">{{ $item->title }}</h6>
                                     </a>
                                 </div>
                             </div>

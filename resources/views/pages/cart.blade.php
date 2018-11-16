@@ -70,8 +70,8 @@
                             <img src="{{ (isset($product['image'])) ? asset('uploads/' . $product['image']) : '/images/not-found.png' }}" alt="{{ $product['name'] }}">
                         </div>
                         <div class="col-xs-9 bs-basket__bigCol">
-                          <p class="bs-basket__about">{{ $product['name'] }}
-                              <br>3-х слойная паркетная доска
+                          <p class="bs-basket__about">
+                              <br>{{ $product['options']['category'] . ' ' . $product['options']['brand']['name'] }}
                               <br>{{ $product['name'] }}
                           </p>
                           <p class="bs-basket__cost">{{ number_format($product['price'], null, ' ', ' ') }}  тг</p>

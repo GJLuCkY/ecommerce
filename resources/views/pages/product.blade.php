@@ -53,18 +53,25 @@
                     <div class="col-sm-4 bs-podlozhka__col">
                         <form action="{{ route('addToCart') }}" method="post">
                             {!! csrf_field() !!}
-                            <h3 class="bs-podlozhka__cost"><span>{{ $product->price }}</span> ₸ / 
-                            
-                            @if($product->type == 'polotno')
-                            полотно
-                            @elseif($product->type == 'thing')
-                            шт.
-                            @else
-                            за уп.
+                            @if(isset($product->packaging))
+                            <h3 class="bs-podlozhka__cost"><span>{{ number_format($product->price / $product->packaging, 0, ',', ' ') }}</span> ₸ / 1 м²</h3>
                             @endif
-
-                            </h3>
-                            @if($product->type == 'polotno')
+                            
+                            
+                            <h3 class="bs-podlozhka__cost"><span>{{ number_format($product->price, 0, ',', ' ') }}</span> ₸ / 
+                            
+                                @if($product->type == 'polotno')
+                                полотно
+                                @elseif($product->type == 'thing')
+                                шт.
+                                @else
+                                за уп.
+                                @endif
+                                </h3>
+                                @if(count($equipment) > 0)
+                                <h3 class="bs-podlozhka__cost"><span id="price2">{{ number_format($product->price, 0, ',', ' ') }}</span> ₸ / итого</h3>
+                                @endif
+                                @if($product->type == 'polotno')
                             <h6 class="bs-podlozhka__quan">Комплектация</h6>
                             @elseif($product->type == 'thing')
                             <h6 class="bs-podlozhka__quan">Количество в штуках</h6>
@@ -76,17 +83,24 @@
                             <input type="number" min="1" max="{{ $product->quantity }}" step="1" value="1" name="quantity" id="quantity-change"><div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>
                                 <span class="bs-podlozhka__equal">=</span>
                                 <div class="bs-podlozhka__plintus">
-                                    <h6 class="bs-podlozhka__plintus-area" ><span id="packaging-summa-izm">{{ $product->packaging }}</span> м</h6>
+                                    <h6 class="bs-podlozhka__plintus-area" ><span id="packaging-summa-izm">{{ isset($product->packaging) ? $product->packaging: 1 }}</span> 
+                                        @if($product->type == 'polotno')
+                                        полотно
+                                        @elseif($product->type == 'thing')
+                                        шт.
+                                        @else
+                                        м²
+                                        @endif</h6>
                                 <p class="bs-podlozhka__plintus-pay">(<span id="packaging-summa">{{ number_format($product->price, 0, ',', ' ') }}</span> ₸)</p>
                                 </div>
                             </div>
                             @endif
-                                  
+                                    
                             @include('partials.equipment')
                             <div class="bs-podlozhka__buttons">
                             <input type="hidden" name="id" value="{{ $product->id }}">
                                 @if($product->type !== 'polotno')
-                                <button class="bs-podlozhka__calc">Калькулятора расчета</button>
+                                <span class="bs-podlozhka__calc" style="cursor: pointer;display: block; text-align: center">Калькулятора расчета</span>
                                 @endif
                                 <button type="submit" class="bs-podlozhka__add">Добавить в корзину</button>
                             </div>
@@ -187,13 +201,22 @@
                     <div class="bs-podlozhka__buttons">
                       <div>
                         <button class="bs-podlozhka__calc">Калькулятора расчета</button>
-                        <p class="bs-podlozhka-mob__cost">ЦЕНА: <span>2 600 ТГ</span></p>
+                        <p class="bs-podlozhka-mob__cost">ЦЕНА: <span>{{ number_format($product->price, 0, ',', ' ') }} ₸</span></p>
                       </div>
                       <div>
                         <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="bs-podlozhka-mob-wishlist">
                           <img src="/images/heart.svg" alt="favorite">
                         </a>
-                        <a href="{{ route('addToCart', ['id' => $product->id]) }}" class="bs-podlozhka__add">КУПИТЬ</a>
+
+
+                        <form action="{{ route('addToCart') }}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <button type="submit" class="bs-podlozhka__add">
+                                        КУПИТЬ
+                                </button>
+                            </form>
+                        {{-- <a href="{{ route('addToCart', ['id' => $product->id]) }}" >КУПИТЬ</a> --}}
                       </div>
                     </div>
                   </div>

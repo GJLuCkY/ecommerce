@@ -10,7 +10,6 @@
             <h4 class="bs-profile__head">Избранное</h4>
            
             @foreach($wishlist as $product)
-            {{-- {{ dd($wishlist) }} --}}
             @if(isset($product->product))
             <div class="bs-profile__fav">
               <div class="row">

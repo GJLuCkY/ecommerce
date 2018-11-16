@@ -14,6 +14,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <style>
+        .bs-catalog__hitText a {
+            min-height: 85px;
+            display: flex;
+            align-items: center;
+        }
         .bs-footer__send img {
             margin-top: 0px;
         }
@@ -209,12 +214,13 @@
         <img src="/images/logo.svg" class="bs-header__modalLogo">
         <h4 class="bs-header__h4">Вход</h4>
         <hr class="bs-header__modalLine">
-        <form method="post" action="form.php">
+        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                @csrf
             <label>
-            <input type="email" required name="email" placeholder="E-mail">
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
             </label>
             <label>
-            <input type="password" required name="password   " placeholder="Пароль">
+                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
             </label>
             <button type="submit">Войти</button>
         </form>
@@ -328,7 +334,7 @@
               <a class="mob-header__link" href="{{ route('news') }}">Новости</a>
           </li>
           <li class="mob-header__item">
-              <a class="mob-header__link" href="{{ route('news') }}">Советы</a>
+              <a class="mob-header__link" href="{{ route('advices') }}">Советы</a>
           </li>
           <li class="mob-header__item">
               <a class="mob-header__link" href="/oplata-i-dostavka">Оплата и доставка</a>
@@ -349,22 +355,24 @@
         <!-- Modal content -->
       <div class="bs-header__modal-content row">
         <h4 class="cat-head"><img class="cat-head-close" src="/images/back.png">КАТАЛОГ</h4>
-        <div>
-          <p class="cat-link">Напольные покрытия TODO</p>
-          <ul class="cat-list">
-            <li> <a href="todo">Напольные покрытия</a></li>
-            <li> <a href="todo">Напольные покрытия</a></li>
-            <li> <a href="todo">Напольные покрытия</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="cat-link">Напольные покрытия</p>
-          <ul class="cat-list">
-            <li> <a href="todo">Напольные покрытия</a></li>
-            <li> <a href="todo">Напольные покрытия</a></li>
-            <li> <a href="todo">Напольные покрытия</a></li>
-          </ul>
-        </div>
+        {{-- @foreach($category->children as $item)
+                        <option value={{ $item->id }}>{{ $item->title }}</option>
+                    @endforeach --}}
+        @foreach($menus as $category)
+            <div>
+                <p class="cat-link">{{ $category->title }}</p>
+                @if(count($category->children) > 0)
+                <ul class="cat-list">
+                    @foreach($category->children as $item)
+                        <li>
+                            <a href="{{ route('category', ['catSlug' => $item->slug]) }}">{{ $item->title }}</a>
+                        </li>
+                    @endforeach    
+                </ul>
+                @endif
+            </div>         
+        @endforeach
+        
       </div>
     </div>
 </article>
@@ -597,6 +605,7 @@
                             $( "#signup .signup-"+ index +"-error" ).text( value );
                         }
                     });
+                    $('.form-spinner').hide();
                 },
                 success: function(msg) {
                     $('.form-btn').prop('disabled', true);
