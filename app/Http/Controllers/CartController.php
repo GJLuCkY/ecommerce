@@ -35,21 +35,20 @@ class CartController extends Controller
                 }
             }
         }
-
-        
-        
-        // dd($id);
         $data = [];
         $amount = 0;
         if(!empty($request->get('equipment'))) {
             $equipments = $request->get('equipment');
-            $products = Product::whereIn('id', $equipments)->select('id', 'title', 'quantity', 'price', 'image')->get()->toArray();
+            $products = Product::whereIn('id', $equipments)->select('id', 'title', 'quantity', 'price', 'image', 'article', 'api_id_product')->get()->toArray();
+           
             foreach($products as $key=>$product) {
                 $amount += $product['price'];
                 $data[$product['id']] = [
                     'name' => $product['title'],
                     'price' => $product['price'],
-                    'image' => isset($product['image']) ? asset('uploads/' . $product['image']) : ''
+                    'image' => isset($product['image']) ? asset('uploads/' . $product['image']) : '',
+                    'article' => $product['article'],
+                    'code' => $product['api_id_product']
                 ];
             }
             
@@ -69,9 +68,9 @@ class CartController extends Controller
             return redirect()->back();
         }
         $image = isset($product->image) ? asset('uploads/' . $product->image) : '';
-        // dd($quantity);
-        Cart::add($product->id, $product->title, $quantity, $product->price + $amount, ['image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name])->associate('App\\Models\\Product');
-        // Cart::destroy();
+      
+        Cart::add($product->id, $product->title, $quantity, $product->price + $amount, ['article' => $product->article, 'code' => $product->api_id_product,'image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name])->associate('App\\Models\\Product');
+       
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
         return redirect()->back();
     }

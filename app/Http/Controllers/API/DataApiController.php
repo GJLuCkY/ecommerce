@@ -133,9 +133,8 @@ class DataApiController extends Controller
 
     public function getNewOrders(Request $request)
     {
-        // $orders = Order::where('status', '!=', 'Отправлен')->get();
-        // $orders = Order::get();
-        dd('В стадии разработки!');
+        $orders = Order::where('status', 'create')->get();
+        // dd($orders);
         $data = collect([]);
         $data2 = collect([
             'DOCUMENT_OUT' => $data
@@ -146,17 +145,30 @@ class DataApiController extends Controller
                 $products = collect([]);
                 $totalPrice = 0;
                 if(isset($order->products)) {
-                    foreach(json_decode($order->products) as $product) {
-                        $totalPrice = $totalPrice + $product->price;
+                    foreach($order->products as $product) {
+                        $equipment = collect([]);
+                        if(count((array)$product->options->equipments) > 0) {
+                            foreach((array)$product->options->equipments as $key=>$eq) {
+                                // dd($eq);
+                                $equipment->push([
+                                    "name" => $eq->name,
+                                    "article" => $eq->article,
+                                    "code"=> $eq->code
+                                ]);
+                            }
+                        }
+                        
+                        
                         $products->push([
-                            'name' => $product->item->title,
-                            'article' => 'Н0000005031',
-                            'code' => 'TODO',
+                            'name' => $product->name,
+                            'article' => $product->options->article,
+                            'code' => $product->options->code,
                             'quantity' => $product->qty,
                             'price' => $product->price,
                             'price_type' => 'Тенге',
                             'price_id' => 'KZT',
-                            'discount' => null
+                            'discount' => null,
+                            'equipment' => $equipment
                         ]);
                     }
                 }
@@ -180,7 +192,7 @@ class DataApiController extends Controller
                 } else {
                     $delivMethod = 'Другое';
                 }
-                
+                //dd($order->updated_at);
                 $data->push([
                     'order_id' => $order->id, // идентификатор заказа на сайте
                     'user_id' => $order->user_id,
@@ -190,7 +202,7 @@ class DataApiController extends Controller
                     'address' => $order->address, // адрес
                     'phone' => $order->phone, // телефон
                     'email' => $order->email, // e-mail
-                    'total_price' => $totalPrice, // сумма заказа
+                    'total_price' => $order->total_price, // сумма заказа
                     'comment' => $order->comment, // комментарий покупателя
                     'payment_method' => $cartMethod, // способ оплаты, 
                     'payment_method_id' => $order->method, // идентификатор способа оплаты
@@ -200,9 +212,9 @@ class DataApiController extends Controller
                     'created_at' => $order->created_at, // Дата создания заказа
                     'products' => $products,
                 ]);
-                $order->update([
-                    'status' => 'Отправлен'
-                ]);
+                // $order->update([
+                //     'status' => 'Отправлен'
+                // ]);
             }
             return response()->json($data2);
         } else {
@@ -221,6 +233,7 @@ class DataApiController extends Controller
 
     public function changeOrder(Request $request)
     {
+        dd('В стадии тестировании');
         $orders = $request->get("DOCUMENT_OUT");
         if(isset($orders)) {
             foreach($orders as $orderItemsBitrix) {

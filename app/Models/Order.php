@@ -25,6 +25,10 @@ class Order extends Model
     protected $casts = [
         'products' => 'object'
     ];
+    protected $date = [
+        'created_at',
+        'updated_at'
+    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -58,6 +62,15 @@ class Order extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->toDateTimeString();
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->toDateTimeString();
+    }
 
     /*
     |--------------------------------------------------------------------------
