@@ -394,7 +394,7 @@
             $(document).on("change", ".subproducts", function() {
                 summ+=((this.checked?1:-1)*$(this).data('price'));
                 
-                $("#price2").html(summ);
+                $("#price2").html(number_format(summ, 0, ',', ' '));
             });
             
 
