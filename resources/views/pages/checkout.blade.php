@@ -52,7 +52,7 @@
                             </label>
                             
                             <div class="bs-order__check" style="margin-bottom: 40px">
-                                <p style="margin-bottom: 15px">Способ доставки</p>
+                                <p style="margin-bottom: 15px">Способ доставки <span style="font-weight: 400; display: block; font-size: 13px; color: #959c9b;margin-top: 5px;">* для уточнения стоимости доставки с Вами свяжется наш менеджер</span> </p>
                                 <label class="check_dostavka"><input type="radio" name="delivery_method" value="dostavka" checked> Доставка
                                     <span class="checkmark"></span>
                                 </label>
@@ -60,6 +60,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
+                            
 
                             <label class="bs-order__input adress-dostavki">Адрес доставки
                                 <input type="text" name="address">
