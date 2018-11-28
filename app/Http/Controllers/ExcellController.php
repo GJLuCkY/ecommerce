@@ -6,27 +6,43 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Value;
 use Excel;
+use Illuminate\Support\Facades\Input;
+use Toastr;
 
 class ExcellController extends Controller
 {
     public function importExcell(Request $request)
     {
-        // dd(1);
-        $request->validate([
-            'import_file' => 'required'
-        ]);
+        // if(empty($request->get('import_file'))) {
+        //     Toastr::warning('', 'Выберите excel файл', ["positionClass" => "toast-top-right"]);
+        //     return redirect()->back();
+        // }
+        $extensions = [
+            'csv',
+            'xls',
+            'xlm',
+            'xla',
+            'xlt'
+        ];
+
+        if(!in_array($request->file('import_file')->getClientOriginalExtension(), $extensions)) {
+            Toastr::warning('', 'Выберите excel файл', ["positionClass" => "toast-top-right"]);
+            return redirect()->back();
+        }
+        $categoryId = $request->get('category');
  
         $path = $request->file('import_file')->getRealPath();
         $data = Excel::load($path)->get();
-        // dd($data);
+    
         if($data->count()){
             foreach ($data as $key => $value) {
                 $arr[] = [
                     'title' => $value->title, //1
-                    'category_id' => 1, //1
-                    'price' => 1000, //1
-                    'quantity' => 10, 
-                    'status' => 1, 
+                    'category_id' => $categoryId, //1
+                    'price' => $value->price, //1
+                    'quantity' => $value->kolichestvo, 
+                    'status' => 0, 
+                    'packaging' => $value->upakovka,
                     'article' => $value->article,
                     'minimum' => $value->minimum,
                     'filters' => [
@@ -56,28 +72,35 @@ class ExcellController extends Controller
                         26 => $value->steklo,
                         27 => $value->pokrytie,
                         28 => $value->type,
-                        // 1 => minimum,
                     ]
                     
                 ];
             }
-            // dd($arr);
             if(!empty($arr)){
+                // dd($arr);
                 foreach($arr as $item) {
-                    $product = new Product();
+                    $product = Product::where('article', $item['article'])->first();
+                    if(isset($product)){
+                    } else {
+                        $product = new Product();
+                    }
                     $product->title = $item['title'];
-                    $product->category_id = 1326;
-                    $product->status = 1;
+                    $product->category_id = $categoryId;
+                    $product->status = $item['status'];
+                    $product->packaging = str_replace(",", ".", $item['packaging']);
                     $product->quantity = $item['quantity'];
                     $product->article = $item['article'];
                     $product->minimum = $item['minimum'];
+                    $product->type = $request->get('type', 'Полотно');
                     $product->price = random_int(300, 700) * 50;
                     $product->save();
-
+                    // dd($item['filters']);
                     foreach($item['filters'] as $key=>$filter) {
                         if(strlen($filter) > 0) {
                             $value = Value::where('name', $filter)->where('filter_id', $key)->first();
                             if(isset($value)) {
+                                // dd($value);
+                                $value->products()->detach($product->id);
                                 $value->products()->attach($product->id);
                             } else {
                                 $value = new Value();
@@ -90,10 +113,10 @@ class ExcellController extends Controller
                     }
 
                 }
-                Product::insert($arr);
+                // Product::insert($arr);
             }
         }
- 
-        return back()->with('success', 'Insert Record successfully.');
+        Toastr::success('', 'Успех!', ["positionClass" => "toast-top-right"]);
+        return redirect()->back();
     }
 }

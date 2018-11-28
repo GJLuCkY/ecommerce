@@ -34,6 +34,31 @@ class ProductCrudController extends CrudController
         ]);
 
         $this->crud->addColumn([
+            'label' => "Категория", // Table column heading
+            'type' => "select",
+            'name' => 'category_id', // the column that contains the ID of that connected entity;
+            'entity' => 'category', // the method that defines the relationship in your Model
+            'attribute' => "title", // foreign key attribute that is shown to user
+            'model' => "App\Models\Category", // foreign key model
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'article',
+            'label' => 'Артикул'
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'quantity',
+            'label' => 'Количество'
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'status',
+            'label' => 'Опубликованные',
+            'type' => 'check'
+        ]);
+
+        $this->crud->addColumn([
             'name' => 'price',
             'label' => 'Цена',
             'type' => 'number'

@@ -5,18 +5,20 @@
 Route::get('/test', 'PageController@test');
 
 Route::view('excell', 'excell');
-
+Route::post('excel', 'ExcellController@importExcell')->name('importExcel');
 Route::view('city', 'test.city');
 
-Route::post('excel', 'ExcellController@importExcell')->name('importExcel');
 
+Route::post('excel', 'ExcellController@importExcell')->name('importExcel')->middleware('admin');
 
 Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin'], 'namespace' => 'Admin'], function()
 {
+    
+    Route::get('/dashboard', 'DashboardController@dashboard');
     CRUD::resource('product', 'ProductCrudController');
     CRUD::resource('category', 'CategoryCrudController');
     CRUD::resource('menu-item', 'MenuItemCrudController');
-
+    
     CRUD::resource('order', 'OrderCrudController');
     CRUD::resource('filter', 'FilterCrudController');
     CRUD::resource('value', 'ValueCrudController');

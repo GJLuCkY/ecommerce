@@ -68,7 +68,8 @@
                                     </form>
                                 </div>
                                 <div class="bs-catalog__hitText">
-                                    <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ $product->brand->name }}
+                         
+                                    <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ isset($product->brand->name) ? $product->brand->name : '' }}
                                     <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
                                     @if(isset($product->brand))
                                     <br> {{ $product->brand->name }} </p>
