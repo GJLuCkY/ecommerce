@@ -92,7 +92,7 @@ class ExcellController extends Controller
                     $product->article = $item['article'];
                     $product->minimum = $item['minimum'];
                     $product->type = $request->get('type', 'Полотно');
-                    $product->price = random_int(300, 700) * 50;
+                    $product->price = $item['price'];
                     $product->save();
                     // dd($item['filters']);
                     foreach($item['filters'] as $key=>$filter) {
@@ -107,6 +107,7 @@ class ExcellController extends Controller
                                 $value->name = $filter;
                                 $value->filter_id = $key;
                                 $value->save();
+                                $value->products()->detach($product->id);
                                 $value->products()->attach($product->id);
                             }
                         }
