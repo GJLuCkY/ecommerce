@@ -106,8 +106,8 @@
                         @foreach($latests as $product)
                         <div class="bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
-                                <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
+                                <a href="{{ route('product', ['catSlug' => $product->category['slug'], 'prodSlug' => $product->slug]) }}">
+                                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product['title'] }}">
                                 </a>
                                 <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                     <img src="/images/fav.svg" alt="favorite">
@@ -125,10 +125,10 @@
                                     </form>
                                 </div>
                                 <div class="bs-catalog__hitText">
-                                        <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ $product->brand->name }}
-                                        <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
+                                        <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category['title'] }} {{ $product->brand['name'] }}
+                                        <br> <a href="{{ route('product', ['catSlug' => $product->category['slug'], 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
                                         @if(isset($product->brand))
-                                        <br> {{ $product->brand->name }} </p>
+                                        <br> {{ $product->brand['name'] }} </p>
                                         @endif
                                 </div>
                             </div>
