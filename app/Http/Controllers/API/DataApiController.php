@@ -17,7 +17,7 @@ class DataApiController extends Controller
         $categories = $request->get('GROUPS');
         if(isset($categories)) {
             foreach($categories as $item) {
-                $searchCategory = ProductCategory::where('code', $item['ID'])->first();
+                $searchCategory = Category::where('code', $item['ID'])->first();
                 if(isset($searchCategory)) {
                     $searchCategory->title = $item['NAME'];
                     $searchCategory->code = $item['ID'];
@@ -25,7 +25,7 @@ class DataApiController extends Controller
                     $searchCategory->status = $item['PUBLISHED'];
                     $searchCategory->save();
                 } else {
-                    $category = new ProductCategory;
+                    $category = new Category;
                     $category->title = $item['NAME'];
                     $category->code = $item['ID'];
                     $category->code_parent = $item['CODE_PARENT'];
