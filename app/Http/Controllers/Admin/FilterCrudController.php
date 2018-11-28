@@ -22,6 +22,10 @@ class FilterCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/filter');
         $this->crud->setEntityNameStrings('filter', 'filters');
 
+
+        $this->crud->allowAccess('reorder');
+        $this->crud->enableReorder('name', 1);
+
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION

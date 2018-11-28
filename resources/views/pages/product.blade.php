@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-sm-7">
                             <p class="bs-podlozhka__desc">Артикул: <span> {{ $product->article }}</span></p>
-                           
+                               
                                 @foreach($product->values as $filter)
                               <p class="bs-podlozhka__desc">{{$filter->filter->name}}: <span> {{ $filter->name }}</span></p>
                                 @endforeach

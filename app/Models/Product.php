@@ -88,7 +88,9 @@ class Product extends Model
     }
     public function values()
     {
-        return $this->belongsToMany('App\Models\Value');
+        return $this->belongsToMany('App\Models\Value')->whereHas('filter', function($query) {
+            $query->orderBy('lft');
+        });
     }
 
     public function products()

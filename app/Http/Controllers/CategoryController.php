@@ -48,12 +48,23 @@ class CategoryController extends Controller
         $otherProducts = Product::whereIn('category_id', $pivotCats)->where('status', 1)->inRandomOrder()->take(10)->get();
         
 
-        $product = Product::active()->where('slug', $prodSlug)->with(['reviews' => function($query) {
-            $query->where('status', 1);
-        }])->firstOrFail();
+        $product = Product::active()
+                ->where('slug', $prodSlug)
+                ->with(['reviews' => function($query) {
+                    $query->where('status', 1);
+                }])
+                ->with(['values' => function($query) {
+                    $query->join('filters as po', 'po.id', '=', 'values.filter_id');
+                    $query->orderBy('lft');
+                }])
+                ->firstOrFail();
         $equipment = $product->produces->where('status', 1)->where('quantity', '>', 0);
         
         $product->addView();
+
+        // $filters = $product->values;
+        // dd($filters);
+
         SEO::setTitle($product->title);
         SEO::setDescription($product->meta_description);
         $similarProducts = Product::where('category_id', $category->id)->take(10)->get();
