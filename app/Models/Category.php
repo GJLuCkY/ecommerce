@@ -82,7 +82,7 @@ class Category extends Model
 
     public function filters()
     {
-        return $this->belongsToMany('App\Models\Filter');
+        return $this->belongsToMany('App\Models\Filter')->orderBy('lft');
     }
 
 
