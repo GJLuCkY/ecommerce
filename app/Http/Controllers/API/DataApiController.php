@@ -23,6 +23,13 @@ class DataApiController extends Controller
                     $searchCategory->code = $item['ID'];
                     $searchCategory->code_parent = $item['CODE_PARENT'];
                     $searchCategory->status = $item['PUBLISHED'];
+
+                    $parentSearchCategory = Category::where('code', $item['CODE_PARENT'])->first();
+                    if(isset($parentSearchCategory)) {
+                        $searchCategory->parent_id = $parentSearchCategory->id;
+                    }
+
+
                     $searchCategory->save();
                 } else {
                     $category = new Category;
@@ -30,6 +37,12 @@ class DataApiController extends Controller
                     $category->code = $item['ID'];
                     $category->code_parent = $item['CODE_PARENT'];
                     $category->status = $item['PUBLISHED'];
+
+                    $parentSearchCategory = Category::where('code', $item['CODE_PARENT'])->first();
+                    if(isset($parentSearchCategory)) {
+                        $searchCategory->parent_id = $parentSearchCategory->id;
+                    }
+
                     $category->save();
                 }
             }
