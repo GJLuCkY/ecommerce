@@ -40,7 +40,7 @@ class DataApiController extends Controller
 
                     $parentSearchCategory = Category::where('code', $item['CODE_PARENT'])->first();
                     if(isset($parentSearchCategory)) {
-                        $searchCategory->parent_id = $parentSearchCategory->id;
+                        $category->parent_id = $parentSearchCategory->id;
                     }
 
                     $category->save();
