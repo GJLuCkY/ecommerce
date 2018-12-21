@@ -80,21 +80,23 @@ class DataApiController extends Controller
                     $searchProduct->status = $item['PUBLISHED'];;
                     $searchProduct->save();
 
-
-                    foreach($item['FILTERS'] as $key=>$filter) {
-                        if(strlen($filter) > 0) {
-                            $value = Value::where('name', $filter)->where('filter_id', $key)->first();
-                            if(isset($value)) {
-                                $value->products()->attach($searchProduct->id);
-                            } else {
-                                $value = new Value();
-                                $value->name = $filter;
-                                $value->filter_id = $key;
-                                $value->save();
-                                $value->products()->attach($searchProduct->id);
+                    if(isset($item['FILTERS'])) {
+                        foreach($item['FILTERS'] as $key=>$filter) {
+                            if(strlen($filter) > 0) {
+                                $value = Value::where('name', $filter)->where('filter_id', $key)->first();
+                                if(isset($value)) {
+                                    $value->products()->attach($searchProduct->id);
+                                } else {
+                                    $value = new Value();
+                                    $value->name = $filter;
+                                    $value->filter_id = $key;
+                                    $value->save();
+                                    $value->products()->attach($searchProduct->id);
+                                }
                             }
                         }
                     }
+                        
                 } else {
                     $created = true;
                     $product = new Product;
