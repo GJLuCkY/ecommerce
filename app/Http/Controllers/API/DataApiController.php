@@ -164,11 +164,12 @@ class DataApiController extends Controller
                         $equipment = collect([]);
                         if(count((array)$product->options->equipments) > 0) {
                             foreach((array)$product->options->equipments as $key=>$eq) {
-                                // dd($eq);
                                 $equipment->push([
                                     "name" => $eq->name,
                                     "article" => $eq->article,
-                                    "code"=> $eq->code
+                                    "code"=> $eq->code,
+                                    "quantity" => intval($product->qty),
+                                    "price" => intval($eq->price)
                                 ]);
                             }
                         }
@@ -178,10 +179,10 @@ class DataApiController extends Controller
                             'name' => $product->name,
                             'article' => $product->options->article,
                             'code' => $product->options->code,
-                            'quantity' => $product->qty,
-                            'price' => $product->price,
-                            'price_type' => 'Тенге',
-                            'price_id' => 'KZT',
+                            'quantity' => intval($product->qty),
+                            'price' => intval($product->price),
+                            // 'price_type' => 'Тенге',
+                            // 'price_id' => 'KZT',
                             'discount' => null,
                             'equipment' => $equipment
                         ]);
@@ -211,13 +212,13 @@ class DataApiController extends Controller
                 $data->push([
                     'order_id' => $order->id, // идентификатор заказа на сайте
                     'user_id' => $order->user_id,
-                    'user_type' => $order->user_type, // Юр/физ лицо признак
-                    'iin_bin' => $order->iin_bin, // Если Юр лицо то БИН/ИИН и РНН
+                    // 'user_type' => $order->user_type, // Юр/физ лицо признак
+                    // 'iin_bin' => $order->iin_bin, // Если Юр лицо то БИН/ИИН и РНН
                     'fullname' => $order->name, // ФИО
                     'address' => $order->address, // адрес
                     'phone' => $order->phone, // телефон
                     'email' => $order->email, // e-mail
-                    'total_price' => $order->total_price, // сумма заказа
+                    // 'total_price' => $order->total_price, // сумма заказа
                     'comment' => $order->comment, // комментарий покупателя
                     'payment_method' => $cartMethod, // способ оплаты, 
                     'payment_method_id' => $order->method, // идентификатор способа оплаты
