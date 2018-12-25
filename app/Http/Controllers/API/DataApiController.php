@@ -211,7 +211,7 @@ class DataApiController extends Controller
                 //dd($order->updated_at);
                 $data->push([
                     'order_id' => $order->id, // идентификатор заказа на сайте
-                    'user_id' => $order->user_id,
+                    'user_id' => $order->user_id === null ? 0 : $order->user_id,
                     // 'user_type' => $order->user_type, // Юр/физ лицо признак
                     // 'iin_bin' => $order->iin_bin, // Если Юр лицо то БИН/ИИН и РНН
                     'fullname' => $order->name, // ФИО
