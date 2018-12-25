@@ -9,6 +9,7 @@ use Cart;
 use Auth;
 use App\Models\Order;
 use Toastr;
+use App\Traits\CNPMerchantWebServiceClient;
 
 class CheckoutController extends Controller
 {
@@ -26,6 +27,44 @@ class CheckoutController extends Controller
     }
 
     public function postCheckout(Request $request) {
+        $data = [];
+        foreach(Cart::content()->toArray() as $item) {
+            array_push($data, [
+                'nameOfGoods' => (string) $item['name'],
+                'merchantsGoodsID' => (string) $item['id'],
+                'amount' => (string) $item['price'],
+                'currencyCode' => (int) 398
+            ]);
+        }
+        if($request->get('method') == 'cart') {
+            $client=new CNPMerchantWebServiceClient();
+            $transactionDetails = new TransactionDetails();
+            $transactionDetails->merchantId="000000000000001";
+            $transactionDetails->terminalId="TEST TID";
+            $transactionDetails->totalAmount = 100;//*100;
+            $transactionDetails->currencyCode = 398;
+            $transactionDetails->description="My first transaction";
+            $transactionDetails->returnURL=str_replace("checkout.php", "result.php", $pageURL);
+            $transactionDetails->goodsList=$data;
+            $transactionDetails->languageCode="ru";
+            $transactionDetails->merchantLocalDateTime=date("d.m.Y H:i:s");
+            $transactionDetails->orderId= rand(1,10000);		
+            $transactionDetails->purchaserName="IVANOV IVAN";		
+            $transactionDetails->purchaserEmail="purchaser@processing.kz";		
+
+            $st = new startTransaction();
+            $st->transaction = $transactionDetails;
+            $startTransactionResult=$client->startTransaction($st);
+
+            if ($startTransactionResult->return->success == true) {
+                $_SESSION["customerReference"]=$startTransactionResult->return->customerReference;
+                header("Location: " . $startTransactionResult->return->redirectURL);
+            } else {
+                $errors='Error: ' . $startTransactionResult->return->errorDescription;
+            }
+        }
+
+
         $user = Auth::user();
         
         $order = new Order;
@@ -50,46 +89,5 @@ class CheckoutController extends Controller
         Cart::destroy();
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
         return redirect()->route('homepage');
-
-        $client = new \ProcessingKz\Client();
-
-        // Begin payment transaction ("checkout").
-        $details = new \ProcessingKz\Objects\Entity\TransactionDetails();
-        $details->setMerchantId("000000000000001")
-            ->setTerminalId("TEST TID")
-            ->setTotalAmount(1)
-            ->setCurrencyCode(398)
-            ->setDescription("My first transaction")
-            ->setReturnURL("/transaction-result")
-            ->setGoodsList($_SESSION["basket"])
-            ->setLanguageCode("ru")
-            ->setMerchantLocalDateTime(date("d.m.Y H:i:s"))
-            ->setOrderId(rand(1, 10000))
-            ->setPurchaserName("IVANOV IVAN")
-            ->setPurchaserEmail("purchaser@processing.kz");
-
-        $transaction = new \ProcessingKz\Objects\Request\StartTransaction();
-        $transaction->setTransaction($details);
-
-        $startResult = $client->startTransaction($transaction);
-
-        if (true === $startResult->getReturn()->getSuccess()) {
-            $reference = $startResult->getReturn()->getCustomerReference();
-
-            // Commit payment transaction.
-            $complete = new \ProcessingKz\Objects\Request\CompleteTransaction();
-            $complete->setMerchantId("000000000000001")
-                ->setReferenceNr($reference)
-                ->setTransactionSuccess(true);
-            $completeResult = $client->completeTransaction($complete);
-
-            // Get status of transaction.
-            $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
-            $status->setMerchantId("000000000000001")
-                ->setReferenceNr($reference);
-            $statusResult = $client->getTransactionStatus($status);
-        } else {
-            die($startResult->getReturn()->getErrorDescription());
-        }
     }
 }
