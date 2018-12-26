@@ -1,7 +1,7 @@
 <?php
 
 
-
+Route::post('/order', 'CheckoutController@processing')->name('order.processing');
 Route::get('/test', 'PageController@test');
 
 Route::view('excell', 'excell');
@@ -116,3 +116,5 @@ Route::post('/subscribe', 'SubscribeController@subscribe')->name('subscribe');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+

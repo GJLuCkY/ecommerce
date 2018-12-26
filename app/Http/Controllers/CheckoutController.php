@@ -10,6 +10,8 @@ use Auth;
 use App\Models\Order;
 use Toastr;
 use App\Traits\CNPMerchantWebServiceClient;
+use App\Traits\TransactionDetails;
+use App\Traits\startTransaction;
 
 class CheckoutController extends Controller
 {
@@ -32,38 +34,11 @@ class CheckoutController extends Controller
             array_push($data, [
                 'nameOfGoods' => (string) $item['name'],
                 'merchantsGoodsID' => (string) $item['id'],
-                'amount' => (string) $item['price'],
+                'amount' => (string) number_format($item['price'], 2, '', ''),
                 'currencyCode' => (int) 398
             ]);
         }
-        if($request->get('method') == 'cart') {
-            $client=new CNPMerchantWebServiceClient();
-            $transactionDetails = new TransactionDetails();
-            $transactionDetails->merchantId="000000000000001";
-            $transactionDetails->terminalId="TEST TID";
-            $transactionDetails->totalAmount = 100;//*100;
-            $transactionDetails->currencyCode = 398;
-            $transactionDetails->description="My first transaction";
-            $transactionDetails->returnURL=str_replace("checkout.php", "result.php", $pageURL);
-            $transactionDetails->goodsList=$data;
-            $transactionDetails->languageCode="ru";
-            $transactionDetails->merchantLocalDateTime=date("d.m.Y H:i:s");
-            $transactionDetails->orderId= rand(1,10000);		
-            $transactionDetails->purchaserName="IVANOV IVAN";		
-            $transactionDetails->purchaserEmail="purchaser@processing.kz";		
-
-            $st = new startTransaction();
-            $st->transaction = $transactionDetails;
-            $startTransactionResult=$client->startTransaction($st);
-
-            if ($startTransactionResult->return->success == true) {
-                $_SESSION["customerReference"]=$startTransactionResult->return->customerReference;
-                header("Location: " . $startTransactionResult->return->redirectURL);
-            } else {
-                $errors='Error: ' . $startTransactionResult->return->errorDescription;
-            }
-        }
-
+        
 
         $user = Auth::user();
         
@@ -85,9 +60,62 @@ class CheckoutController extends Controller
         $order->user_type = $request->get('usertype');
         $order->total_price = Cart::total();
         $order->save();
+        // dd();
+
+        if($request->get('method') == 'cart') {
+           $client = new \ProcessingKz\Client();
+
+            // Begin payment transaction ("checkout").
+            $details = new \ProcessingKz\Objects\Entity\TransactionDetails();
+            $details->setMerchantId("000000000000073")
+                // ->setTerminalId("TEST TID")
+                ->setTotalAmount(number_format(str_replace(' ','',Cart::total()), 2, '', ''))
+                ->setCurrencyCode(398)
+                ->setDescription("My first transaction")
+                ->setReturnURL(route('order.processing'))
+                ->setGoodsList($data)
+                ->setLanguageCode("ru")
+                ->setMerchantLocalDateTime(date("d.m.Y H:i:s"))
+                ->setOrderId($order->id)
+                ->setPurchaserName($request->get('name'))
+                ->setPurchaserEmail($request->get('email'));
+
+            $transaction = new \ProcessingKz\Objects\Request\StartTransaction();
+            $transaction->setTransaction($details);
+
+            $startResult = $client->startTransaction($transaction);
+
+            if (true === $startResult->getReturn()->getSuccess()) {
+                $reference = $startResult->getReturn()->getCustomerReference();
+
+                // Commit payment transaction.
+                $complete = new \ProcessingKz\Objects\Request\CompleteTransaction();
+                $complete->setMerchantId("000000000000073")
+                    ->setReferenceNr($reference)
+                    ->setTransactionSuccess(true);
+                $completeResult = $client->completeTransaction($complete);
+
+                // Get status of transaction.
+                $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
+                $status->setMerchantId("000000000000073")
+                    ->setReferenceNr($reference);
+                $statusResult = $client->getTransactionStatus($status);
+                // dd();
+                return redirect($startResult->getReturn()->getRedirectURL());
+
+            } else {
+                die($startResult->getReturn()->getErrorDescription());
+            }
+        }
+
         // $order->products()->attach(array_keys($productsId));
-        Cart::destroy();
+        // Cart::destroy();
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
         return redirect()->route('homepage');
+    }
+
+    public function processing(Request $request)
+    {
+        dd($request->all());
     }
 }
