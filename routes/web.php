@@ -1,7 +1,7 @@
 <?php
 
 
-Route::post('/order', 'CheckoutController@processing')->name('order.processing');
+Route::get('/order', 'CheckoutController@processing')->name('order.processing');
 Route::get('/test', 'PageController@test');
 
 Route::view('excell', 'excell');

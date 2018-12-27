@@ -59,7 +59,7 @@ class CheckoutController extends Controller
         $order->delivery_method = $request->get('delivery_method');
         $order->user_type = $request->get('usertype');
         $order->total_price = Cart::total();
-        $order->save();
+        
         // dd();
 
         if($request->get('method') == 'cart') {
@@ -87,13 +87,9 @@ class CheckoutController extends Controller
 
             if (true === $startResult->getReturn()->getSuccess()) {
                 $reference = $startResult->getReturn()->getCustomerReference();
-
+                // dd($reference);
                 // Commit payment transaction.
-                $complete = new \ProcessingKz\Objects\Request\CompleteTransaction();
-                $complete->setMerchantId("000000000000073")
-                    ->setReferenceNr($reference)
-                    ->setTransactionSuccess(true);
-                $completeResult = $client->completeTransaction($complete);
+                
 
                 // Get status of transaction.
                 $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
@@ -101,21 +97,39 @@ class CheckoutController extends Controller
                     ->setReferenceNr($reference);
                 $statusResult = $client->getTransactionStatus($status);
                 // dd();
+                 $order->reference = $reference;
+            $order->save();
                 return redirect($startResult->getReturn()->getRedirectURL());
+
 
             } else {
                 die($startResult->getReturn()->getErrorDescription());
             }
+            
         }
 
         // $order->products()->attach(array_keys($productsId));
-        // Cart::destroy();
+        Cart::destroy();
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
         return redirect()->route('homepage');
     }
 
     public function processing(Request $request)
     {
-        dd($request->all());
+        $order  = Order::find(44);
+         $client = new \ProcessingKz\Client();
+        $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
+        $status->setMerchantId("000000000000073")
+            ->setReferenceNr($order->reference);
+        $statusResult = $client->getTransactionStatus($status);
+        // dd($statusResult->getReturn()->getTransactionStatus());
+        if($statusResult->getReturn()->getTransactionStatus() == 'AUTHORISED') {
+            $complete = new \ProcessingKz\Objects\Request\CompleteTransaction();
+            $complete->setMerchantId("000000000000073")
+            ->setReferenceNr($order->reference)
+            ->setTransactionSuccess(true);
+            $completeResult = $client->completeTransaction($complete);
+        }
+        echo $statusResult->getReturn()->getTransactionStatus();
     }
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/back.css') }}">
     <meta name="_token" content="{{ csrf_token() }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <style>
         .bs-catalog__hitText a {
             min-height: 85px;
@@ -346,7 +346,7 @@
               <a class="mob-header__link" href="tel:+7722331122"><img src="/images/phone.svg" alt="phone" class="bs-header__phone">+7 (722) 33-11-22</a>
           </li>
           <li class="mob-header__sign">
-              <a class="mob-header__link" href="{{ route('signin') }}"><img src="http://127.0.0.1:8000/images/cab.svg" alt="human" class="bs-header__human">Личный кабинет</a>
+              <a class="mob-header__link" href="{{ route('signin') }}"><img src="/images/cab.svg" alt="human" class="bs-header__human">Личный кабинет</a>
           </li>
         </ul>
       </div>
@@ -571,7 +571,7 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('after_jquery')
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 {!! Toastr::message() !!}
 
 @yield('after_js')
