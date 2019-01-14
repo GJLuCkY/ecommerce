@@ -87,7 +87,8 @@ class CheckoutController extends Controller
                 $reference = $startResult->getReturn()->getCustomerReference();
                 $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
                 $status->setMerchantId("000000000000073")
-                    ->setReferenceNr($reference);
+                    ->setReferenceNr($reference)
+                    ->setTransactionSuccess(true);
                 $statusResult = $client->getTransactionStatus($status);
                 $order->reference = $reference;
                 $order->save();
