@@ -59,9 +59,7 @@ class CheckoutController extends Controller
         $order->delivery_method = $request->get('delivery_method');
         $order->user_type = $request->get('usertype');
         $order->total_price = Cart::total();
-        
-        // dd();
-
+        $order->save();
         if($request->get('method') == 'cart') {
            $client = new \ProcessingKz\Client();
 
@@ -72,7 +70,7 @@ class CheckoutController extends Controller
                 ->setTotalAmount(number_format(str_replace(' ','',Cart::total()), 2, '', ''))
                 ->setCurrencyCode(398)
                 ->setDescription("My first transaction")
-                ->setReturnURL(route('order.processing'))
+                ->setReturnURL(route('order.processing', ['id' => $order->id]))
                 ->setGoodsList($data)
                 ->setLanguageCode("ru")
                 ->setMerchantLocalDateTime(date("d.m.Y H:i:s"))
@@ -87,18 +85,12 @@ class CheckoutController extends Controller
 
             if (true === $startResult->getReturn()->getSuccess()) {
                 $reference = $startResult->getReturn()->getCustomerReference();
-                // dd($reference);
-                // Commit payment transaction.
-                
-
-                // Get status of transaction.
                 $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
                 $status->setMerchantId("000000000000073")
                     ->setReferenceNr($reference);
                 $statusResult = $client->getTransactionStatus($status);
-                // dd();
-                 $order->reference = $reference;
-            $order->save();
+                $order->reference = $reference;
+                $order->save();
                 return redirect($startResult->getReturn()->getRedirectURL());
 
 
@@ -114,9 +106,9 @@ class CheckoutController extends Controller
         return redirect()->route('homepage');
     }
 
-    public function processing(Request $request)
+    public function processing(Request $request, $id)
     {
-        $order  = Order::find(44);
+        $order  = Order::find($id);
          $client = new \ProcessingKz\Client();
         $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
         $status->setMerchantId("000000000000073")
