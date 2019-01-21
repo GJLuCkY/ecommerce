@@ -137,7 +137,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
 
-                var result = removeHTML + category + filter + value;
+                var result = removeHTML + category + filter;
                 $(this).html(result);
             });
         });
@@ -154,7 +154,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
 
-                var result = category + filter + value;
+                var result = category + filter;
                 $(this).html(result);
             });
         });
@@ -169,7 +169,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
 
-                var result = removeHTML + category + filter + value;
+                var result = removeHTML + category + filter;
                 $(this).html(result);
             });
             var filterText = $(".select2-results__option");
@@ -182,7 +182,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
 
-                var result = category + filter + value;
+                var result = category + filter;
                 $(this).html(result);
             });
         });
@@ -197,7 +197,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
 
-                var result = removeHTML + category + filter + value;
+                var result = removeHTML + category + filter;
                 $(this).html(result);
             });
             var filterText = $(".select2-results__option");
@@ -210,7 +210,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
                 var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
 
-                var result = category + filter + value;
+                var result = category + filter;
                 $(this).html(result);
             });
         });
