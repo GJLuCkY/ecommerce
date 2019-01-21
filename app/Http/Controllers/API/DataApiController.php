@@ -173,8 +173,6 @@ class DataApiController extends Controller
                                 ]);
                             }
                         }
-                        
-                        
                         $products->push([
                             'name' => $product->name,
                             'article' => $product->options->article,
@@ -228,9 +226,9 @@ class DataApiController extends Controller
                     'created_at' => $order->created_at, // Дата создания заказа
                     'products' => $products,
                 ]);
-                // $order->update([
-                //     'status' => 'Отправлен'
-                // ]);
+                $order->update([
+                    'status' => 'Отправлен'
+                ]);
             }
             return response()->json($data2);
         } else {
@@ -249,7 +247,6 @@ class DataApiController extends Controller
 
     public function changeOrder(Request $request)
     {
-        dd('В стадии тестировании');
         $orders = $request->get("DOCUMENT_OUT");
         if(isset($orders)) {
             foreach($orders as $orderItemsBitrix) {
