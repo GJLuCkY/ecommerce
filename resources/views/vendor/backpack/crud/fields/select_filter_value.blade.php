@@ -135,7 +135,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var divider = '->';
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
-                var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
+                var filter = '<span class="filter-filter-span">' + obj[1];
 
                 var result = removeHTML + category + filter;
                 $(this).html(result);
@@ -152,7 +152,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var divider = '->';
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
-                var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
+                var filter = '<span class="filter-filter-span">' + obj[1];
 
                 var result = category + filter;
                 $(this).html(result);
@@ -167,7 +167,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var divider = '->';
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
-                var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
+                var filter = '<span class="filter-filter-span">' + obj[1];
 
                 var result = removeHTML + category + filter;
                 $(this).html(result);
@@ -180,7 +180,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var divider = '->';
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
-                var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
+                var filter = '<span class="filter-filter-span">' + obj[1];
 
                 var result = category + filter;
                 $(this).html(result);
@@ -195,7 +195,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var divider = '->';
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
-                var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
+                var filter = '<span class="filter-filter-span">' + obj[1];
 
                 var result = removeHTML + category + filter;
                 $(this).html(result);
@@ -208,7 +208,7 @@ $filters = $field['model']::with(['filter'])->get();
                 var divider = '->';
                 var obj = text.split(divider);
                 var category = '<span class="filter-category-span">' + obj[0] + '</span> ->';
-                var filter = '<span class="filter-filter-span">' + obj[1] + '</span> ->';
+                var filter = '<span class="filter-filter-span">' + obj[1];
 
                 var result = category + filter;
                 $(this).html(result);
