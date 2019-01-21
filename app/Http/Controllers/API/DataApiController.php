@@ -13,7 +13,7 @@ class DataApiController extends Controller
 {
     public function postCreationAndUpdatingCategory(Request $request)
     {
-       
+
         $categories = $request->get('GROUPS');
         if(isset($categories)) {
             foreach($categories as $item) {
@@ -54,12 +54,12 @@ class DataApiController extends Controller
                 'message' => 'No Content'
             ], 204);
         }
-        
+
     }
 
     public function postCreationAndUpdatingProducts(Request $request)
     {
-        
+
         $products = $request->get('NOMENCLATURE');
         if(isset($products)) {
             $created = false;
@@ -96,7 +96,7 @@ class DataApiController extends Controller
                             }
                         }
                     }
-                        
+
                 } else {
                     $created = true;
                     $product = new Product;
@@ -112,7 +112,7 @@ class DataApiController extends Controller
                     }
                     $product->status = $item['PUBLISHED'];;
                     $product->save();
-                    
+
                     foreach($item['FILTERS'] as $key=>$filter) {
                         if(strlen($filter) > 0) {
                             $value = Value::where('name', $filter)->where('filter_id', $key)->first();
@@ -138,7 +138,7 @@ class DataApiController extends Controller
                     'message' => 'OK'
                 ], 200);
             }
-            
+
         } else {
             return response()->json([
                 'message' => 'No Content'
@@ -156,7 +156,7 @@ class DataApiController extends Controller
         ]);
         if(count($orders) > 0) {
             foreach($orders as $key=>$order) {
-            
+
                 $products = collect([]);
                 $totalPrice = 0;
                 if(isset($order->products)) {
@@ -218,7 +218,7 @@ class DataApiController extends Controller
                     'email' => $order->email, // e-mail
                     // 'total_price' => $order->total_price, // сумма заказа
                     'comment' => $order->comment, // комментарий покупателя
-                    'payment_method' => $cartMethod, // способ оплаты, 
+                    'payment_method' => $cartMethod, // способ оплаты,
                     'payment_method_id' => $order->method, // идентификатор способа оплаты
                     'date_payment' => $order->updated_at, // дата оплаты
                     'delivery_method' => $delivMethod, // Способ доставки
@@ -241,33 +241,64 @@ class DataApiController extends Controller
             ];
             return response()->json($data);
         }
-        
-        
+
+
     }
 
     public function changeOrder(Request $request)
     {
         $orders = $request->get("DOCUMENT_OUT");
         if(isset($orders)) {
+
             foreach($orders as $orderItemsBitrix) {
+
                 foreach($orders as $orderBitrix) {
                     $order = Order::find($orderBitrix['order_id']);
+
                     if(isset($orderBitrix['products'])) {
-                        $orderProducts = [];
-                        foreach($orderBitrix['products'] as $productBitrix) {
-                            $product = Product::where('api_id_product', $productBitrix['code'])->first()->getAttributes();
-                            $data = [
-                                'qty' => $productBitrix['quantity'],
-                                'price' => $productBitrix['quantity'],
-                                'item' => $product
-                            ];
-                            
-                            $orderProducts[$product['id']] = $data;
-                           
+
+                        $orderProducts = $order->products;
+                        $newOrderPoducts = [];
+                        $newEquipments = [];
+                        $productsBitrix = (array)$orderBitrix['products'];
+
+                        foreach((array)$productsBitrix as $productBitrix) {
+                            foreach((object)$orderProducts as $orderProductKey=>$orderProduct) {
+                                if($productBitrix['code'] == $orderProduct->options->code) {
+                                    $newOrderPoducts[$orderProductKey] = $orderProduct;
+                                    $newOrderPoducts[$orderProductKey]->name = $productBitrix['name'];
+                                    $newOrderPoducts[$orderProductKey]->qty = $productBitrix['quantity'];
+                                    $newOrderPoducts[$orderProductKey]->price = $productBitrix['price'];
+                                    $newOrderPoducts[$orderProductKey]->options->code = $productBitrix['code'];
+                                    $newOrderPoducts[$orderProductKey]->options->article = $productBitrix['article'];
+
+                                    if(count((array)$productBitrix['equipment']) > 0) {
+                                        foreach((array)$productBitrix['equipment'] as $key=>$equipmentBitrix) {
+                                            $equipment = Product::where('api_id_product', $equipmentBitrix['code'])->first();
+                                            if(isset($equipment)) {
+                                                $newEquipments[$equipment->id] = [
+                                                    'code' => $equipmentBitrix['code'],
+                                                    'name' => $equipmentBitrix['name'],
+                                                    'image' => $equipment->image,
+                                                    'price' => $equipment['price'],
+                                                    'article' => $equipmentBitrix['article']
+                                                ];
+                                            }
+
+                                        }
+                                        $newOrderPoducts[$orderProductKey]->options->equipments = $newEquipments;
+                                    }
+                                }
+                            }
                         }
-                       
                     }
+
+                    if($orderBitrix['user_id'] == 0) {
+                        $userId = null;
+                    }
+
                     $order->update([
+                        'user_id' => $userId,
                         'name' => $orderBitrix['fullname'],
                         'address' => $orderBitrix['address'],
                         'phone' => $orderBitrix['phone'],
@@ -275,9 +306,9 @@ class DataApiController extends Controller
                         'method' => $orderBitrix['payment_method_id'],
                         'comment' => $orderBitrix['comment'],
                         'email' => $orderBitrix['email'],
-                        'products' => json_encode((array)$orderProducts)
+                        'products' => (object)$newOrderPoducts
                     ]);
-
+                   
                     return response()->json([
                         'message' => 'OK'
                     ], 200);
