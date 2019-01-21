@@ -91,6 +91,7 @@ class CheckoutController extends Controller
                 $statusResult = $client->getTransactionStatus($status);
                 $order->reference = $reference;
                 $order->save();
+                Cart::destroy();
                 return redirect($startResult->getReturn()->getRedirectURL());
 
 
@@ -99,29 +100,38 @@ class CheckoutController extends Controller
             }
             
         }
-
-        // $order->products()->attach(array_keys($productsId));
-        Cart::destroy();
+        $otvet = 'Наличными';
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('homepage');
+        return view('pages.thank-you', compact(['order', 'otvet']));
     }
 
     public function processing(Request $request, $id)
     {
+
         $order  = Order::find($id);
-         $client = new \ProcessingKz\Client();
+        $client = new \ProcessingKz\Client();
         $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
         $status->setMerchantId("000000000000073")
             ->setReferenceNr($order->reference);
+
         $statusResult = $client->getTransactionStatus($status);
-        // dd($statusResult->getReturn()->getTransactionStatus());
-        if($statusResult->getReturn()->getTransactionStatus() == 'AUTHORISED') {
+        $otvet = $statusResult->getReturn()->getTransactionStatus();
+        if($otvet == 'AUTHORISED') {
             $complete = new \ProcessingKz\Objects\Request\CompleteTransaction();
             $complete->setMerchantId("000000000000073")
             ->setReferenceNr($order->reference)
             ->setTransactionSuccess(true);
             $completeResult = $client->completeTransaction($complete);
+            $statusResult = $client->getTransactionStatus($status);
+            $otvet = $statusResult->getReturn()->getTransactionStatus();
         }
-        echo $statusResult->getReturn()->getTransactionStatus();
+        if($order->status != 'paid') {
+            if($otvet == 'PAID') {
+                $order->update([
+                    'status' => 'paid'
+                ]);
+            }
+        }
+        return view('pages.thank-you', compact(['order', 'otvet']));
     }
 }

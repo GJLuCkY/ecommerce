@@ -35,6 +35,19 @@ class OrderCrudController extends CrudController
             'label' => 'Заказы'
         ]);
 
+         $this->crud->addColumn([
+            'name' => 'phone',
+            'label' => 'Телефон'
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'status',
+            'label' => 'Статус',
+            'type' => 'select_from_array',
+            'options' => ['create' => 'Создан', 'accepted' => 'Принят', 'paid' => 'Оплачено картой', 'prepared' => 'Подготавливается', 'return' => 'Возврат','reserve' => 'Резерв','done' => 'Готово',],
+            'allows_null' => false,
+        ]);
+
         $this->crud->addField([
             'name' => 'name',
             'label' => 'Имя',
@@ -68,7 +81,7 @@ class OrderCrudController extends CrudController
             'name' => 'status',
             'label' => "Статус заказа",
             'type' => 'select_from_array',
-            'options' => ['create' => 'Создан', 'accepted' => 'Принят', 'prepared' => 'Подготавливается', 'return' => 'Возврат','reserve' => 'Резерв','done' => 'Готово',],
+            'options' => ['create' => 'Создан', 'accepted' => 'Принят', 'paid' => 'Оплачено картой', 'prepared' => 'Подготавливается', 'return' => 'Возврат','reserve' => 'Резерв','done' => 'Готово',],
             'allows_null' => false,
 
         ]);
