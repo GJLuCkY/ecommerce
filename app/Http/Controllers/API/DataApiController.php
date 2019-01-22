@@ -249,70 +249,79 @@ class DataApiController extends Controller
     {
         $orders = $request->get("DOCUMENT_OUT");
         if(isset($orders)) {
-
+            $have = false;
             foreach($orders as $orderItemsBitrix) {
 
                 foreach($orders as $orderBitrix) {
                     $order = Order::find($orderBitrix['order_id']);
-
-                    if(isset($orderBitrix['products'])) {
-
-                        $orderProducts = $order->products;
-                        $newOrderPoducts = [];
-                        $newEquipments = [];
-                        $productsBitrix = (array)$orderBitrix['products'];
-
-                        foreach((array)$productsBitrix as $productBitrix) {
-                            foreach((object)$orderProducts as $orderProductKey=>$orderProduct) {
-                                if($productBitrix['code'] == $orderProduct->options->code) {
-                                    $newOrderPoducts[$orderProductKey] = $orderProduct;
-                                    $newOrderPoducts[$orderProductKey]->name = $productBitrix['name'];
-                                    $newOrderPoducts[$orderProductKey]->qty = $productBitrix['quantity'];
-                                    $newOrderPoducts[$orderProductKey]->price = $productBitrix['price'];
-                                    $newOrderPoducts[$orderProductKey]->options->code = $productBitrix['code'];
-                                    $newOrderPoducts[$orderProductKey]->options->article = $productBitrix['article'];
-
-                                    if(count((array)$productBitrix['equipment']) > 0) {
-                                        foreach((array)$productBitrix['equipment'] as $key=>$equipmentBitrix) {
-                                            $equipment = Product::where('api_id_product', $equipmentBitrix['code'])->first();
-                                            if(isset($equipment)) {
-                                                $newEquipments[$equipment->id] = [
-                                                    'code' => $equipmentBitrix['code'],
-                                                    'name' => $equipmentBitrix['name'],
-                                                    'image' => $equipment->image,
-                                                    'price' => $equipment['price'],
-                                                    'article' => $equipmentBitrix['article']
-                                                ];
+                    if(isset($order)) {
+                        if(isset($orderBitrix['products'])) {
+                            $have = true;
+                            $orderProducts = $order->products;
+                            $newOrderPoducts = [];
+                            $newEquipments = [];
+                            $productsBitrix = (array)$orderBitrix['products'];
+    
+                            foreach((array)$productsBitrix as $productBitrix) {
+                                foreach((object)$orderProducts as $orderProductKey=>$orderProduct) {
+                                    if($productBitrix['code'] == $orderProduct->options->code) {
+                                        $newOrderPoducts[$orderProductKey] = $orderProduct;
+                                        $newOrderPoducts[$orderProductKey]->name = $productBitrix['name'];
+                                        $newOrderPoducts[$orderProductKey]->qty = $productBitrix['quantity'];
+                                        $newOrderPoducts[$orderProductKey]->price = $productBitrix['price'];
+                                        $newOrderPoducts[$orderProductKey]->options->code = $productBitrix['code'];
+                                        $newOrderPoducts[$orderProductKey]->options->article = $productBitrix['article'];
+    
+                                        if(count((array)$productBitrix['equipment']) > 0) {
+                                            foreach((array)$productBitrix['equipment'] as $key=>$equipmentBitrix) {
+                                                $equipment = Product::where('api_id_product', $equipmentBitrix['code'])->first();
+                                                if(isset($equipment)) {
+                                                    $newEquipments[$equipment->id] = [
+                                                        'code' => $equipmentBitrix['code'],
+                                                        'name' => $equipmentBitrix['name'],
+                                                        'image' => $equipment->image,
+                                                        'price' => $equipment['price'],
+                                                        'article' => $equipmentBitrix['article']
+                                                    ];
+                                                }
+    
                                             }
-
+                                            $newOrderPoducts[$orderProductKey]->options->equipments = $newEquipments;
                                         }
-                                        $newOrderPoducts[$orderProductKey]->options->equipments = $newEquipments;
                                     }
                                 }
                             }
                         }
+    
+                        if($orderBitrix['user_id'] == 0) {
+                            $userId = null;
+                        } else {
+                            $userId = $orderBitrix['user_id'];
+                        }
+                        
+                        $order->update([
+                            'user_id' => $userId,
+                            'name' => $orderBitrix['fullname'],
+                            'address' => $orderBitrix['address'],
+                            'phone' => $orderBitrix['phone'],
+                            'delivery_method' => $orderBitrix['delivery_method_id'],
+                            'method' => $orderBitrix['payment_method_id'],
+                            'comment' => $orderBitrix['comment'],
+                            'email' => $orderBitrix['email'],
+                            'products' => (object)$newOrderPoducts
+                        ]);
                     }
-
-                    if($orderBitrix['user_id'] == 0) {
-                        $userId = null;
-                    }
-
-                    $order->update([
-                        'user_id' => $userId,
-                        'name' => $orderBitrix['fullname'],
-                        'address' => $orderBitrix['address'],
-                        'phone' => $orderBitrix['phone'],
-                        'delivery_method' => $orderBitrix['delivery_method_id'],
-                        'method' => $orderBitrix['payment_method_id'],
-                        'comment' => $orderBitrix['comment'],
-                        'email' => $orderBitrix['email'],
-                        'products' => (object)$newOrderPoducts
-                    ]);
-                   
-                    return response()->json([
-                        'message' => 'OK'
-                    ], 200);
                 }
+            }
+            if($have){
+                return response()->json([
+                    'message' => 'OK'
+                ], 200);
+            } else {
+                dd(1);
+                return response()->json([
+                    'message' => 'No content / Not Found'
+                ], 204);
             }
         } else {
             return response()->json([
