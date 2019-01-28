@@ -44,7 +44,7 @@ class OrderCrudController extends CrudController
             'name' => 'status',
             'label' => 'Статус',
             'type' => 'select_from_array',
-            'options' => ['create' => 'Создан', 'accepted' => 'Принят', 'paid' => 'Оплачено картой', 'prepared' => 'Подготавливается', 'return' => 'Возврат','reserve' => 'Резерв','done' => 'Готово',],
+            'options' => ['create' => 'Создан', 'accepted' => 'Принят', 'paid' => 'Оплачено картой', 'prepared' => 'Подготавливается', 'return' => 'Возврат','reserve' => 'Резерв','done' => 'Готово', 'changed' => 'Изменен (Bitrix)'],
             'allows_null' => false,
         ]);
 
@@ -81,7 +81,7 @@ class OrderCrudController extends CrudController
             'name' => 'status',
             'label' => "Статус заказа",
             'type' => 'select_from_array',
-            'options' => ['create' => 'Создан', 'accepted' => 'Принят', 'paid' => 'Оплачено картой', 'prepared' => 'Подготавливается', 'return' => 'Возврат','reserve' => 'Резерв','done' => 'Готово',],
+            'options' => ['create' => 'Создан', 'accepted' => 'Принят', 'paid' => 'Оплачено картой', 'prepared' => 'Подготавливается', 'return' => 'Возврат','reserve' => 'Резерв','done' => 'Готово', 'changed' => 'Изменен (Bitrix)'],
             'allows_null' => false,
 
         ]);

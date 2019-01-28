@@ -227,7 +227,7 @@ class DataApiController extends Controller
                     'products' => $products,
                 ]);
                 $order->update([
-                    'status' => 'Отправлен'
+                    'status' => 'changed'
                 ]);
             }
             return response()->json($data2);
