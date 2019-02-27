@@ -348,7 +348,7 @@
                                             <img src="/images/fav.svg" alt="favorite">
                                         </a>
                                         <div class="bs-catalog__hitText">
-                                            <p>{{ isset($similarProduct->category->custom_name) ? $similarProduct->category->custom_name : $similarProduct->category->title }} {{ $similarProduct->brand->name }}</p>
+                                            <p>{{ isset($similarProduct->category->custom_name) ? $similarProduct->category->custom_name : $similarProduct->category->title }} {{ isset($similarProduct->brand->name) ? $similarProduct->brand->name : '' }}</p>
                                             <a href="{{ route('product', ['catSlug' => $similarProduct->category->slug, 'prodSlug' => $similarProduct->slug]) }}">
                                                 <h6>{{ $similarProduct->title }}</h6>
                                             </a>

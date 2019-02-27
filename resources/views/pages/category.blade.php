@@ -7,14 +7,14 @@
                 
                 @include('partials.menu')
                 <form>
-                    {{-- @if(count($products) > 0) --}}
+                    @if(count($products))   
                     <div class="bs-laminat__brands">
                         <h6 class="bs-laminat__title">Цена
                             <span>
                             <img src="/images/laminat.svg">
                             </span>
                         </h6>
-                    @if(count($products))   
+                   
                     <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
                     @endif
                     </div>
