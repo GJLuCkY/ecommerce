@@ -14,7 +14,9 @@
                             <img src="/images/laminat.svg">
                             </span>
                         </h6>
+                    @if(count($products))   
                     <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
+                    @endif
                     </div>
                     {{-- @endif --}}
                     @foreach($category->filters as $filters)
@@ -127,17 +129,18 @@
                           <h5 class="filter__head"><span class="filter__close"><img src="/images/back.png" alt="back"></span> ФИЛЬТР</h5>
                         </div>
                         <form>
-                            {{-- @if(count($products) > 0) --}}
+                            @if(count($products))
                             <div class="bs-laminat__brands">
                                 <h6 class="bs-laminat__title">Цена
                                     <span>
                                     <img src="/images/laminat.svg">
                                     </span>
                                 </h6>
-                                
+                                  
                             <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
+                            @endif
                             </div>
-                            {{-- @endif --}}
+                           
                             @foreach($category->filters as $filters)
                             @if(count($filters->values) > 0)
                             <div class="bs-laminat__brands">
