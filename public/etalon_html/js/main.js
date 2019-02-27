@@ -335,14 +335,6 @@ $(document).ready(function () {
     	sign.style.display = "block";
     });
 
-    // $('.bs-services__col').click(function(){
-    // 	mod.style.display = "block";
-    // 	$('.bs-services__desc').text($(this).find('.bs-services__small').text());
-    // 	$('.bs-services__detail').html($(this).find('.bs-services__info').html());
-    // 	// $('.bs-services__ul').html($(this).find('.bs-services__info ul').html());
-    // });
-
-
 	// When the user clicks on <span> (x), close the modal
 	if(span) {
         span.onclick = function() {
@@ -365,9 +357,9 @@ $(document).ready(function () {
 	    if (event.target === sign) {
 	        sign.style.display = "none";
       }
-    if (event.target === login) {
-      login.style.display = "none";
-    }
+      if (event.target === login) {
+        login.style.display = "none";
+      }
 	};
 
 	if(send) {
