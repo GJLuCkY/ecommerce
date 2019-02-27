@@ -69,7 +69,7 @@ class CartController extends Controller
         }
         $image = isset($product->image) ? asset('uploads/' . $product->image) : '';
       
-        Cart::add($product->id, $product->title, $quantity, $product->price + $amount, ['article' => $product->article, 'code' => $product->api_id_product,'image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name])->associate('App\\Models\\Product');
+        Cart::add($product->id, $product->title, $quantity, $product->price + $amount, ['article' => $product->article, 'code' => $product->api_id_product,'image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name, 'type' => $product->type])->associate('App\\Models\\Product');
        
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
         return redirect()->back();

@@ -21,7 +21,7 @@
                             <img src="{{ (isset($product['options']['image']) && strlen($product['options']['image']) > 1) ? $product['options']['image'] : '/images/not-found.png' }}" alt="{{ $product['name'] }}">
                         </div>
                         <div class="col-sm-4 bs-basket__bigCol">
-                            <p class="bs-basket__about">{{ $product['name'] }}
+                            <p class="bs-basket__about">{{ $product['name'] }} 
                                 <br>{{ $product['options']['category'] . ' ' . $product['options']['brand']['name'] }}
                                
                             </p>
@@ -57,8 +57,20 @@
                             </div>
                         </div>
                         <div class="col-sm-3 bs-basket__cost">
-                            <p class="bs-basket__cost">{{ number_format($product['price'], null, ' ', ' ') }}  тг / 1 шт.</p>
-                            <h4 class="bs-basket__costTotal">{{ number_format($product['subtotal'], null, ' ', ' ') }} тг / {{ $product['qty'] }} шт.</h4>
+                            <p class="bs-basket__cost">{{ number_format($product['price'], null, ' ', ' ') }}  тг / 1 @if($product['options']['type'] == 'polotno')
+                                полотно
+                                @elseif($product['options']['type'] == 'thing')
+                                шт.
+                                @else
+                                за уп.
+                                @endif</p>
+                            <h4 class="bs-basket__costTotal">{{ number_format($product['subtotal'], null, ' ', ' ') }} тг / {{ $product['qty'] }} @if($product['options']['type'] == 'polotno')
+                                полотно
+                                @elseif($product['options']['type'] == 'thing')
+                                шт.
+                                @else
+                                за уп.
+                                @endif</h4>
                         </div>
                         <div class="col-sm-1 bs-basket__delete">
                             <a href="{{ route('removeToCart', ['id' => $product['rowId']]) }}"><img src="/images/delete.svg" alt="X" class=""></a>
@@ -70,7 +82,7 @@
                             <img src="{{ (isset($product['image'])) ? asset('uploads/' . $product['image']) : '/images/not-found.png' }}" alt="{{ $product['name'] }}">
                         </div>
                         <div class="col-xs-9 bs-basket__bigCol">
-                          <p class="bs-basket__about">
+                          <p class="bs-basket__about">awd
                               <br>{{ $product['options']['category'] . ' ' . $product['options']['brand']['name'] }}
                               <br>{{ $product['name'] }}
                           </p>
