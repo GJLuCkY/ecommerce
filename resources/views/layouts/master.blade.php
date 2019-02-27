@@ -9,6 +9,7 @@
     <meta name="author" content="BrandStudio.kz">
     <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/back.css') }}">
     <meta name="_token" content="{{ csrf_token() }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -165,6 +166,13 @@
                     <img src="{{ asset('images/cab.svg') }}" alt="human" class="bs-header__human"> Личный кабинет
                   </a>
               </button>
+              @endif
+            </li>
+            <li class="bs-main-nav__item ">
+              @if(Auth::check())
+                      <a href="{{ route('getLogout') }}">Выйти</a>
+                      <a href="{{ route('profile.index') }}">Профиль</a>
+                  @else
               <button class="bs-header__login">
                 <a class="bs-main-nav__link">Войти</a>
               </button>
@@ -568,8 +576,8 @@
 </div>
 @yield('before_jquery')
 <!--SCRIPTS    -->
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @yield('after_jquery')
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 {!! Toastr::message() !!}

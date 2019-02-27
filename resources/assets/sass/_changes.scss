@@ -1,0 +1,99 @@
+.bs-header{
+  .first .row{
+    margin-top: 0;
+  }
+  .bs-main-nav__list{
+    justify-content: space-around;
+  }
+  .bs-main-nav__link{
+    font-size: 16px;
+    font-weight: 400;
+  }
+  &__phone{
+    max-width: 23px;
+    margin-right: 5px;
+  }
+  &__div{
+    display: none;
+  }
+  &__col{
+    padding-right: 0!important;
+    padding-left: 0!important;
+    justify-content: space-between;
+    .bs-main-nav__item:last-of-type{
+      width: fit-content;
+    }
+  }
+  &__img{
+    max-width: 23px;
+  }
+  &__text{
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+.bs-links{
+  &__item a{
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .dropdown-content a{
+    font-size: 15px;
+    font-weight: 400;
+  }
+}
+.bs-footer{
+  padding: 55px 0 70px;
+  &__item{
+    padding-bottom: 17px;
+  }
+}
+
+.bs-laminat__head{
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.bs-basket__heading{
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.bs-podlozhka__cost {
+  font-size: 25px;
+  font-weight: 600;
+  color: #00AB0C;
+  margin-bottom: 15px;
+  width: 130%;
+}
+
+.bs-podlozhka__review button {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #00AB0C;
+  padding: 11px 75px;
+  margin-left: 0;
+  margin-top: 30px;
+  display: block;
+}
+
+.bs-podlozhka .bs-catalog__head{
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.bs-podlozhka__cat a{
+  font-size: 14px;
+}
+
+.bs-basket__order{
+  background: none;
+  padding: 0;
+  a{
+    width: 100%;
+    padding: 14px;
+    display: block;
+    background-color: #00ab0c;
+  }
+}
