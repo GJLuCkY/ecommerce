@@ -16,9 +16,9 @@
                         </h6>
                    
                     <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
-                    @endif
+                    
                     </div>
-                    {{-- @endif --}}
+                    @endif
                     @foreach($category->filters as $filters)
                     @if(count($filters->values) > 0)
                     <div class="bs-laminat__brands">
@@ -138,9 +138,9 @@
                                 </h6>
                                   
                             <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
-                            @endif
+                            
                             </div>
-                           
+                            @endif
                             @foreach($category->filters as $filters)
                             @if(count($filters->values) > 0)
                             <div class="bs-laminat__brands">
