@@ -163,16 +163,13 @@
                   @else
               <button class="bs-header__signup">
                   <a class="bs-main-nav__link">
-                    <img src="{{ asset('images/cab.svg') }}" alt="human" class="bs-header__human"> Личный кабинет
+                    <img src="{{ asset('images/cab.svg') }}" alt="human" class="bs-header__human"> Регистрация
                   </a>
               </button>
               @endif
             </li>
             <li class="bs-main-nav__item ">
-              @if(Auth::check())
-                      <a href="{{ route('getLogout') }}">Выйти</a>
-                      <a href="{{ route('profile.index') }}">Профиль</a>
-                  @else
+              @if(!Auth::check())
               <button class="bs-header__login">
                 <a class="bs-main-nav__link">Войти</a>
               </button>

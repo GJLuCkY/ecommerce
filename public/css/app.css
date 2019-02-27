@@ -112,6 +112,10 @@
   background-color: #00ab0c;
 }
 
+.bs-basket__costTotal {
+  font-size: 22px;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
