@@ -106,7 +106,7 @@ class CheckoutController extends Controller
 
         Mail::send('form.order', $order, function ($message) use ($order) {
             $message->from('etalon-holding@gmail.com', 'TAMOS');
-            $message->to('balymbetov.temirlan@gmail.com', 'Tamos')->subject('Ваш заказ принят №' . $order->id .' | tamos.kz');
+            $message->to($order->email, 'Tamos')->subject('Ваш заказ принят №' . $order->id .' | tamos.kz');
             // $message->cc('tamos.kz@mail.ru', 'Tamos');
         });
 
