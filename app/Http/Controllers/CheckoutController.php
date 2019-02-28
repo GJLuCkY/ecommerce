@@ -102,36 +102,41 @@ class CheckoutController extends Controller
         }
         $otvet = 'Наличными';
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
-        return view('pages.thank-you', compact(['order', 'otvet']));
+        return redirect()->route('order.processing', ['id' => $order->id]);
     }
 
     public function processing(Request $request, $id)
     {
 
         $order  = Order::find($id);
-        $client = new \ProcessingKz\Client();
-        $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
-        $status->setMerchantId("000000000000073")
-            ->setReferenceNr($order->reference);
+        $otvet = 'Наличными';
 
-        $statusResult = $client->getTransactionStatus($status);
-        $otvet = $statusResult->getReturn()->getTransactionStatus();
-        if($otvet == 'AUTHORISED') {
-            $complete = new \ProcessingKz\Objects\Request\CompleteTransaction();
-            $complete->setMerchantId("000000000000073")
-            ->setReferenceNr($order->reference)
-            ->setTransactionSuccess(true);
-            $completeResult = $client->completeTransaction($complete);
+        if($order->method == 'cart') {
+            $client = new \ProcessingKz\Client();
+            $status = new \ProcessingKz\Objects\Request\GetTransactionStatus();
+            $status->setMerchantId("000000000000073")
+                ->setReferenceNr($order->reference);
+    
             $statusResult = $client->getTransactionStatus($status);
             $otvet = $statusResult->getReturn()->getTransactionStatus();
-        }
-        if($order->status != 'paid') {
-            if($otvet == 'PAID') {
-                $order->update([
-                    'status' => 'paid'
-                ]);
+            if($otvet == 'AUTHORISED') {
+                $complete = new \ProcessingKz\Objects\Request\CompleteTransaction();
+                $complete->setMerchantId("000000000000073")
+                ->setReferenceNr($order->reference)
+                ->setTransactionSuccess(true);
+                $completeResult = $client->completeTransaction($complete);
+                $statusResult = $client->getTransactionStatus($status);
+                $otvet = $statusResult->getReturn()->getTransactionStatus();
+            }
+            if($order->status != 'paid') {
+                if($otvet == 'PAID') {
+                    $order->update([
+                        'status' => 'paid'
+                    ]);
+                }
             }
         }
-        return view('pages.thank-you', compact(['order', 'otvet']));
+       
+        return view('pages.thanku', compact(['order', 'otvet']));
     }
 }
