@@ -43,7 +43,8 @@
                                     <input type="hidden" name="change" value="plus">
                                     <button type="submit">+</button>
                                 </form> 
-                                <p>{{ $product['qty'] }}</p>
+                                <!-- <p>{{ $product['qty'] }}</p> -->
+                                <input type="text" value="{{ $product['qty'] }}">
                                 @if($product['qty'] == 1)
                                 <button type="button">-</button>
                                 @else

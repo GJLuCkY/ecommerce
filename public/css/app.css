@@ -139,6 +139,11 @@
   min-height: 85px;
 }
 
+.bs-basket__counter input {
+  text-align: center;
+  width: 60px;
+}
+
 @media (max-width: 1300px) {
   .bs-header .first .col-md-8 {
     width: 63.66667% !important;
@@ -463,5 +468,13 @@
 
 body {
   overflow: scroll;
+}
+
+a:hover,
+a:focus,
+button:hover,
+button:focus {
+  text-decoration: none;
+  outline: none;
 }
 
