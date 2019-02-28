@@ -98,6 +98,13 @@
   }
 }
 
+.bs-basket__counter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+}
+
 .bs-basket__costTotal{
   font-size: 22px;
 }
@@ -142,5 +149,11 @@
     &__col{
       width: 39.33333%!important;
     }
+  }
+}
+
+@media (max-width: 1100px) {
+  .bs-basket__counter{
+    width: 100px;
   }
 }

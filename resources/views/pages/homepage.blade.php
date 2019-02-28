@@ -175,6 +175,7 @@
                       </div>
                     </div>
                     <div class="addToCartModal__linkWrp">
+                      <button type="submit">ПРОДОЛЖИТЬ ПОКУПКИ</button>
                       <a href="{{ route('checkout') }}"> Оформить заказ</a>
                     </div>
                   </div>
