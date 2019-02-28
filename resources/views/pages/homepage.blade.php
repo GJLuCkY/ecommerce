@@ -162,26 +162,28 @@
                   <div class="addToCartModal__content">
                     <span class="close">&times;</span>
                     <h3>Вы добавили в корзину</h3>
-                    <div class="addToCartModal__row">
-                      <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product['title'] }}">
-                      <p>{{ $product->title }}</p>
-                      <div class="addToCartModal__quan">
-                        <button type="button" class="plus">+</button>
-                        <input id="uintTextBox" type="text" value="1">
-                        <button type="button" class="minus">-</button>
+                    <form action="">
+                      <div class="addToCartModal__row">
+                        <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product['title'] }}">
+                        <p>{{ $product->title }}</p>
+                        <div class="addToCartModal__quan">
+                          <button type="button" class="plus">+</button>
+                          <input id="uintTextBox" type="text" value="1">
+                          <button type="button" class="minus">-</button>
+                        </div>
+                        <div>
+                          <span class="cost">5 418 тг / 1шт.</span>
+                        </div>
+                        <div class="addToCartModal__total">
+                          <span>ИТОГОВАЯ СТОИМОСТЬ</span>
+                          <h5>5 418 тг </h5>
+                        </div>
                       </div>
-                      <div>
-                        <span class="cost">5 418 тг / 1шт.</span>
+                      <div class="addToCartModal__linkWrp">
+                        <button type="submit">ПРОДОЛЖИТЬ ПОКУПКИ</button>
+                        <a href="{{ route('checkout') }}"> Оформить заказ</a>
                       </div>
-                      <div class="addToCartModal__total">
-                        <span>ИТОГОВАЯ СТОИМОСТЬ</span>
-                        <h5>5 418 тг </h5>
-                      </div>
-                    </div>
-                    <div class="addToCartModal__linkWrp">
-                      <button type="submit">ПРОДОЛЖИТЬ ПОКУПКИ</button>
-                      <a href="{{ route('checkout') }}"> Оформить заказ</a>
-                    </div>
+                    </form>  
                   </div>
                 </div>
             </div>

@@ -460,7 +460,7 @@ $('.one-time').slick({
   infinite: true,
   speed: 700,
   slidesToShow: 1,
-  adaptiveHeight: true,
+  adaptiveHeight: false,
   autoplay: true,
   arrows: false
 });
