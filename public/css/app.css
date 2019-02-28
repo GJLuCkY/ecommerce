@@ -112,6 +112,21 @@
   background-color: #00ab0c;
 }
 
+.bs-basket__counter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .bs-basket__costTotal {
   font-size: 22px;
 }
@@ -149,6 +164,12 @@
 
   .bs-header__col {
     width: 39.33333% !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .bs-basket__counter {
+    width: 100px;
   }
 }
 
@@ -263,12 +284,22 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 10px 14px;
+  padding: 10px 36px;
   display: block;
   background-color: #00ab0c;
   color: #fff;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 12px;
+}
+
+.addToCartModal__linkWrp button {
+  font-size: 12px;
+  font-weight: 300;
+  color: #00ab0c;
+  background: transparent;
+  border: 1px solid #00ab0c;
+  margin-right: 20px;
+  padding: 0 25px;
 }
 
 @media (max-width: 1450px) {

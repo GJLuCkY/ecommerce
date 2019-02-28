@@ -10885,13 +10885,14 @@ a:hover {
   }
 
   .bs-catalog__hit {
-    padding: 0 100px;
+    padding: 0 60px;
   }
 
   .bs-catalog__brand {
     width: 50%;
     float: left;
     margin-bottom: 30px;
+    overflow: hidden;
   }
 
   .brands::after {
