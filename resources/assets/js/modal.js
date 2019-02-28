@@ -6,7 +6,7 @@ $(document).ready(function () {
 
   var sign = document.getElementById('sign');
   var login = document.getElementById('login');
-  var addToCartModal = document.getElementById('addToCartModal');
+  var addToCartModal = document.getElementsByClassName('addToCartModal')[0];
 
   var catalog = document.getElementById('mob-catalog');
 
