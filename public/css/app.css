@@ -144,6 +144,10 @@
   width: 60px;
 }
 
+.bs-catalog__newBtm {
+  position: absolute;
+}
+
 @media (max-width: 1300px) {
   .bs-header .first .col-md-8 {
     width: 63.66667% !important;
@@ -269,6 +273,12 @@
 }
 
 .addToCartModal__total h5 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #18A921;
+}
+
+.addToCartModal__total h5 span {
   font-size: 18px;
   font-weight: 700;
   color: #18A921;

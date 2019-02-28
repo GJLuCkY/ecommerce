@@ -206,7 +206,7 @@
                         <div class="col-sm-3 bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
                                 <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
-                                    <img src="{{ (isset($item->image)) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{ $item->title }}">
+                                    <img class="prodImg" src="{{ (isset($item->image)) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{ $item->title }}">
                                 </a>
                                 <a class="back-wishlist" href="{{ route('wishlist', ['id' => $item->id]) }}">
                                     <img src="{{ asset('images/fav.svg') }}" alt="favorite">
@@ -224,6 +224,8 @@
                                   </form>
                                 </div>
                                 <div class="bs-catalog__hitText">
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <input type="hidden" name="quantity" value="{{ $item->quantity }}">
                                     <p>{{ isset($item->category->custom_name) ? $item->category->custom_name : $item->category->title }} {{ isset($item->brand->name) ? $item->brand->name : '' }}</p>
                                     <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
                                         <h6 style="font-size: 16px">{{ $item->title }}</h6>
@@ -231,15 +233,13 @@
                                 </div>
                             </div>
                            
-                            <p class="bs-catalog__size">{{ number_format($item->price, null, ',', ' ') }} ₸</p>
-                            <form action="{{ route('addToCart') }}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="id" value="{{ $item->id }}">
+                            <p class="bs-catalog__size"><span>{{ number_format($item->price, null, ',', ' ') }}</span> ₸</p>
+                            
                                 <button type="button" class="bs-catalog__add">
                                     <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
                                     Добавить в корзину
                                 </button>
-                            </form>
+                            
                             
                             <div class="bs-catalog__compare">
                                 <ul>
@@ -248,35 +248,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="addToCartModal" id="addToCartModal">
-                          <div class="addToCartModal__content">
-                            <span class="close">&times;</span>
-                            <h3>Вы добавили в корзину</h3>
-                            <div class="addToCartModal__row">
-                              <img src="{{ (isset($item->image)) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{ $item['title'] }}">
-                              <p>{{ $item->title }}</p>
-                              <div class="addToCartModal__quan">
-                                <button type="button" class="plus">+</button>
-                                <input id="uintTextBox" type="text" value="1">
-                                <button type="button" class="minus">-</button>
-                              </div>
-                              <div>
-                                <span class="cost">5 418 тг / 1шт.</span>
-                              </div>
-                              <div class="addToCartModal__total">
-                                <span>ИТОГОВАЯ СТОИМОСТЬ</span>
-                                <h5>5 418 тг </h5>
-                              </div>
-                            </div>
-                            <div class="addToCartModal__linkWrp">
-                              <button type="submit">ПРОДОЛЖИТЬ ПОКУПКИ</button>
-                              <a href="{{ route('checkout') }}"> Оформить заказ</a>
-                            </div>
-                          </div>
-                        </div>
+                        
                         @endforeach
                     </div>
                     @endforeach
+                    @include('partials.product-modal')
                 </div>
                 {{ $products->appends(request()->all())->links('partials.pagination') }}
             </div>
