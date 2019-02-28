@@ -144,8 +144,9 @@
   width: 60px;
 }
 
-.bs-catalog__newBtm {
-  position: absolute;
+.bs-catalog__hitImg {
+  height: 350px;
+  overflow: hidden;
 }
 
 @media (max-width: 1300px) {
