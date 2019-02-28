@@ -155,38 +155,7 @@
                         @endforeach
                     </div>
                 </div>
-<<<<<<< HEAD
                @include('partials.product-modal')
-=======
-                <div class="addToCartModal" id="addToCartModal">
-                  <div class="addToCartModal__content">
-                    <span class="close">&times;</span>
-                    <h3>Вы добавили в корзину</h3>
-                    <form action="">
-                      <div class="addToCartModal__row">
-                        <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product['title'] }}">
-                        <p>{{ $product->title }}</p>
-                        <div class="addToCartModal__quan">
-                          <button type="button" class="plus">+</button>
-                          <input id="uintTextBox" type="text" value="1">
-                          <button type="button" class="minus">-</button>
-                        </div>
-                        <div>
-                          <span class="cost">5 418 тг / 1шт.</span>
-                        </div>
-                        <div class="addToCartModal__total">
-                          <span>ИТОГОВАЯ СТОИМОСТЬ</span>
-                          <h5>5 418 тг </h5>
-                        </div>
-                      </div>
-                      <div class="addToCartModal__linkWrp">
-                        <button type="submit">ПРОДОЛЖИТЬ ПОКУПКИ</button>
-                        <a href="{{ route('checkout') }}"> Оформить заказ</a>
-                      </div>
-                    </form>  
-                  </div>
-                </div>
->>>>>>> 7d374dc01c87a146968f2407debdddd4bc13658c
             </div>
         </div>
     </div>
