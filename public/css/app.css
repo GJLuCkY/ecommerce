@@ -274,6 +274,12 @@
   color: #18A921;
 }
 
+.addToCartModal__total h5 span {
+  font-size: 18px;
+  font-weight: 700;
+  color: #18A921;
+}
+
 .addToCartModal__linkWrp {
   margin-top: 40px;
   text-align: center;

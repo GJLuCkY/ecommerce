@@ -12,6 +12,7 @@ use Toastr;
 use App\Traits\CNPMerchantWebServiceClient;
 use App\Traits\TransactionDetails;
 use App\Traits\startTransaction;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -102,6 +103,13 @@ class CheckoutController extends Controller
         }
         $otvet = 'Наличными';
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
+
+        Mail::send('form.order', $order, function ($message) use ($order) {
+            $message->from('etalon-holding@gmail.com', 'TAMOS');
+            $message->to('balymbetov.temirlan@gmail.com', 'Tamos')->subject('Ваш заказ принят №' . $order->id .' | tamos.kz');
+            // $message->cc('tamos.kz@mail.ru', 'Tamos');
+        });
+
         return redirect()->route('order.processing', ['id' => $order->id]);
     }
 

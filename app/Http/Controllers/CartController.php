@@ -19,8 +19,8 @@ class CartController extends Controller
         return view('pages.cart');
     }
 
-    public function getAddToCart(Request $request) {
-        
+    public function getAddToCart(Request $request) 
+    { 
         $id = $request->get('id');
         $quantity = $request->get('quantity', 1);
         $cart = Cart::content()->toArray();

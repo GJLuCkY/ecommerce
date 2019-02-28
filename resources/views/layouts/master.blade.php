@@ -258,7 +258,7 @@
         <form class="bs-header__form" action="{{ route('search') }}" method="GET">
             <div class="bs-header__cat">
                 <select name="category">
-                <option disabled>Выбор категории</option>
+                <option disabled selected>Выбор категории</option>
                 @foreach($menus as $category)
                     @foreach($category->children as $item)
                         <option value={{ $item->id }}>{{ $item->title }}</option>

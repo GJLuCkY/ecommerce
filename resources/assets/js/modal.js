@@ -38,12 +38,22 @@ $(document).ready(function () {
     });
 
     $('.bs-catalog__add').click(function(){
-      img = $(this).parent().parent().find('.prodImg').attr('src');
-      alt = $(this).parent().parent().find('.prodImg').attr('alt');
-      name = $(this).parent().parent().find('.bs-catalog__hitText a').text();
+      img = $(this).parent().find('.prodImg').attr('src');
+      alt = $(this).parent().find('.prodImg').attr('alt');
+      name = $(this).parent().find('.bs-catalog__hitText a').text();
+      price = $(this).parent().find('.bs-catalog__size span').text().replace(/ /g, '');
+      value = $('.addToCartModal__quan input').val();
+      total = parseInt(price) * parseInt(value);
+      id = $(this).parent().find('.bs-catalog__hitText input[name*=id]').val();
+      quantity = $(this).parent().find('.bs-catalog__hitText input[name*=quantity]').val();
       $('.addToCartModal__content img').attr('src', img);
       $('.addToCartModal__content img').attr('alt', alt);
       $('.addToCartModal__content p').html(name);
+      $('.addToCartModal__content .cost span').html(number_format(price, 0, ',', ' '));
+      // $('.addToCartModal__total .modalTotalPrice span').html(number_format(total, 0, ',', ' '));
+      $('.addToCartModal__total .modalTotalPrice span').html(total);
+      $('.addToCartModal__content input[name*=id]').attr('value', id);
+      $('.addToCartModal__content #uintTextBox').attr('max', quantity);
 
       // console.log($(this).parent().parent().find('.prodImg'));
       addToCartModal.style.display = "block";
@@ -130,17 +140,54 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.addToCartModal__quan .plus').click(function(){
+    quantity = $('.addToCartModal__quan input').attr('max');
     value = $('.addToCartModal__quan input').val();
-    value++;
+    price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
+    console.log(price);
+    if(parseInt(value) < parseInt(quantity)) 
+    {
+      value++;
+    }
+    $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
     $('.addToCartModal__quan input').val(value);
-    // cost = $('.addToCartModal .cost').text();
-    // cost = parseInt(cost);
+  });
+  $('.addToCartModal__quan input').on('input', function() {
+    quantity = $('.addToCartModal__quan input').attr('max');
+    value = $('.addToCartModal__quan input').val();
+    price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
+    if(parseInt(value) > parseInt(quantity)) 
+    {
+      value = value.substr(0, value.length - 1);
+    }
+
+    if(parseInt(value) == 0) {
+      value = 1;
+    }
+    $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
+    $('.addToCartModal__quan input').val(value);
   });
 
+  $('.addToCartModal__quan input').on('input', function() {
+    quantity = $('.addToCartModal__quan input').attr('max');
+    value = $('.addToCartModal__quan input').val();
+    price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
+    if(parseInt(value) > parseInt(quantity)) 
+    {
+      value = value.substr(0, value.length - 1);
+    }
+
+    if(parseInt(value) == 0) {
+      value = 1;
+    }
+    $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
+    $('.addToCartModal__quan input').val(value);
+  });
   $('.addToCartModal__quan .minus').click(function(){
     if($('.addToCartModal__quan input').val() > 1){
       value = $('.addToCartModal__quan input').val();
+      price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
       value--;
+      $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
       $('.addToCartModal__quan input').val(value);
     }
   });
@@ -165,3 +212,28 @@ $(document).ready(function () {
     return /^\d*$/.test(value);
   });
 });
+
+
+function number_format (number, decimals, dec_point, thousands_sep) {
+    // Strip all characters but numerical ones.
+    number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+    var n = !isFinite(+number) ? 0 : +number,
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function (n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+        };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
+}
