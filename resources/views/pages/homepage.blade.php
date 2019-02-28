@@ -47,7 +47,7 @@
                         <div class="bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
                                 <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">
-                                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
+                                    <img class="prodImg" src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product->title }}">
                                 </a>
                                 <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                     <img src="/images/fav.svg" alt="favorite">
@@ -72,20 +72,20 @@
                                     <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ isset($product->brand->name) ? $product->brand->name : '' }}
                                     <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
                                     @if(isset($product->brand))
-                                    <br> {{ $product->brand->name }} </p>
+                                    {{ $product->brand->name }} </p>
                                     @endif
                                 </div>
                             </div>
                             
                             <p class="bs-catalog__size">{{ number_format($product->price, null, ',', ' ') }} ₸</p>
                             <form action="{{ route('addToCart') }}" method="POST">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="id" value="{{ $product->id }}">
-                                    <button type="submit" class="bs-catalog__add">
-                                        <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
-                                        Добавить в корзину
-                                    </button>
-                                </form>
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <button type="button" class="bs-catalog__add">
+                                    <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                    Добавить в корзину
+                                </button>
+                            </form>
                                 
                             <div class="bs-catalog__compare">
                                 <ul>
@@ -108,7 +108,7 @@
                         <div class="bs-catalog__hit">
                             <div class="bs-catalog__hitImg">
                                 <a href="{{ route('product', ['catSlug' => $product->category['slug'], 'prodSlug' => $product->slug]) }}">
-                                    <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product['title'] }}">
+                                    <img class="prodImg" src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product['title'] }}">
                                 </a>
                                 <a href="{{ route('wishlist', ['id' => $product->id]) }}" class="back-wishlist">
                                     <img src="/images/fav.svg" alt="favorite">
@@ -129,19 +129,19 @@
                                         <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category['title'] }} {{ $product->brand['name'] }}
                                         <br> <a href="{{ route('product', ['catSlug' => $product->category['slug'], 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
                                         @if(isset($product->brand))
-                                        <br> {{ $product->brand['name'] }} </p>
+                                        {{ $product->brand['name'] }} </p>
                                         @endif
                                 </div>
                             </div>
                             <p class="bs-catalog__size">{{ number_format($product->price, null, ',', ' ') }} ₸</p>
                             <form action="{{ route('addToCart') }}" method="POST">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="id" value="{{ $product->id }}">
-                                    <button type="submit" class="bs-catalog__add">
-                                        <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
-                                        Добавить в корзину
-                                    </button>
-                                </form>
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <button type="button" class="bs-catalog__add">
+                                    <img src="/images/basket.svg" alt="basket" class="bs-catalog__basket">   
+                                    Добавить в корзину
+                                </button>
+                            </form>
                             <div class="bs-catalog__compare">
                                 <ul>
                                 <star-rating :rating={{ $product->getCountActiveReviews() }} :read-only="true" :show-rating="false" :star-size="16" :round-start-rating="false"></star-rating>
@@ -151,6 +151,31 @@
                         </div>
                         @endforeach
                     </div>
+                </div>
+                <div class="addToCartModal" id="addToCartModal">
+                  <div class="addToCartModal__content">
+                    <span class="close">&times;</span>
+                    <h3>Вы добавили в корзину</h3>
+                    <div class="addToCartModal__row">
+                      <img src="{{ (isset($product->image)) ? asset('uploads/' . $product->image) : '/images/not-found.png' }}" alt="{{ $product['title'] }}">
+                      <p>{{ $product->title }}</p>
+                      <div class="addToCartModal__quan">
+                        <button type="button" class="plus">+</button>
+                        <input id="uintTextBox" type="text" value="1">
+                        <button type="button" class="minus">-</button>
+                      </div>
+                      <div>
+                        <span class="cost">5 418 тг / 1шт.</span>
+                      </div>
+                      <div class="addToCartModal__total">
+                        <span>ИТОГОВАЯ СТОИМОСТЬ</span>
+                        <h5>5 418 тг </h5>
+                      </div>
+                    </div>
+                    <div class="addToCartModal__linkWrp">
+                      <a href="{{ route('checkout') }}"> Оформить заказ</a>
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>

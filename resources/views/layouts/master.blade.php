@@ -7,7 +7,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="author" content="BrandStudio.kz">
-    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/ico" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/back.css') }}">
@@ -573,8 +573,8 @@
 </div>
 @yield('before_jquery')
 <!--SCRIPTS    -->
-<script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 @yield('after_jquery')
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 {!! Toastr::message() !!}

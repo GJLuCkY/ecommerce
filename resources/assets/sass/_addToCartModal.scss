@@ -1,0 +1,127 @@
+.addToCartModal{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba($color: #000000, $alpha: 0.4);
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: none;
+
+  &__content{
+    background: #fff;
+    display: block;
+    margin: auto;
+    width: 42%;
+    padding: 20px;
+    transform: translate(0, 100%);
+    img{
+      max-width: 65px;
+      max-height: 65px;
+    }
+    h3{
+      display: inline;
+      font-size: 20px;
+      font-weight: 700;
+      color: #525252;
+    }
+    p{
+      font-size: 16px;
+      font-weight: 300;
+      color: #525252;
+    }
+    span{
+      font-size: 14px;
+      font-weight: 400;
+      color: #AAAAAA;
+    }
+  }
+  &__row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+  }
+  &__quan{
+    border: 1px solid #707070;
+    width: fit-content;
+    button{
+      border: none;
+      background: #F0F0F0;
+      width: 33px;
+      height: 25px;
+      font-size: 11px;
+      font-weight: 400;
+      color: #B4B4B4;
+    }
+    input{
+      width: 38px;
+      text-align: center;
+    }
+  }
+  .close{
+    font-size: 21px;
+    font-weight: bold;
+    color: #000;
+  }
+  &__total{
+    span{
+      text-transform: uppercase;
+    }
+    h5{
+      font-size: 18px;
+      font-weight: 700;
+      color: #18A921;
+    }
+  }
+  &__linkWrp{
+    margin-top: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    a{
+      width: fit-content;
+      padding: 10px 14px;
+      display: block;
+      background-color: #00ab0c;
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+}
+
+
+@media (max-width: 1450px) {
+  .addToCartModal{
+    &__content{
+      width: 58%;
+    }
+  }
+}
+
+
+@media (max-width: 1300px) {
+  .addToCartModal{
+    &__content{
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .addToCartModal{
+    &__content{
+      width: 80%;
+      transform: translate(0, 55%);
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .addToCartModal{
+    &__content{
+      width: 96%;
+    }
+  }
+}

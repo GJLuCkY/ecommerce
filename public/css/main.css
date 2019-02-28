@@ -9066,7 +9066,7 @@ a:hover {
 /*800*/
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-advice {
     padding: 0;
     width: 100%;
@@ -9943,7 +9943,7 @@ a:hover {
 
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-basket__img {
     width: 20%;
   }
@@ -10302,7 +10302,7 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 640px) and (-webkit-min-device-pixel-ratio: 1) {
+@media screen and (max-width: 800px) and (-webkit-min-device-pixel-ratio: 1) {
   .bs-brands {
     padding: 0;
   }
@@ -11236,7 +11236,7 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-contacts .bs-advice {
     width: 100%;
   }
@@ -11629,7 +11629,7 @@ a:hover {
 /*800*/
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-faq__list li {
     background: transparent;
   }
@@ -13002,7 +13002,7 @@ a:hover {
 /*800*/
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
 
   .bs-how__screen,
   .bs-how__flex .bs-how__screen {
@@ -13200,7 +13200,7 @@ a:hover {
 
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-inner-news .col-sm-3 {
     display: none;
   }
@@ -13899,7 +13899,7 @@ a:hover {
 
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-laminat .bs-catalog__hit {
     padding: 0 8px 0 15px;
     width: 50%;
@@ -14362,7 +14362,7 @@ a:hover {
 /*768*/
 /*600*/
 /*414*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
 
   .bs-news__col {
     padding: 0 0 15px;
@@ -14800,7 +14800,7 @@ a:hover {
 /*800*/
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-order__col {
     padding: 0;
   }
@@ -15836,7 +15836,7 @@ a:hover {
 
 /*768*/
 /*600*/
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-podlozhka .bs-catalog {
     display: none;
   }
@@ -16585,7 +16585,7 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-profile__links {
     width: 100%;
     background: transparent;
@@ -17342,7 +17342,7 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .bs-vacancy .bs-advice {
     width: 100%;
     padding: 0;

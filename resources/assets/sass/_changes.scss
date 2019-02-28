@@ -101,3 +101,46 @@
 .bs-basket__costTotal{
   font-size: 22px;
 }
+
+.bs-catalog__hitText{
+  a{
+    min-height: auto!important;
+    img{
+      min-height: 85px;
+    }
+  }
+}
+
+
+@media (max-width: 1300px) {
+  .bs-header{
+    .first{
+      .col-md-8 {
+        width: 63.66667%!important;
+        .bs-main-nav__list {
+          padding-right: 27px;
+        }
+      }
+    }
+    &__col{
+      width: 36.33333%!important;
+    }
+  }
+}
+
+
+@media (max-width: 1100px) {
+  .bs-header{
+    .first{
+      .col-md-8 {
+        width: 59.66667% !important;
+        .bs-main-nav__list {
+          padding-right: 0;
+        }
+      }
+    }
+    &__col{
+      width: 39.33333%!important;
+    }
+  }
+}
