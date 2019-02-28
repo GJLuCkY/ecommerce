@@ -18,7 +18,7 @@
                                                         <tr style="border-collapse:collapse;">
                                                             <td style="margin:0;padding-left:15px;padding-right:15px;padding-top:20px;padding-bottom:20px;" align="left">
                                                                 <a rel="noopener noreferrer" href="{{ route('homepage') }}" target="_blank" data-vdir-href="https://mail.yandex.kz/re.jsx?uid=1130000026509125&amp;c=LIZA&amp;cv=16.5.5&amp;mid=168322036072976119&amp;h=a,goiBpBTzmzU2pLwpTn5W9A&amp;l=aHR0cHM6Ly93d3cudGFsYXBhaS5rei8" data-orig-href="{{ route('homepage') }}" class="daria-goto-anchor">
-                                                                    <img height="36" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" alt="" src="https://resize.yandex.net/mailservice?url=https%3A%2F%2Fixwtd.stripocdn.email%2Fcontent%2Fguids%2FCABINET_f6ec10357646a6ff6ef47622ab34dba0%2Fimages%2F48891546069527681.png&amp;proxy=yes&amp;key=28173a2d21f89d3d4f935ade7fa51df4">
+                                                                <img height="36" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" alt="" src="{{ asset('images/logo.svg') }}">
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -149,17 +149,8 @@
                                                     <table bgcolor="#fff7e5" style="border-collapse:collapse;border-spacing:0px;background-color:#FFF7E5;background-position:left top;" width="100%" cellspacing="0" cellpadding="0">
                                                         <tbody><tr style="border-collapse:collapse;">
                                                             <td style="margin:0;padding-top:15px;padding-bottom:15px;padding-left:15px;padding-right:15px;" bgcolor="#efefef" align="left">
-                                                                <p style="margin:0;font-size:14px;font-family:roboto,&quot;helvetica neue&quot;,helvetica,arial,sans-serif;line-height:28px;color:#666666;">
-                                                                    Товаров на сумму: 4 587 тг
-                                                                </p>
-                                                                                                                                <p style="margin:0;font-size:14px;font-family:roboto,&quot;helvetica neue&quot;,helvetica,arial,sans-serif;line-height:28px;color:#666666;">
-                                                                    Стоимость доставки: 900 тг
-                                                                </p>
-                                                                
-                                                                
-                                                                
-                                                                                                                                <p style="margin:0;font-size:14px;font-family:roboto,&quot;helvetica neue&quot;,helvetica,arial,sans-serif;line-height:28px;color:#7E57C2;">
-                                                                    <strong>Итого к оплате: 5 487 тг</strong>
+                                                                    <p style="margin:0;font-size:14px;font-family:roboto,&quot;helvetica neue&quot;,helvetica,arial,sans-serif;line-height:28px;color:#7E57C2;">
+                                                                    <strong>Итого к оплате: {{ Cart::total() }} ₸</strong>
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -167,7 +158,7 @@
                                             </tr>
                                         </tbody></table> </td>
                                 </tr>
-                                <tr style="border-collapse:collapse;">
+                                {{-- <tr style="border-collapse:collapse;">
                                     <td style="margin:0;padding-bottom:10px;padding-left:15px;padding-right:15px;padding-top:25px;background-position:left top;" align="left">
                                         
                                         <table style="border-collapse:collapse;border-spacing:0px;float:left;" align="left" cellspacing="0" cellpadding="0">
@@ -222,8 +213,7 @@
                                                     </tbody></table> </td>
                                             </tr>
                                         </tbody></table> </td>
-                                </tr>
-                                                                                                    
+                                </tr>                                                             
                                 <tr style="border-collapse:collapse;">
                                     <td style="margin:0;padding-top:15px;padding-bottom:15px;padding-left:15px;padding-right:15px;background-position:left top;" align="left">
                                         
@@ -281,9 +271,6 @@
                                         </tbody></table>
                                         </td>
                                 </tr>
-
-                                
-                                
                                 <tr style="border-collapse:collapse;">
                                     <td style="padding:0;margin:0;" align="left">
                                         <table style="border-collapse:collapse;border-spacing:0px;" width="100%" cellspacing="0" cellpadding="0">
@@ -306,7 +293,7 @@
                                                     </tbody></table> </td>
                                             </tr>
                                         </tbody></table> </td>
-                                </tr>
+                                </tr> --}}
                             </tbody></table> </td>
                     </tr>
                 </tbody></table> </td>
