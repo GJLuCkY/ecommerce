@@ -26,13 +26,17 @@
 
 @section('content')
     <div class="bs-catalog">
-        <h5 class="bs-catalog__brandText">Бренды</h5>
+        <a href="{{ route('brands') }}">
+            <h5 class="bs-catalog__brandText">Бренды</h5>
+        </a>
         <div class="brands">
             @if(isset($brand->values))
             @foreach($brand->values as $item)
             <div class="bs-catalog__brand">
-                <img src="{{ isset($item->image) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{$item->name}}">
-            <p>{{ $item->name }}</p>
+                <a href="{{ route('brand', ['brandSlug' => $item->slug]) }}">
+                    <img src="{{ isset($item->image) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{$item->name}}">
+                    <p>{{ $item->name }}</p>
+                </a>
             </div>
             @endforeach
             @endif
