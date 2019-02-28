@@ -104,7 +104,7 @@ class CheckoutController extends Controller
         $otvet = 'Наличными';
         Toastr::success('', 'Вы успешно оформили заказ', ["positionClass" => "toast-top-right"]);
 
-        Mail::send('form.order', $order, function ($message) use ($order) {
+        Mail::send('form.order', $order->toArray(), function ($message) use ($order) {
             $message->from('etalon-holding@gmail.com', 'TAMOS');
             $message->to($order->email, 'Tamos')->subject('Ваш заказ принят №' . $order->id .' | tamos.kz');
             // $message->cc('tamos.kz@mail.ru', 'Tamos');
