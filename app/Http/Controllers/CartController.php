@@ -31,7 +31,12 @@ class CartController extends Controller
                 $product = Product::find($id);
                 if($sumQty >= $product->quantity) {
                     Toastr::warning('', 'Сейчас в наличии ' . $product->quantity . ' единиц выбранного Вами товара', ["positionClass" => "toast-top-right"]);
-                    return redirect()->back();
+                    if($request->get('button') == 'first') {
+                        return redirect()->back();
+                    } else {
+                        return redirect()->route('checkout');
+                    }
+                    
                 }
             }
         }
@@ -55,7 +60,11 @@ class CartController extends Controller
         }
         if(empty($id)) {
             Toastr::warning('', 'Что-то пошло не так!', ["positionClass" => "toast-top-right"]);
-            return redirect()->back();
+            if($request->get('button') == 'first') {
+                return redirect()->back();
+            } else {
+                return redirect()->route('checkout');
+            }
         }
         
         $product = Product::where('id', $id)->where('status', 1)->first();
@@ -72,7 +81,11 @@ class CartController extends Controller
         Cart::add($product->id, $product->title, $quantity, $product->price + $amount, ['article' => $product->article, 'code' => $product->api_id_product,'image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name, 'type' => $product->type])->associate('App\\Models\\Product');
        
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
-        return redirect()->back();
+        if($request->get('button') == 'first') {
+            return redirect()->back();
+        } else {
+            return redirect()->route('checkout');
+        }
     }
 
     public function removeToCart(Request $request, $id) {

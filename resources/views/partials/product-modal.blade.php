@@ -21,8 +21,8 @@
             </div>
         </div>
         <div class="addToCartModal__linkWrp">
-        <button type="submit">ПРОДОЛЖИТЬ ПОКУПКИ</button>
-        <a href="{{ route('checkout') }}"> Оформить заказ</a>
+        <button type="submit" name="button" value="first">ПРОДОЛЖИТЬ ПОКУПКИ</button>
+        <button type="submit" name="button" value="second" style="width: -webkit-fit-content; width: -moz-fit-content; width: fit-content; padding: 10px 36px; display: block; background-color: #00ab0c; color: #fff; font-weight: 600; font-size: 12px;"> Оформить заказ</a>
         </div>
     </form>
 </div>
