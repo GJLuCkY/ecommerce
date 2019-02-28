@@ -183,6 +183,12 @@
   }
 }
 
+@media (max-width: 640px) {
+  .bs-catalog__hitImg {
+    height: auto;
+  }
+}
+
 .addToCartModal {
   position: fixed;
   width: 100%;

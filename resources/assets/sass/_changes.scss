@@ -166,3 +166,9 @@
     width: 100px;
   }
 }
+
+@media (max-width: 640px) {
+  .bs-catalog__hitImg{
+    height: auto;
+  }
+}
