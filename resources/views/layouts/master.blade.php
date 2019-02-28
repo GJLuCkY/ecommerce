@@ -158,8 +158,9 @@
 
             <li class="bs-main-nav__item ">
               @if(Auth::check())
-                      <a href="{{ route('getLogout') }}">Выйти</a>
-                      <a href="{{ route('profile.index') }}">Профиль</a>
+                      <a class="bs-main-nav__link" href="{{ route('profile.index') }}">
+                        <img src="{{ asset('images/cab.svg') }}" alt="human" class="bs-header__human">
+                          Профиль</a>
                   @else
               <button class="bs-header__signup">
                   <a class="bs-main-nav__link">
@@ -169,7 +170,10 @@
               @endif
             </li>
             <li class="bs-main-nav__item ">
-              @if(!Auth::check())
+              @if(Auth::check())
+                <a class="bs-main-nav__link" href="{{ route('getLogout') }}">Выйти</a>
+
+              @else
               <button class="bs-header__login">
                 <a class="bs-main-nav__link">Войти</a>
               </button>
