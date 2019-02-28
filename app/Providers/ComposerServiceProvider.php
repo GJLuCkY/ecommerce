@@ -14,9 +14,9 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['pages.contacts', 'pages.brand', 'pages.brands', 'pages.advices', 'pages.advice', 'pages.vacancy-city', 'pages.vacancy', 'pages.homepage', 'pages.category', 'pages.inner-news', 'pages.news', 'pages.page', 'pages.product', 'pages.cart', 'pages.checkout', 'pages.search', 'pages.profile.index', 'pages.profile.wishlist', 'pages.profile.purchases', 'pages.profile.order', 'pages.profile.help', 'auth.login', 'pages.thank-you'] , 'App\Http\ViewComposers\MenuComposer');
+        View::composer(['pages.contacts', 'pages.brand', 'pages.brands', 'pages.advices', 'pages.advice', 'pages.vacancy-city', 'pages.vacancy', 'pages.homepage', 'pages.category', 'pages.inner-news', 'pages.news', 'pages.page', 'pages.product', 'pages.cart', 'pages.checkout', 'pages.search', 'pages.profile.index', 'pages.profile.wishlist', 'pages.profile.purchases', 'pages.profile.order', 'pages.profile.help', 'auth.login', 'pages.thanku'] , 'App\Http\ViewComposers\MenuComposer');
 
-        View::composer(['pages.contacts', 'pages.brand', 'pages.brands', 'pages.advices', 'pages.advice', 'pages.vacancy-city', 'pages.vacancy', 'pages.homepage', 'pages.category', 'pages.inner-news', 'pages.news', 'pages.page', 'pages.product', 'pages.cart', 'pages.checkout', 'pages.profile.index', 'pages.profile.wishlist', 'pages.profile.purchases', 'pages.profile.order', 'pages.profile.help', 'pages.search', 'auth.login', 'pages.thank-you'] , 'App\Http\ViewComposers\CityComposer');
+        View::composer(['pages.contacts', 'pages.brand', 'pages.brands', 'pages.advices', 'pages.advice', 'pages.vacancy-city', 'pages.vacancy', 'pages.homepage', 'pages.category', 'pages.inner-news', 'pages.news', 'pages.page', 'pages.product', 'pages.cart', 'pages.checkout', 'pages.profile.index', 'pages.profile.wishlist', 'pages.profile.purchases', 'pages.profile.order', 'pages.profile.help', 'pages.search', 'auth.login', 'pages.thanku'] , 'App\Http\ViewComposers\CityComposer');
 
     }
 
