@@ -474,7 +474,6 @@ $('.brands').slick({
   speed: 700,
   autoplaySpeed: 1500,
   arrows: true,
-  adaptiveHeight: false
 });
 
 $('.hits').slick({
@@ -484,7 +483,6 @@ $('.hits').slick({
   dots: false,
   speed: 700,
   arrows: true,
-  adaptiveHeight: false
 });
 
 $('.slider-for').slick({
@@ -492,8 +490,7 @@ $('.slider-for').slick({
   slidesToScroll: 1,
   arrows: false,
   fade: true,
-  asNavFor: '.slider-nav',
-  adaptiveHeight: false
+  asNavFor: '.slider-nav'
 });
 $('.slider-nav').slick({
   slidesToShow: 3,
@@ -501,8 +498,7 @@ $('.slider-nav').slick({
   asNavFor: '.slider-for',
   dots: false,
   centerMode: false,
-  focusOnSelect: true,
-  adaptiveHeight: false
+  focusOnSelect: true
 });
 
 
@@ -511,8 +507,7 @@ $('.slide-for').slick({
   slidesToScroll: 1,
   arrows: false,
   fade: true,
-  asNavFor: '.slide-nav',
-  adaptiveHeight: false
+  asNavFor: '.slide-nav'
 });
 $('.slide-nav').slick({
   slidesToShow: 4,
@@ -520,8 +515,7 @@ $('.slide-nav').slick({
   asNavFor: '.slide-for',
   dots: false,
   centerMode: false,
-  focusOnSelect: true,
-  adaptiveHeight: false
+  focusOnSelect: true
 });
 
 (function ($) {

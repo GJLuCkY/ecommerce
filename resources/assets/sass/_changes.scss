@@ -123,6 +123,10 @@
   width: 60px;
 }
 
+.bs-catalog__hitImg{
+  height: 350px;
+  overflow: hidden;
+}
 
 @media (max-width: 1300px) {
   .bs-header{
@@ -160,5 +164,11 @@
 @media (max-width: 1100px) {
   .bs-basket__counter{
     width: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .bs-catalog__hitImg{
+    height: auto;
   }
 }
