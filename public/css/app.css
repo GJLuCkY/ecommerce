@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.bs-header .first .row {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+.bs-header .first .row {
   margin-top: 0;
 }
 
@@ -435,6 +435,3 @@ body {
   overflow: scroll;
 }
 
-=======
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.bs-header .first .row{margin-top:0}.bs-header .bs-main-nav__list{-ms-flex-pack:distribute;justify-content:space-around}.bs-header .bs-main-nav__link{font-size:16px;font-weight:400}.bs-header__phone{max-width:23px;margin-right:5px}.bs-header__div{display:none}.bs-header__col{padding-right:0!important;padding-left:0!important;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.bs-header__col .bs-main-nav__item:last-of-type{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}.bs-header__img{max-width:23px}.bs-header__text{font-size:14px;font-weight:400}.bs-links .dropdown-content a,.bs-links__item a{font-size:15px;font-weight:400}.bs-footer{padding:55px 0 70px}.bs-footer__item{padding-bottom:17px}.bs-basket__heading,.bs-laminat__head{font-size:22px;font-weight:400}.bs-podlozhka__cost{font-size:25px;font-weight:600;color:#00ab0c;margin-bottom:15px;width:130%}.bs-podlozhka__review button{font-size:16px;font-weight:600;color:#fff;background-color:#00ab0c;padding:11px 75px;margin-left:0;margin-top:30px;display:block}.bs-podlozhka .bs-catalog__head{font-size:22px;font-weight:400}.bs-podlozhka__cat a{font-size:14px}.bs-basket__order{background:none;padding:0}.bs-basket__order a{width:100%;padding:14px;display:block;background-color:#00ab0c}.bs-basket__costTotal{font-size:22px}.navbar-laravel{background-color:#fff;-webkit-box-shadow:0 2px 4px rgba(0,0,0,.04);box-shadow:0 2px 4px rgba(0,0,0,.04)}
->>>>>>> 6352b62a5e3ddc905e376b80b062189ff2e49f25
