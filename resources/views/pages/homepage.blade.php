@@ -28,12 +28,14 @@
     <div class="bs-catalog">
         <h5 class="bs-catalog__brandText">Бренды</h5>
         <div class="brands">
+            @if(isset($brand->values))
             @foreach($brand->values as $item)
             <div class="bs-catalog__brand">
                 <img src="{{ isset($item->image) ? asset('uploads/' . $item->image) : '/images/not-found.png' }}" alt="{{$item->name}}">
             <p>{{ $item->name }}</p>
             </div>
             @endforeach
+            @endif
             <a href="{{ route('brands') }}" class="brands__button">ВСЕ БРЕНДЫ</a>
         </div>
         <div class="row">

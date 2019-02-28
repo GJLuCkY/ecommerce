@@ -69,7 +69,7 @@ class DataApiController extends Controller
                 if(isset($searchProduct)) {
                     $searchProduct->title = $item['NAME'];
                     $searchProduct->article = $item['ARTICUL'];
-                    $searchProduct->price = $item['PRICE'];
+                    // $searchProduct->price = $item['PRICE'];
                     $searchProduct->quantity = $item['BALANCE'];
                     $searchProduct->api_id_product = $item['ID'];
                     $category = Category::where('code', $item['ID_CATEGORY'])->first();
@@ -102,7 +102,7 @@ class DataApiController extends Controller
                     $product = new Product;
                     $product->title = $item['NAME'];
                     $product->article = $item['ARTICUL'];
-                    $product->price = $item['PRICE'];
+                    // $product->price = $item['PRICE'];
                     $product->quantity = $item['BALANCE'];
                     $product->api_id_product = $item['ID'];
                     $product->api_id_category = $item['ID_CATEGORY'];
@@ -148,7 +148,7 @@ class DataApiController extends Controller
 
     public function getNewOrders(Request $request)
     {
-        $orders = Order::where('status', 'create')->get();
+        $orders = Order::whereIn('status', ['create', 'changed', 'paid'])->get();
         // dd($orders);
         $data = collect([]);
         $data2 = collect([

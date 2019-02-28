@@ -7,16 +7,18 @@
                 
                 @include('partials.menu')
                 <form>
-                    {{-- @if(count($products) > 0) --}}
+                    @if(count($products))   
                     <div class="bs-laminat__brands">
                         <h6 class="bs-laminat__title">Цена
                             <span>
                             <img src="/images/laminat.svg">
                             </span>
                         </h6>
+                   
                     <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
+                    
                     </div>
-                    {{-- @endif --}}
+                    @endif
                     @foreach($category->filters as $filters)
                     @if(count($filters->values) > 0)
                     <div class="bs-laminat__brands">
@@ -127,17 +129,18 @@
                           <h5 class="filter__head"><span class="filter__close"><img src="/images/back.png" alt="back"></span> ФИЛЬТР</h5>
                         </div>
                         <form>
-                            {{-- @if(count($products) > 0) --}}
+                            @if(count($products))
                             <div class="bs-laminat__brands">
                                 <h6 class="bs-laminat__title">Цена
                                     <span>
                                     <img src="/images/laminat.svg">
                                     </span>
                                 </h6>
-                                
+                                  
                             <price-slider price="{{ request('price') }}" :max-price="{{ $max }}" :min-price="{{ $min }}" cat-slug="{{ $category->slug }}"></price-slider>        
+                            
                             </div>
-                            {{-- @endif --}}
+                            @endif
                             @foreach($category->filters as $filters)
                             @if(count($filters->values) > 0)
                             <div class="bs-laminat__brands">
@@ -221,7 +224,7 @@
                                   </form>
                                 </div>
                                 <div class="bs-catalog__hitText">
-                                    <p>{{ isset($item->category->custom_name) ? $item->category->custom_name : $item->category->title }} {{ $item->brand->name }}</p>
+                                    <p>{{ isset($item->category->custom_name) ? $item->category->custom_name : $item->category->title }} {{ isset($item->brand->name) ? $item->brand->name : '' }}</p>
                                     <a href="{{ route('product', ['catSlug' => $category->slug, 'prodSlug' => $item->slug]) }}">
                                         <h6 style="font-size: 16px">{{ $item->title }}</h6>
                                     </a>
