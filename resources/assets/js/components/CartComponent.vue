@@ -16,7 +16,7 @@
                             </div>
                             <div class="col-sm-4 bs-basket__bigCol">
                                 <p class="bs-basket__about">{{ product.name }} 
-                                    <br>{{ product.options.category + ' ' + product.options.brand.name }}
+                                    <br>{{ product.options.category | '' + ' ' + product.options.brand.name | '' }}
                                     
                                 </p>
                                 <ul>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-xs-9 bs-basket__bigCol">
                                 <p class="bs-basket__about">
-                                    <br>{{ product.options.category + ' ' + product.options.brand.name }}
+                                    <br>{{ product.options.category | '' + ' ' + product.options.brand.name | '' }}
                                     <br>{{ product.name }}
                                 </p>
                                 <p class="bs-basket__cost">{{ product.price }}  тг</p>
