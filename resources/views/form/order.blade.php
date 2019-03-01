@@ -12,13 +12,12 @@
                                             <tbody><tr style="border-collapse:collapse;">
                                                 <td style="padding:0;margin:0;" valign="top" align="center" width="600">
                                                     <table style="border-collapse:collapse;border-spacing:0px;" width="100%" cellspacing="0" cellpadding="0">
-                                                        <tbody><tr style="border-collapse:collapse;">
-                                                            <td style="padding:0;margin:0;padding-bottom:30px;" bgcolor="#f6f6f6" align="left"> <p style="margin:0;font-size:14px;font-family:roboto,&quot;helvetica neue&quot;,helvetica,arial,sans-serif;line-height:21px;color:#666666;"><br></p> </td>
-                                                        </tr>
+                                                        <tbody>
+                                                            
                                                         <tr style="border-collapse:collapse;">
                                                             <td style="margin:0;padding-left:15px;padding-right:15px;padding-top:20px;padding-bottom:20px;" align="left">
                                                                 <a rel="noopener noreferrer" href="{{ route('homepage') }}" target="_blank" data-vdir-href="https://mail.yandex.kz/re.jsx?uid=1130000026509125&amp;c=LIZA&amp;cv=16.5.5&amp;mid=168322036072976119&amp;h=a,goiBpBTzmzU2pLwpTn5W9A&amp;l=aHR0cHM6Ly93d3cudGFsYXBhaS5rei8" data-orig-href="{{ route('homepage') }}" class="daria-goto-anchor">
-                                                                <img height="36" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" alt="" src="{{ asset('images/logo.png') }}">
+                                                                <img height="55" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" alt="" src="{{ asset('images/logo.png') }}">
                                                                 </a>
                                                             </td>
                                                         </tr>
