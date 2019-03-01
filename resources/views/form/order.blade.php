@@ -274,8 +274,8 @@
                                                                             target="_blank" data-vdir-href="#"
                                                                             data-orig-href="#"
                                                                             class="daria-goto-anchor">
-                                                                            <img alt="Image" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; width: 100%;"
-                                                                                src="{{ isset($product->options->image) ? $product->options->image : asset('images/not-found.png') }}">
+                                                                            <img alt="Image" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"
+                                                                                src="{{ isset($product->options->image) ? $product->options->image : asset('images/not-found.png') }}" style="width: 100%;">
                                                                         </a>
                                                                     </td>
                                                                 </tr>
