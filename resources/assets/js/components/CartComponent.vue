@@ -78,7 +78,7 @@
                         <p class="bs-basket__text bs-basket__text--total">ИТОГО: <span class="count">{{ total }} тг</span></p>
                     </div>
                     <button class="bs-basket__order">
-                        <a href="#"> Оформить заказ</a>
+                        <a href="/checkout"> Оформить заказ</a>
                     </button>
                     <form>
                         <input class="bs-basket__promo" type="text" name="promo" placeholder="ПРОМОКОД">
@@ -91,7 +91,7 @@
                         <p class="bs-basket__costText"> {{ total }} тг
                         </p>
                         <button class="bs-basket__order">
-                            <a href="#"> Оформить заказ</a>
+                            <a href="/checkout"> Оформить заказ</a>
                         </button>
                         <form>
                             <input class="bs-basket__promo" type="text" name="promo" placeholder="ПРОМОКОД">
