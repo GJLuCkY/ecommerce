@@ -63,6 +63,10 @@ Route::auth();
 Route::get('/cart', 'CartController@cart')->name('cart');
 Route::post('/add-to-cart', 'CartController@getAddToCart')->name('addToCart');
 Route::get('/remove-to-cart/{id}', 'CartController@removeToCart')->name('removeToCart');
+
+Route::post('/remove-to-basket', 'CartController@removeToBasket')->name('removeToBasket');
+
+
 Route::post('/cart-change-quantity', 'CartController@cartChangeQuantity')->name('cart.change.quantity');
 
 // Избранное
@@ -121,3 +125,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::view('/thanku', 'pages.thanku');
 
 
+Route::get('/v1/get-basket', 'API\CartApiController@getBasket');

@@ -20,3 +20,6 @@ Route::post('/v1/creation-and-updating-products', 'API\DataApiController@postCre
 Route::post('/v1/get-new-orders', 'API\DataApiController@getNewOrders');
 
 Route::post('/v1/get-new-orders-2', 'API\DataApiController@changeOrder');
+
+
+

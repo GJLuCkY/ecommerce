@@ -31,7 +31,7 @@ class CartController extends Controller
                 $product = Product::find($id);
                 if($sumQty >= $product->quantity) {
                     Toastr::warning('', 'Сейчас в наличии ' . $product->quantity . ' единиц выбранного Вами товара', ["positionClass" => "toast-top-right"]);
-                    if($request->get('button') == 'first') {
+                    if($request->get('button') != 'second') {
                         return redirect()->back();
                     } else {
                         return redirect()->route('checkout');
@@ -60,7 +60,7 @@ class CartController extends Controller
         }
         if(empty($id)) {
             Toastr::warning('', 'Что-то пошло не так!', ["positionClass" => "toast-top-right"]);
-            if($request->get('button') == 'first') {
+            if($request->get('button') != 'second') {
                 return redirect()->back();
             } else {
                 return redirect()->route('checkout');
@@ -81,7 +81,7 @@ class CartController extends Controller
         Cart::add($product->id, $product->title, $quantity, $product->price + $amount, ['article' => $product->article, 'code' => $product->api_id_product,'image' => $image, 'equipments' => $data, 'brand' => $product->brand, 'category' => $product->category->custom_name, 'type' => $product->type])->associate('App\\Models\\Product');
        
         Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
-        if($request->get('button') == 'first') {
+        if($request->get('button') != 'second') {
             return redirect()->back();
         } else {
             return redirect()->route('checkout');
@@ -95,6 +95,17 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    public function removeToBasket(Request $request) {
+       
+        Cart::remove($request->get('id'));
+        // Toastr::success('', 'Товар добавлен в корзину!', ["positionClass" => "toast-top-right"]);
+        return response()->json([
+            'data' => Cart::content()->toArray(),
+            'total' => Cart::total(),
+            'count' => Cart::content()->count()
+        ], 200);
+    }
+
     public function cartChangeQuantity(Request $request)
     {
         $rowId = $request->get('product');
@@ -103,13 +114,21 @@ class CartController extends Controller
         if($request->get('change') == 'plus') {
             if($p->quantity <= $product->qty) {
                 Toastr::warning('', 'Сейчас в наличии ' . $p->quantity . ' единиц выбранного Вами товара', ["positionClass" => "toast-top-right"]);
-                return redirect()->back();
+                return response()->json([
+                    'data' => Cart::content()->toArray(),
+                    'total' => Cart::total(),
+                    'count' => Cart::content()->count()
+                ], 200);
             }
             Cart::update($rowId, 1 + $product->qty);
         }
         else if($request->get('change') == 'minus') {
             Cart::update($rowId, $product->qty - 1);
         }
-        return redirect()->back();
+        return response()->json([
+            'data' => Cart::content()->toArray(),
+            'total' => Cart::total(),
+            'count' => Cart::content()->count()
+        ], 200);
     }
 }

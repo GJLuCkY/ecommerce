@@ -25,6 +25,7 @@ import StarRating from 'vue-star-rating'
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('price-slider', require('./components/SliderPrice.vue'));
+Vue.component('cart-component', require('./components/CartComponent.vue'));
 Vue.component('star-rating', StarRating);
 
 const app = new Vue({
