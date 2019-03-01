@@ -54,11 +54,11 @@ class CheckoutController extends Controller
         $order->address = $request->get('address');
         $order->email = $request->get('email');
         $order->comment = $request->get('comment');
-        $order->method = $request->get('method');
+        $order->method = $request->get('method', 'nal');
         $order->status = 'create';
         $order->products = Cart::content()->toArray();
-        $order->delivery_method = $request->get('delivery_method');
-        $order->user_type = $request->get('usertype');
+        $order->delivery_method = $request->get('delivery_method', 'dostavka');
+        $order->user_type = $request->get('usertype', 'f');
         $order->total_price = Cart::total();
         $order->save();
         if($request->get('method') == 'cart') {
