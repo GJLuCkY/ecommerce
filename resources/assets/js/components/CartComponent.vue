@@ -108,12 +108,11 @@
 
 <script>
 export default {
-    props: ["countProps", "totalProps", 'partialsMenu'],
     data() {
         return {
             products: [],
-            count: this.countProps,
-            total: this.totalProps,
+            count: '',
+            total: '',
         };
     },
     mounted() {
