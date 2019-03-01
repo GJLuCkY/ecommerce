@@ -268,13 +268,13 @@
                                                             cellpadding="0">
                                                             <tbody>
                                                                 <tr style="border-collapse:collapse;">
-                                                                    <td style="margin:0;padding-left:15px;padding-right:15px;padding-top:20px;padding-bottom:20px;"
+                                                                    <td style="margin: 0; padding-right: 30px;"
                                                                         align="center">
                                                                         <a rel="noopener noreferrer" href="#"
                                                                             target="_blank" data-vdir-href="#"
                                                                             data-orig-href="#"
                                                                             class="daria-goto-anchor">
-                                                                            <img alt="Image" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;height:"
+                                                                            <img alt="Image" data-r="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; width: 100%;"
                                                                                 src="{{ isset($product->options->image) ? $product->options->image : asset('images/not-found.png') }}">
                                                                         </a>
                                                                     </td>
