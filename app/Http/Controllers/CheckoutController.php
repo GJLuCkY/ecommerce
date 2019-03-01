@@ -110,6 +110,8 @@ class CheckoutController extends Controller
             // $message->cc('tamos.kz@mail.ru', 'Tamos');
         });
 
+        Session::forget('cart');
+
         return redirect()->route('order.processing', ['id' => $order->id]);
     }
 
