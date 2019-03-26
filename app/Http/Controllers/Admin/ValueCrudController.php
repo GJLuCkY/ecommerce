@@ -20,7 +20,7 @@ class ValueCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Value');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/value');
-        $this->crud->setEntityNameStrings('value', 'values');
+        $this->crud->setEntityNameStrings('Значение', 'Значения');
 
         /*
         |--------------------------------------------------------------------------

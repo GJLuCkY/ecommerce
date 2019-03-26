@@ -25,7 +25,7 @@ class AdviceCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Advice');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/advice');
-        $this->crud->setEntityNameStrings('advice', 'advices');
+        $this->crud->setEntityNameStrings('Совет', 'Советы');
 
         /*
         |--------------------------------------------------------------------------

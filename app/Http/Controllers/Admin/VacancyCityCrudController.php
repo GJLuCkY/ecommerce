@@ -25,7 +25,7 @@ class VacancyCityCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\VacancyCity');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/vacancy-city');
-        $this->crud->setEntityNameStrings('cities', 'vacancy_cities');
+        $this->crud->setEntityNameStrings('Город для вакансии', 'Города для вакансии');
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('title', 1);
         /*

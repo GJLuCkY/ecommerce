@@ -10,7 +10,7 @@ $filters = $field['model']::with(['filter'])->get();
 
 
     <div class="col-md-12">
-        <label>Выберите значение</label>
+        <label>Выберите фильтры</label>
         <select
                 name="{{ $field['name'] }}[]"
                 style="width: 100%"

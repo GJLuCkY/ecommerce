@@ -22,7 +22,7 @@ class OrderCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Order');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/order');
-        $this->crud->setEntityNameStrings('order', 'orders');
+        $this->crud->setEntityNameStrings('Заказ', 'Заказы');
         $this->crud->denyAccess(['create']);
         /*
         |--------------------------------------------------------------------------
