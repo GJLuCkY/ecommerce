@@ -37,11 +37,22 @@
 
 .bs-header__img {
   max-width: 23px;
+  -webkit-filter: invert(1) brightness(0);
+          filter: invert(1) brightness(0);
+}
+
+.bs-header .col-md-3 .row .col-sm-6:first-of-type a:hover .bs-header__img {
+  -webkit-filter: none !important;
+          filter: none !important;
 }
 
 .bs-header__text {
   font-size: 14px;
   font-weight: 400;
+}
+
+.bs-top .sliderWrp {
+  position: relative;
 }
 
 .bs-links__item a {
@@ -186,6 +197,14 @@
 @media (max-width: 640px) {
   .bs-catalog__hitImg {
     height: auto;
+  }
+
+  .one-time img {
+    min-height: 190px;
+  }
+
+  .bs-top__item-text {
+    bottom: 45px;
   }
 }
 

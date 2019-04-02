@@ -11,11 +11,13 @@
                     <div class="one-time">
                         @foreach($sliders as $slider)
                         <a href="{{ $slider->url }}" class="bs-top__item">
+                          <div class="sliderWrp">
                             <img src="{{ asset('uploads/' . $slider->image) }}" alt="newPic">
                             <div class="bs-top__item-text">
                                 <h5>{{ $slider->title }}</h5>
                                 {!! $slider->content !!}
                             </div>
+                          </div>
                         </a>
                         @endforeach
                     </div>
