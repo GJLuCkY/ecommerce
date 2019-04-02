@@ -15,11 +15,12 @@
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.11",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "inputmask": "^5.0.0-beta.130",
         "vue-router": "^3.0.1",
         "vue-slider-component": "^2.7.6",
         "vue-star-rating": "^1.6.0"

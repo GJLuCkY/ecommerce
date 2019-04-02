@@ -25,7 +25,7 @@ class CityCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\City');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/city');
-        $this->crud->setEntityNameStrings('city', 'cities');
+        $this->crud->setEntityNameStrings('Город', 'Города');
 
         /*
         |--------------------------------------------------------------------------

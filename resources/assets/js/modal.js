@@ -237,3 +237,7 @@ function number_format (number, decimals, dec_point, thousands_sep) {
     }
     return s.join(dec);
 }
+
+// $(document).ready(function(){
+//   $('input[name=phone]').inputmask({"mask": "+7 (777) 777-7777"}); //specifying options
+// });

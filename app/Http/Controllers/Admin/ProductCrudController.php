@@ -20,7 +20,7 @@ class ProductCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Product');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/product');
-        $this->crud->setEntityNameStrings('product', 'products');
+        $this->crud->setEntityNameStrings('Продукт', 'Продукты');
 
         /*
         |--------------------------------------------------------------------------
@@ -66,37 +66,22 @@ class ProductCrudController extends CrudController
 
         $this->crud->addField([
             'name' => 'title',
-            'label' => 'Название продукта'
+            'label' => 'Название продукта',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
         ]);
         $this->crud->addField([
             'name' => 'custom_name',
-            'label' => 'Пользовательское название'
+            'label' => 'Пользовательское название',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
         ]);
         $this->crud->addField([
             'name' => 'meta_description',
             'label' => 'Meta-описание для SEO',
             'type' => 'textarea',
-        ]);
-        $this->crud->addField([
-            'name' => 'slug',
-            'label' => 'Slug (URL)',
-            'type' => 'text',
-            'hint' => 'URL-страницы (Генерируется автоматически)',
-            // 'disabled' => 'disabled'
-        ]);
-        $this->crud->addField([ // image
-            'label' => "Изображение",
-            'name' => "image",
-            'type' => 'image',
-            'upload' => true,
-            'crop' => true, // set to true to allow cropping, false to disable
-            //'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
-            'prefix' => 'uploads/' // in case you only store the filename in the database, this text will be prepended to the database value
-        ]);
-        $this->crud->addField([
-            'name' => 'content',
-            'label' => 'Описание продукта',
-            'type' => 'summernote',
         ]);
         $this->crud->addField([
             'name' => 'price',
@@ -105,8 +90,21 @@ class ProductCrudController extends CrudController
             // optionals
             'attributes' => ["step" => "any"], // allow decimals
             'prefix' => "₸",
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
             // 'suffix' => ".00",
         ]);
+
+        $this->crud->addField([
+            'name' => 'quantity',
+            'label' => 'Количество',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
+        ]);
+        
+
         $this->crud->addField([
             'label' => "Выберите категорию",
             'type' => 'select',
@@ -114,28 +112,11 @@ class ProductCrudController extends CrudController
             'entity' => 'category', // the method that defines the relationship in your Model
             'attribute' => 'title', // foreign key attribute that is shown to user
             'model' => "App\Models\Category", // foreign key model
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
         ]);
 
-
-        $this->crud->addField([
-            'name' => 'article',
-            'label' => 'Article'
-        ]);
-
-        $this->crud->addField([
-            'name' => 'quantity',
-            'label' => 'Количество'
-        ]);
-
-        $this->crud->addField([
-            'name' => 'packaging',
-            'label' => 'Упаковка м2'
-        ]);
-
-        $this->crud->addField([
-            'name' => 'minimum',
-            'label' => 'Минимальный закуп, упаковка'
-        ]);
         $this->crud->addField([
             'label' => "Фильтры",
             'type' => 'select_filter_value',
@@ -151,8 +132,35 @@ class ProductCrudController extends CrudController
             'data_source' => url("api/filters"), // url to controller search function (with /{id} should return model)
 
             'minimum_input_length' => 2, // minimum characters to type before querying results
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6 no-padding'
+              ]
         ]);
+        $this->crud->addField([ // image
+            'label' => "Изображение",
+            'name' => "image",
+            'type' => 'image',
+            'upload' => true,
+            'crop' => true, // set to true to allow cropping, false to disable
+            //'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
+            'prefix' => 'uploads/' // in case you only store the filename in the database, this text will be prepended to the database value
+        ]);
+        $this->crud->addField([
+            'name' => 'content',
+            'label' => 'Описание продукта',
+            'type' => 'summernote',
+        ]);
+        
+        
 
+
+        $this->crud->addField([
+            'name' => 'article',
+            'label' => 'Article',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
+        ]);
 
         $this->crud->addField([
             'name' => 'type',
@@ -160,7 +168,30 @@ class ProductCrudController extends CrudController
             'type' => 'select_from_array',
             'options' => ['polotno' => 'Полотно', 'thing' => 'Штука', 'package' => 'Упаковка'],
             'allows_null' => false,
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
         ]);
+
+        $this->crud->addField([
+            'name' => 'packaging',
+            'label' => 'Упаковка м2',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
+        ]);
+
+        $this->crud->addField([
+            'name' => 'minimum',
+            'label' => 'Минимальный закуп, упаковка',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
+        ]);
+       
+
+        
+       
 
         $this->crud->addField([
             'label' => "Комплектующие",
@@ -170,6 +201,20 @@ class ProductCrudController extends CrudController
             'attribute' => 'title', // foreign key attribute that is shown to user
             'model' => "App\Models\Product", // foreign key model
             'pivot' => true,
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
+        ]);
+
+        $this->crud->addField([
+            'name' => 'slug',
+            'label' => 'Slug (URL)',
+            'type' => 'text',
+            'hint' => 'URL-страницы (Генерируется автоматически)',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+              ]
+            // 'disabled' => 'disabled'
         ]);
 
         $this->crud->addField([

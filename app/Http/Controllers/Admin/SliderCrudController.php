@@ -25,7 +25,7 @@ class SliderCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Slider');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/slider');
-        $this->crud->setEntityNameStrings('slider', 'sliders');
+        $this->crud->setEntityNameStrings('Слайдер', 'Слайдеры');
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('title', null);
         /*
