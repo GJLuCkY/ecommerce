@@ -302,6 +302,7 @@ $(document).ready(function () {
       $('.addToCartModal__quan input[name*=secondqty]').val(value);
       $('.addToCartModal__content .cost-second').html(number_format((parseInt(price) / packaging * 1000) / 1000, 0, ',', ' '));
     }
+<<<<<<< HEAD
   });
 
   $('.addToCartModal__quan input[name*=secondqty]').on('input', function () {
@@ -322,3 +323,11 @@ $(document).ready(function () {
   });
 
 });
+=======
+    return s.join(dec);
+}
+
+// $(document).ready(function(){
+//   $('input[name=phone]').inputmask({"mask": "+7 (777) 777-7777"}); //specifying options
+// });
+>>>>>>> e437aa750fb59a66cb522149c57b8ab562db8862
