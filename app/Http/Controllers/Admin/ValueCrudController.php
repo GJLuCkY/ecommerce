@@ -65,6 +65,12 @@ class ValueCrudController extends CrudController
             'crop' => true
         ]);
 
+        $this->crud->addField([
+            'label' => 'Описание',
+            'type' => 'summernote',
+            'name' => 'content'
+        ]);
+
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
