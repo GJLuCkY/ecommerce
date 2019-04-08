@@ -74,6 +74,8 @@
                                 </div>
                                 <div class="bs-catalog__hitText">
                                     <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="packaging" value="{{ isset($product->packaging) ? $product->packaging : 1 }}">
+                                    <input type="hidden" name="type" value="{{ $product->type }}">
                                     <input type="hidden" name="quantity" value="{{ $product->quantity }}">
                                     <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ isset($product->brand->name) ? $product->brand->name : '' }}
                                     <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>
@@ -129,6 +131,8 @@
                                     </div>
                                     <div class="bs-catalog__hitText">
                                         <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <input type="hidden" name="packaging" value="{{ isset($product->packaging) ? $product->packaging : 1 }}">
+                                        <input type="hidden" name="type" value="{{ $product->type }}">
                                         <input type="hidden" name="quantity" value="{{ $product->quantity }}">
                                         <p>{{ isset($product->category->custom_name) ? $product->category->custom_name : $product->category->title }} {{ isset($product->brand->name) ? $product->brand->name : '' }}
                                         <br> <a href="{{ route('product', ['catSlug' => $product->category->slug, 'prodSlug' => $product->slug]) }}">{{ $product->title }}</a>

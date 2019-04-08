@@ -36115,22 +36115,32 @@ $(document).ready(function () {
   });
 
   $('.bs-catalog__add').click(function () {
+    $('.addToCartModal__content #uintTextBox').attr('value', 1);
     img = $(this).parent().find('.prodImg').attr('src');
     alt = $(this).parent().find('.prodImg').attr('alt');
     name = $(this).parent().find('.bs-catalog__hitText a').text();
     price = $(this).parent().find('.bs-catalog__size span').text().replace(/ /g, '');
-    value = $('.addToCartModal__quan input').val();
+    value = $('.addToCartModal__quan input[name*=quantity]').val();
     total = parseInt(price) * parseInt(value);
     id = $(this).parent().find('.bs-catalog__hitText input[name*=id]').val();
+    type = $(this).parent().find('.bs-catalog__hitText input[name*=type]').val();
     quantity = $(this).parent().find('.bs-catalog__hitText input[name*=quantity]').val();
+    packaging = $(this).parent().find('.bs-catalog__hitText input[name*=packaging]').val();
+    console.log(packaging);
+    $('.addToCartModal__row input[name*=pack]').val(packaging);
+    $('.addToCartModal__quan input[name*=quantity]').val(1);
+    $('.addToCartModal__quan input[name*=secondqty]').val(1 * packaging);
     $('.addToCartModal__content img').attr('src', img);
     $('.addToCartModal__content img').attr('alt', alt);
     $('.addToCartModal__content p').html(name);
-    $('.addToCartModal__content .cost span').html(number_format(price, 0, ',', ' '));
+    $('.addToCartModal__content .cost-first').html(number_format(price, 0, ',', ' '));
+    $('.addToCartModal__content .cost-second').html(number_format(price / packaging * 1000 / 1000, 0, ',', ' '));
     // $('.addToCartModal__total .modalTotalPrice span').html(number_format(total, 0, ',', ' '));
     $('.addToCartModal__total .modalTotalPrice span').html(total);
     $('.addToCartModal__content input[name*=id]').attr('value', id);
     $('.addToCartModal__content #uintTextBox').attr('max', quantity);
+    $('.addToCartModal__content #uintTextBox2').attr('max', quantity * packaging);
+    $('.addToCartModal__content .product-type').html(productType(type));
 
     // console.log($(this).parent().parent().find('.prodImg'));
     addToCartModal.style.display = "block";
@@ -36216,21 +36226,26 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $('.addToCartModal__quan .plus').click(function () {
-    quantity = $('.addToCartModal__quan input').attr('max');
-    value = $('.addToCartModal__quan input').val();
-    price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
+  $('.addToCartModal__quan .plus-first').click(function () {
+    quantity = $('.addToCartModal__quan input[name*=quantity]').attr('max');
+    value = $('.addToCartModal__quan input[name*=quantity]').val();
+    packaging = $('.addToCartModal__row input[name*=pack]').val();
+    price = $('.addToCartModal__content .cost-first').text().replace(/ /g, '');
+
     console.log(price);
     if (parseInt(value) < parseInt(quantity)) {
       value++;
     }
     $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
-    $('.addToCartModal__quan input').val(value);
+    $('.addToCartModal__quan input[name*=quantity]').val(value);
+    $('.addToCartModal__quan input[name*=secondqty]').val(value * packaging);
+    $('.addToCartModal__content .cost-second').html(number_format(parseInt(price) / packaging * 1000 / 1000, 0, ',', ' '));
   });
-  $('.addToCartModal__quan input').on('input', function () {
-    quantity = $('.addToCartModal__quan input').attr('max');
-    value = $('.addToCartModal__quan input').val();
-    price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
+  $('.addToCartModal__quan input[name*=quantity]').on('input', function () {
+    quantity = $('.addToCartModal__quan input[name*=quantity]').attr('max');
+    value = $('.addToCartModal__quan input[name*=quantity]').val();
+    packaging = $('.addToCartModal__row input[name*=pack]').val();
+    price = $('.addToCartModal__content .cost-first').text().replace(/ /g, '');
     if (parseInt(value) > parseInt(quantity)) {
       value = value.substr(0, value.length - 1);
     }
@@ -36239,13 +36254,13 @@ $(document).ready(function () {
       value = 1;
     }
     $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
-    $('.addToCartModal__quan input').val(value);
+    $('.addToCartModal__quan input[name*=quantity]').val(value);
+    $('.addToCartModal__quan input[name*=secondqty]').val(value * packaging);
   });
-
-  $('.addToCartModal__quan input').on('input', function () {
-    quantity = $('.addToCartModal__quan input').attr('max');
-    value = $('.addToCartModal__quan input').val();
-    price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
+  $('.addToCartModal__quan input[name*=quantity]').on('input', function () {
+    quantity = $('.addToCartModal__quan input[name*=quantity]').attr('max');
+    value = $('.addToCartModal__quan input[name*=quantity]').val();
+    price = $('.addToCartModal__content .cost-first').text().replace(/ /g, '');
     if (parseInt(value) > parseInt(quantity)) {
       value = value.substr(0, value.length - 1);
     }
@@ -36254,15 +36269,18 @@ $(document).ready(function () {
       value = 1;
     }
     $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
-    $('.addToCartModal__quan input').val(value);
+    $('.addToCartModal__quan input[name*=quantity]').val(value);
   });
-  $('.addToCartModal__quan .minus').click(function () {
-    if ($('.addToCartModal__quan input').val() > 1) {
-      value = $('.addToCartModal__quan input').val();
-      price = $('.addToCartModal__content .cost span').text().replace(/ /g, '');
+  $('.addToCartModal__quan .minus-first').click(function () {
+    if ($('.addToCartModal__quan input[name*=quantity]').val() > 1) {
+      value = $('.addToCartModal__quan input[name*=quantity]').val();
+      price = $('.addToCartModal__content .cost-first').text().replace(/ /g, '');
+      packaging = $('.addToCartModal__row input[name*=pack]').val();
       value--;
       $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
-      $('.addToCartModal__quan input').val(value);
+      $('.addToCartModal__quan input[name*=quantity]').val(value);
+      $('.addToCartModal__quan input[name*=secondqty]').val(value * packaging);
+      $('.addToCartModal__content .cost-second').html(number_format(parseInt(price) / packaging * 1000 / 1000, 0, ',', ' '));
     }
   });
 
@@ -36287,6 +36305,18 @@ $(document).ready(function () {
   });
 });
 
+function productType(type) {
+  if (type == 'polotno') {
+    return 'полотно';
+  } else if (type == 'thing') {
+    return 'шт.';
+  } else {
+    return 'уп.';
+  }
+  // return "м²";
+
+}
+
 function number_format(number, decimals, dec_point, thousands_sep) {
   // Strip all characters but numerical ones.
   number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
@@ -36310,6 +36340,54 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+
+$(document).ready(function () {
+  $('.addToCartModal__quan .plus-second').click(function () {
+    quantity = $('.addToCartModal__quan input[name*=quantity]').attr('max');
+    value = $('.addToCartModal__quan input[name*=secondqty]').val();
+    packaging = $('.addToCartModal__row input[name*=pack]').val();
+    price = $('.addToCartModal__content .cost-first').text().replace(/ /g, '');
+
+    console.log(price);
+    if (parseInt(value) < parseInt(quantity)) {
+      value++;
+    }
+    $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
+    $('.addToCartModal__quan input[name*=quantity]').val(Math.ceil(value / packaging));
+    $('.addToCartModal__quan input[name*=secondqty]').val(value);
+    $('.addToCartModal__content .cost-second').html(number_format(parseInt(price) / packaging * 1000 / 1000, 0, ',', ' '));
+  });
+
+  $('.addToCartModal__quan .minus-second').click(function () {
+    if ($('.addToCartModal__quan input[name*=quantity]').val() > 1) {
+      value = $('.addToCartModal__quan input[name*=secondqty]').val();
+      price = $('.addToCartModal__content .cost-first').text().replace(/ /g, '');
+      packaging = $('.addToCartModal__row input[name*=pack]').val();
+      value--;
+      $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
+      $('.addToCartModal__quan input[name*=quantity]').val(Math.ceil(value / packaging));
+      $('.addToCartModal__quan input[name*=secondqty]').val(value);
+      $('.addToCartModal__content .cost-second').html(number_format(parseInt(price) / packaging * 1000 / 1000, 0, ',', ' '));
+    }
+  });
+
+  $('.addToCartModal__quan input[name*=secondqty]').on('input', function () {
+    quantity = $('.addToCartModal__quan input[name*=quantity]').attr('max');
+    value = $('.addToCartModal__quan input[name*=secondqty]').val();
+    packaging = $('.addToCartModal__row input[name*=pack]').val();
+    price = $('.addToCartModal__content .cost-first').text().replace(/ /g, '');
+    if (parseInt(value) > parseInt(quantity)) {
+      value = value.substr(0, value.length - 1);
+    }
+
+    if (parseInt(value) == 0) {
+      value = 1;
+    }
+    $('.addToCartModal__total .modalTotalPrice span').html(number_format(parseInt(value) * parseInt(price), 0, ',', ' '));
+    $('.addToCartModal__quan input[name*=quantity]').val(Math.ceil(value / packaging));
+    $('.addToCartModal__quan input[name*=secondqty]').val(value);
+  });
+});
 
 /***/ }),
 /* 38 */

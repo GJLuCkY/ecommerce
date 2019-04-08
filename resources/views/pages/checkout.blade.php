@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-sm-2 bs-basket__qual">
                         <h6 class="bs-basket__title">Стоимость</h6>
-                        <p>{{ $product['price'] }}</p>
+                        <p>{{ $product['price'] }} ₸</p>
                     </div>
                 </div>
                 @endforeach
@@ -110,7 +110,7 @@
 
 
                             <div class="bs-order__total">
-                                <h6>ИТОГО <span class="bs-order__quan"> {{Cart::content()->count()}} </span> товара на сумму <span class="bs-order__sum"> {{ Cart::total() }} </span></h6>
+                                <h6>ИТОГО <span class="bs-order__quan"> {{Cart::content()->count()}} </span> товара на сумму <span class="bs-order__sum"> {{ Cart::total() }} ₸</span></h6>
                                 {{-- <h4>К оплате: <span class="bs-order__pay"> 13 390</span></h4> --}}
                                 <button type="submit">Оформить заказ</button>
                             </div>
@@ -174,7 +174,7 @@
                     <div class="bs-order__total">
                       <div class="row bs-basket__buttons-cost">
                         <p class="bs-basket__text bs-basket__text--total">ВЫБРАНО: <span class="count">{{Cart::content()->count()}} товаров</span></p>
-                        <p class="bs-basket__text bs-basket__text--total">ИТОГО: <span class="count">{{ Cart::total() }} тг</span></p>
+                        <p class="bs-basket__text bs-basket__text--total">ИТОГО: <span class="count">{{ Cart::total() }} ₸</span></p>
                     </div>
                       <button type="submit">Оформить заказ</button>
                     </div>

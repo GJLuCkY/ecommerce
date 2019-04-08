@@ -152,8 +152,8 @@
         <div class="col-md-4 bs-header__col">
 
             <li class="bs-main-nav__item">
-            <a href="tel:+7722331122" class="bs-main-nav__link">
-                <img src="/images/phone.svg" alt="human" class="bs-header__phone"> +7 (722) 33-11-22</a>
+            <a href="tel:{{ Config::get('settings.phone') }}" class="bs-main-nav__link">
+                <img src="/images/phone.svg" alt="human" class="bs-header__phone">{{ Config::get('settings.phone') }}</a>
             </li>
 
             <li class="bs-main-nav__item ">
@@ -297,7 +297,7 @@
                 <a href="{{ route('cart') }}">
                 <img src="/images/basket.svg" alt="basket" class="bs-header__img">
                 <p class="bs-header__text">Корзина</p>
-                <span class="badge">{{ Cart::count() > 0 ? Cart::count() : '' }}</span>
+                <span class="badge">{{ Cart::content()->count() > 0 ? Cart::content()->count() : '' }}</span>
                 </a>
             </div>
             </div>
@@ -352,7 +352,7 @@
       <div class="mob-bottom">
         <ul class="mob-header__list">
           <li class="mob-header__phone">
-              <a class="mob-header__link" href="tel:+7722331122"><img src="/images/phone.svg" alt="phone" class="bs-header__phone">+7 (722) 33-11-22</a>
+              <a class="mob-header__link" href="tel:{{ Config::get('settings.phone') }}"><img src="/images/phone.svg" alt="phone" class="bs-header__phone">{{ Config::get('settings.phone') }}</a>
           </li>
           <li class="mob-header__sign">
               <a class="mob-header__link" href="{{ route('signin') }}"><img src="/images/cab.svg" alt="human" class="bs-header__human">Личный кабинет</a>
@@ -435,7 +435,7 @@
                   </div>
                   <div class="col-xs-6">
                     <p class="bs-footer__gray">Телефон</p>
-                    <a href="tel:+7722331122" class="bs-footer__whiteMob">+7 (722) 33-11-22</a>
+                    <a href="tel:{{ Config::get('settings.phone') }}" class="bs-footer__whiteMob">{{ Config::get('settings.phone') }}</a>
                   </div>
                 </div>
                 <form class="bs-footer__form" method="POST" action="{{ route('subscribe') }}">

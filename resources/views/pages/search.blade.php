@@ -61,6 +61,8 @@
                                 </div>
                                 <div class="bs-catalog__hitText">
                                     <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <input type="hidden" name="packaging" value="{{ isset($item->packaging) ? $item->packaging : 1 }}">
+                                    <input type="hidden" name="type" value="{{ $item->type }}">
                                     <input type="hidden" name="quantity" value="{{ $item->quantity }}">
                                     <p>{{ isset($item->category->custom_name) ? $item->category->custom_name : $item->category->title }} {{ $item->brand->name }}</p>
                                     <a href="{{ route('product', ['catSlug' => $item->category->slug, 'prodSlug' => $item->slug]) }}">
