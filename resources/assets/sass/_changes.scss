@@ -1,174 +1,243 @@
-.bs-header{
-  .first .row{
-    margin-top: 0;
-  }
-  .bs-main-nav__list{
-    justify-content: space-around;
-  }
-  .bs-main-nav__link{
-    font-size: 16px;
-    font-weight: 400;
-  }
-  &__phone{
-    max-width: 23px;
-    margin-right: 5px;
-  }
-  &__div{
-    display: none;
-  }
-  &__col{
-    padding-right: 0!important;
-    padding-left: 0!important;
-    justify-content: space-between;
-    .bs-main-nav__item:last-of-type{
-      width: fit-content;
-    }
-  }
-  &__img{
-    max-width: 23px;
-  }
-  &__text{
-    font-size: 14px;
-    font-weight: 400;
-  }
-}
-.bs-links{
-  &__item a{
-    font-size: 15px;
-    font-weight: 400;
-  }
-  .dropdown-content a{
-    font-size: 15px;
-    font-weight: 400;
-  }
-}
-.bs-footer{
-  padding: 55px 0 70px;
-  &__item{
-    padding-bottom: 17px;
-  }
+.bs-header .first .row {
+  margin-top: 0
 }
 
-.bs-laminat__head{
-  font-size: 22px;
-  font-weight: 400;
+.bs-header .bs-main-nav__list {
+  -ms-flex-pack: distribute;
+  justify-content: space-around
 }
 
-.bs-basket__heading{
+.bs-header .bs-main-nav__link {
+  font-size: 16px;
+  font-weight: 400
+}
+
+.bs-header__phone {
+  max-width: 23px;
+  margin-right: 5px
+}
+
+.bs-header__div {
+  display: none
+}
+
+.bs-header__col {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between
+}
+
+.bs-header__col .bs-main-nav__item:last-of-type {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content
+}
+
+.bs-header__img {
+  max-width: 23px;
+  -webkit-filter: invert(1) brightness(0);
+  filter: invert(1) brightness(0)
+}
+
+.bs-header .col-md-3 .row .col-sm-6:first-of-type a:hover .bs-header__img {
+  -webkit-filter: none !important;
+  filter: none !important
+}
+
+.bs-header__text {
+  font-size: 14px;
+  font-weight: 400
+}
+
+.bs-top .sliderWrp {
+  position: relative
+}
+
+.bs-links .dropdown-content a,
+.bs-links__item a {
+  font-size: 15px;
+  font-weight: 400
+}
+
+.bs-footer {
+  padding: 55px 0 70px
+}
+
+.bs-footer__item {
+  padding-bottom: 17px
+}
+
+.bs-basket__heading,
+.bs-laminat__head {
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 400
 }
 
 .bs-podlozhka__cost {
   font-size: 25px;
   font-weight: 600;
-  color: #00AB0C;
+  color: #00ab0c;
   margin-bottom: 15px;
-  width: 130%;
+  width: 130%
 }
 
 .bs-podlozhka__review button {
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  background-color: #00AB0C;
+  background-color: #00ab0c;
   padding: 11px 75px;
   margin-left: 0;
   margin-top: 30px;
-  display: block;
+  display: block
 }
 
-.bs-podlozhka .bs-catalog__head{
+.bs-podlozhka .bs-catalog__head {
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 400
 }
 
-.bs-podlozhka__cat a{
-  font-size: 14px;
+.bs-podlozhka__cat a {
+  font-size: 14px
 }
 
-.bs-basket__order{
+.bs-basket__order {
   background: none;
-  padding: 0;
-  a{
-    width: 100%;
-    padding: 14px;
-    display: block;
-    background-color: #00ab0c;
-  }
+  padding: 0
 }
 
-.bs-basket__counter{
+.bs-basket__order a {
+  width: 100%;
+  padding: 14px;
+  display: block;
+  background-color: #00ab0c
+}
+
+.bs-basket__counter {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
-  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content
 }
 
-.bs-basket__costTotal{
-  font-size: 22px;
+.bs-basket__costTotal {
+  font-size: 22px
 }
 
-.bs-catalog__hitText{
-  a{
-    min-height: auto!important;
-    img{
-      min-height: 85px;
-    }
-  }
+.bs-catalog__hitText a {
+  min-height: auto !important
 }
 
-.bs-basket__counter input{
+.bs-catalog__hitText a img {
+  min-height: 85px
+}
+
+.bs-basket__counter input {
   text-align: center;
-  width: 60px;
+  width: 60px
 }
 
-.bs-catalog__hitImg{
+.bs-catalog__hitImg {
   height: 350px;
-  overflow: hidden;
+  overflow: hidden
 }
 
-@media (max-width: 1300px) {
-  .bs-header{
-    .first{
-      .col-md-8 {
-        width: 63.66667%!important;
-        .bs-main-nav__list {
-          padding-right: 27px;
-        }
-      }
-    }
-    &__col{
-      width: 36.33333%!important;
-    }
+.bs-header__select,
+.bs-main-nav__list {
+  margin: 0
+}
+
+.bs-header__col {
+  padding-top: 10px
+}
+
+.bs-header .row:last-of-type {
+  margin-top: 20px
+}
+
+.bs-header {
+  margin-bottom: 30px
+}
+
+.slick-slide img {
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover
+}
+
+.bs-top__item-text {
+  position: absolute;
+  bottom: auto;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin-left: 0;
+  color: #000;
+  right: 0;
+  width: 40%;
+  background: hsla(0, 0%, 100%, .5);
+  padding: 20px
+}
+
+@media (max-width:1300px) {
+  .bs-header .first .col-md-8 {
+    width: 63.66667% !important
+  }
+
+  .bs-header .first .col-md-8 .bs-main-nav__list {
+    padding-right: 27px
+  }
+
+  .bs-header__col {
+    width: 36.33333% !important
   }
 }
 
+@media (max-width:1100px) {
+  .bs-header .first .col-md-8 {
+    width: 59.66667% !important
+  }
 
-@media (max-width: 1100px) {
-  .bs-header{
-    .first{
-      .col-md-8 {
-        width: 59.66667% !important;
-        .bs-main-nav__list {
-          padding-right: 0;
-        }
-      }
-    }
-    &__col{
-      width: 39.33333%!important;
-    }
+  .bs-header .first .col-md-8 .bs-main-nav__list {
+    padding-right: 0
+  }
+
+  .bs-header__col {
+    width: 39.33333% !important
   }
 }
 
-@media (max-width: 1100px) {
-  .bs-basket__counter{
-    width: 100px;
+@media (max-width:1100px) {
+  .bs-basket__counter {
+    width: 100px
   }
 }
 
-@media (max-width: 640px) {
-  .bs-catalog__hitImg{
-    height: auto;
+@media (max-width:640px) {
+  .bs-catalog__hitImg {
+    height: auto
+  }
+
+  .one-time img {
+    min-height: 190px
+  }
+
+  .bs-top__item-text {
+    bottom: 0;
+    width: 100%;
+    height: 90%;
+    h5{
+      font-size: 14px;
+    }
   }
 }
