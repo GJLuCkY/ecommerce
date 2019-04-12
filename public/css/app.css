@@ -4,7 +4,65 @@
 
 .bs-header .bs-main-nav__list {
   -ms-flex-pack: distribute;
-  justify-content: space-around;
+      justify-content: space-around;
+}
+
+.bs-header .bs-main-nav__link {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.bs-header__phone {
+  max-width: 23px;
+  margin-right: 5px;
+}
+
+.bs-header__div {
+  display: none;
+}
+
+.bs-header__col {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.bs-header__col .bs-main-nav__item:last-of-type {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.bs-header__img {
+  max-width: 23px;
+  -webkit-filter: invert(1) brightness(0);
+          filter: invert(1) brightness(0);
+}
+
+.bs-header .col-md-3 .row .col-sm-6:first-of-type a:hover .bs-header__img {
+  -webkit-filter: none !important;
+          filter: none !important;
+}
+
+.bs-header__text {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.bs-top .sliderWrp {
+  position: relative;
+}
+
+.bs-links__item a {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.bs-links .dropdown-content a {
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .bs-header .bs-main-nav__link {
@@ -37,8 +95,13 @@
 
 .bs-header__img {
   max-width: 23px;
-  -webkit-filter: invert(1) brightness(0);
-  filter: invert(1) brightness(0);
+  -webkit-filter: none;
+          filter: none;
+}
+
+.bs-header .col-md-3 .row .col-sm-6:last-of-type a .bs-header__img {
+  -webkit-filter: contrast(0) sepia(62%) hue-rotate(77deg) brightness(0.9) saturate(7.28);
+          filter: contrast(0) sepia(62%) hue-rotate(77deg) brightness(0.9) saturate(7.28);
 }
 
 .bs-header .col-md-3 .row .col-sm-6:first-of-type a:hover .bs-header__img {
@@ -172,21 +235,22 @@
 .slick-slide img {
   width: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
 }
 
 .bs-top__item-text {
   position: absolute;
   bottom: auto;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
   margin-left: 0;
   color: #000;
   right: 0;
   width: 40%;
   background: rgba(255, 255, 255, 0.5);
   padding: 20px;
+  min-height: 65%;
 }
 
 @media (max-width: 1300px) {
@@ -240,6 +304,14 @@
 
   .bs-top__item-text h5 {
     font-size: 14px;
+  }
+
+  .one-time img {
+    min-height: 190px;
+  }
+
+  .bs-top__item-text {
+    bottom: 0;
   }
 }
 

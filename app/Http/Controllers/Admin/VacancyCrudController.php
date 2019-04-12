@@ -25,7 +25,7 @@ class VacancyCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Vacancy');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/vacancy');
-        $this->crud->setEntityNameStrings('vacancy', 'vacancies');
+        $this->crud->setEntityNameStrings('Вакансия', 'Вакансии');
         $this->crud->allowAccess('reorder');
         $this->crud->enableReorder('title', 1);
         /*

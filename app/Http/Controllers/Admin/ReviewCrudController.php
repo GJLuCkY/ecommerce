@@ -25,7 +25,7 @@ class ReviewCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Review');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/review');
-        $this->crud->setEntityNameStrings('review', 'reviews');
+        $this->crud->setEntityNameStrings('Отзыв', 'Отзывы');
         $this->crud->denyAccess(['create']);
         /*
         |--------------------------------------------------------------------------

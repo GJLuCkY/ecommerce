@@ -394,7 +394,7 @@
             $(document).on("change", ".subproducts", function() {
                 summ+=((this.checked?1:-1)*$(this).data('price'));
                 
-                $("#price2").html(number_format(summ, 0, ',', ' '));
+                $("#price2").html(formatMoney(summ, 0, ',', ' '));
             });
             
 
@@ -403,7 +403,7 @@
             $(document).on("change", "#quantity-change", function() {
                 $("#packaging-summa-izm").html(Math.round(this.value * izm * 1000) / 1000);
                 summa = this.value * {{ $product->price }}
-                $("#packaging-summa").html(number_format(summa, 0, ',', ' '));
+                $("#packaging-summa").html(formatMoney(summa, 0, ',', ' '));
             });
 
             $(document).on("click", ".vue-star-rating-pointer", function() {
@@ -411,6 +411,23 @@
                 $('#review-stars').val(rating);
                 console.log($('#review-stars').val());
             });
+
+
+            function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+  try {
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+    const negativeSign = amount < 0 ? "-" : "";
+
+    let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+    let j = (i.length > 3) ? i.length % 3 : 0;
+
+    return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+  } catch (e) {
+    console.log(e)
+  }
+};
    
 
     </script>

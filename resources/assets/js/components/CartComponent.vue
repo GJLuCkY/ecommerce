@@ -27,14 +27,14 @@
                             
                             <div class="col-sm-3 bs-basket__qual">
                                 <div class="bs-basket__counter">
-                                    <button type="submit" @click="changeQuality('plus', product.rowId)">+</button>
-                                    <p>{{ product.qty }}</p>
                                     <div v-if="product.qty == 1">
                                         <button type="button">-</button>
                                     </div>
                                     <div v-else>
                                         <button type="submit" @click="changeQuality('minus', product.rowId)">-</button>
                                     </div>
+                                    <p>{{ product.qty }}</p>
+                                    <button type="submit" @click="changeQuality('plus', product.rowId)">+</button>
                                 </div>
                             </div>
                             <div class="col-sm-3 bs-basket__cost">

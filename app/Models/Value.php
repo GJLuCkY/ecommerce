@@ -20,7 +20,7 @@ class Value extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name', 'slug', 'filter_id', 'image'];
+    protected $fillable = ['name', 'slug', 'filter_id', 'image', 'content'];
     // protected $hidden = [];
     // protected $dates = [];
 

@@ -1394,7 +1394,7 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Futura";
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -8554,7 +8554,7 @@ button.close {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Futura";
   overflow-x: hidden;
 }
 
@@ -8670,32 +8670,32 @@ a:hover {
 /*360*/
 /*320*/
 @font-face {
-  font-family: 'Helvetica';
-  src: url("../fonts/Helvetica/HelveticaThin.ttf");
+  font-family: 'Futura';
+  src: url("../fonts/futura/FuturaLightC.ttf");
   font-weight: 100;
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src: url("../fonts/Helvetica/HelveticaLight.ttf");
+  font-family: 'Futura';
+  src: url("../fonts/futura/FuturaLightC.ttf");
   font-weight: 200;
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src: url("../fonts/Helvetica/HelveticaRegular.ttf");
+  font-family: 'Futura';
+  src: url("../fonts/futura/FuturaBookC.ttf");
   font-weight: 300;
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src: url("../fonts/Helvetica/HelveticaMedium.ttf");
+  font-family: 'Futura';
+  src: url("../fonts/futura/FuturaMediumC.ttf");
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src: url("../fonts/Helvetica/HelveticaBold.ttf");
+  font-family: 'Futura';
+  src: url("../fonts/futura/FuturaDemiC.ttf");
   font-weight: 600;
 }
 
@@ -17620,7 +17620,7 @@ a:hover {
 }
 
 .mob-header .modal-content p {
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Futura';
 }
 
 /*800*/
