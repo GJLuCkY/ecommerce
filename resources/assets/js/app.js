@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('./calc');
 require('./modal');
 // require('./alljs');
 

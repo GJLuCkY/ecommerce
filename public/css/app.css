@@ -253,6 +253,18 @@
   min-height: 65%;
 }
 
+.calculator .bs-basket__count {
+  padding-left: 10px;
+}
+
+.calculator .bs-basket__quality {
+  margin-top: 20px;
+}
+
+.calculator .bs-basket__quality label {
+  font-size: 18px;
+}
+
 @media (max-width: 1300px) {
   .bs-header .first .col-md-8 {
     width: 63.66667% !important;

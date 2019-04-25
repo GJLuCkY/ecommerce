@@ -14013,6 +14013,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 __webpack_require__(15);
+__webpack_require__(61);
 __webpack_require__(37);
 // require('./alljs');
 
@@ -48998,6 +48999,41 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var area, areaNumber;
+  $(".areaCheck input").click(function () {
+    $(".areaCheck input").removeClass("checked");
+    $(this).toggleClass("checked");
+
+    area = document.getElementById("area").value;
+    areaNumber = parseInt(area);
+    if ($('#diagonal').hasClass("checked")) {
+      areaNumber = areaNumber + areaNumber * .06;
+      $("#areaResult").html(areaNumber);
+    } else {
+      areaNumber = areaNumber + areaNumber * .05;
+      $("#areaResult").html(areaNumber);
+    }
+  });
+  $("#area").keyup(function () {
+    area = this.value;
+    areaNumber = parseInt(area);
+    if ($('#diagonal').hasClass("checked")) {
+      areaNumber = areaNumber + areaNumber * .06;
+    } else if ($('#pryamoi').hasClass("checked")) {
+      areaNumber = areaNumber + areaNumber * .05;
+    }
+    $("#areaResult").html(areaNumber);
+  });
+});
 
 /***/ })
 /******/ ]);

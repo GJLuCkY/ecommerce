@@ -156,26 +156,27 @@
                         <div class="bs-basket__modal-content">
                             <span class="close">&times;</span>
                             <h4 class="bs-basket__h4">Калькулятор расчет ламината</h4>
-                            <form method="post" action="form.php" >
-                                <label class="bs-basket__area">Площадь помещения (м2) <input type="text" name="area" placeholder="100" class="bs-basket__inputModal"> <span> М2 </span></label>
+                            <!-- <form method="post" action="form.php" > -->
+                                <label class="bs-basket__area">Площадь помещения (м2) <input type="text" name="area" placeholder="100" id="area" class="bs-basket__inputModal"> <span> М2 </span></label>
                                 <div class="bs-basket__modalLine">
                                     <p class="bs-basket__p">Способ укладки</p>
                                     <div class="bs-basket__check">
-                                        <label><input type="radio" name="radio"> Диагональный
+                                        <label class="areaCheck"><input type="radio" name="radio" id="diagonal" value="diagonal"> Диагональный
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label><input type="radio" name="radio"> Прямой
+                                        <label class="areaCheck"><input type="radio" name="radio" id="pryamoi" value="pryamoi"> Прямой
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row bs-basket__quality">
-                                    <label>Точное количество с запасом <span class="bs-basket__count">57 пачек</span></label>
-                                    <label>Точное количество м2 <span class="bs-basket__count">106.248 м2</span></label>
+                                    <!-- <label>Точное количество с запасом <span class="bs-basket__count">57 пачек</span></label> -->
+                                    <label>Точное количество м2 <span id="areaResult">0</span> м2</label>
                                 </div>
-                                <button id="send" class="bs-basket__btn" type="button">Заказать</button>
-                                <p class="bs-basket__text">*При диагональном способе укладки, на подрезку, прибавляется 6%</p>
-                            </form>
+
+                                <!-- <button id="send" class="bs-basket__btn" type="button">Заказать</button>
+                                <p class="bs-basket__text">*При диагональном способе укладки, на подрезку, прибавляется 6%</p> -->
+                            <!-- </form> -->
                         </div>
                     </div>
                     <div id="modal" class="bs-basket__modal">
