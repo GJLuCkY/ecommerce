@@ -16,6 +16,7 @@ $(document).ready(function(){
   });
   $("#area").keyup(function(){
     area = this.value;
+    // qweqweqeqewqe
     areaNumber = parseInt(area);    
     if ($('#diagonal').hasClass("checked")){
       areaNumber = areaNumber + (areaNumber * .06);
